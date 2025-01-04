@@ -123,10 +123,12 @@ set_individual <- function(data, individual){
 #' @examples
 #' data <- data.frame(time = 0:10, value = rnorm(11))
 #' result <- set_framerate(data, framerate = 60, old_framerate = 30)
-set_framerate <- function(data, framerate, old_framerate=1){
+set_framerate <- function(data, framerate){
   has_framerate <- !is.null(attributes(data)$metadata$framerate)
   if (isTRUE(has_framerate)){
     old_framerate <- attributes(data)$metadata$framerate
+  } else {
+    old_framerate <- 1
   }
 
   scaling_factor <- old_framerate / framerate
