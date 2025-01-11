@@ -1,28 +1,39 @@
-t <- seq(0, 5, length.out=500)
+library(dplyr)
+library(ggplot2)
 
-# Individual 1, keypoint 1
-x11 <- 100 + 50 * sin(2*pi*t)
-y11 <- 80 + 20 * cos(4*pi*t)
+t <- seq(0, 10, length.out = 1000)  # Extended timeframe
 
-# Individual 1, keypoint 2
+# Individual 1, keypoints a, b, c
+x11 <- 100 + 50 * sin(2 * pi * t)
+y11 <- 80 + 20 * cos(4 * pi * t)
 x12 <- x11 + 20
 y12 <- y11 + 20
+x13 <- x11 - 15
+y13 <- y11 - 25
 
-# Individual 2, keypoint 1
-x21 <- 200 + 50 * sin(2*pi*t + pi)
-y21 <- 80 + 20 * cos(4*pi*t + pi)
-
-# Individual 2, keypoint 2
+# Individual 2, keypoints a, b, c
+x21 <- 200 + 50 * sin(2 * pi * t + pi)
+y21 <- 80 + 20 * cos(4 * pi * t + pi)
 x22 <- x21 + 20
 y22 <- y21 + 20
+x23 <- x21 - 15
+y23 <- y21 - 25
+
+# Individual 3, keypoints a, b, c
+x31 <- 300 + 50 * sin(2 * pi * t + pi / 2)
+y31 <- 100 + 20 * cos(4 * pi * t + pi / 2)
+x32 <- x31 + 20
+y32 <- y31 + 20
+x33 <- x31 - 15
+y33 <- y31 - 25
 
 # Create tidy data frame
 data <- data.frame(
-  time = rep(t, 4),
-  individual = rep(rep(c("individual1", "individual2"), each=length(t)), 2),
-  keypoint = rep(c("a", "b"), each=2*length(t)),
-  x = c(x11, x21, x12, x22),
-  y = c(y11, y21, y12, y22),
+  time = rep(t, 9),
+  individual = rep(rep(c("individual1", "individual2", "individual3"), each = length(t)), 3),
+  keypoint = rep(c("a", "b", "c"), each = 3 * length(t)),
+  x = c(x11, x21, x31, x12, x22, x32, x13, x23, x33),
+  y = c(y11, y21, y31, y12, y22, y32, y13, y23, y33),
   confidence = 0.9  # Example confidence
 )
 
@@ -33,17 +44,19 @@ data$x <- data$x + rnorm(nrow(data), 0, noise)
 data$y <- data$y + rnorm(nrow(data), 0, noise)
 
 # Introduce swaps at specific times
-swap_times_start <- c(150, 300, 400)
-swap_times_end <- c(170, 320, 420)
+swap_times_start <- c(150, 300, 400, 700)
+swap_times_end <- c(170, 320, 420, 720)
 
 # Swap individuals
-for(i in 1:length(swap_times_start)) {
+for (i in 1:length(swap_times_start)) {
   data <- data |>
     mutate(swap = if_else(time > t[swap_times_start[i]] & time < t[swap_times_end[i]], TRUE, FALSE),
            individual = case_when(
              swap == TRUE & individual == "individual1" ~ "individual2",
-             swap == TRUE & individual == "individual2" ~ "individual1",
-             .default = individual))
+             swap == TRUE & individual == "individual2" ~ "individual3",
+             swap == TRUE & individual == "individual3" ~ "individual1",
+             .default = individual),
+           confidence = if_else(swap == TRUE, 0.4, confidence))
 }
 
 
@@ -57,10 +70,7 @@ plot_data <- bind_rows(
 )
 
 # Add shading for swap regions
-swap_regions_df <- data.frame(
-  start = c(150, 300, 400),
-  end = c(170, 320, 420)
-) %>%
+swap_regions_df <- tibble(.rows = length(swap_times_start)) %>%
   mutate(
     start = t[swap_times_start],
     end = t[swap_times_end]
@@ -74,59 +84,24 @@ plot_data |>
   geom_rect(data=swap_regions_df,
             aes(xmin=start, xmax=end, ymin=-Inf, ymax=Inf),
             fill="pink", alpha=0.3) +
-  # facet_wrap(~individual) +
+  facet_grid(cols = vars(individual),
+             rows = vars(keypoint)) +
   theme_bw() +
   labs(title="Raw vs Corrected Trajectories",
        subtitle="Pink regions show introduced swaps")
-}
 
 
-
-detect_keypoint_swaps <- function(data){
-  d <- data |>
-    pivot_wider(id_cols = c(time),
-                values_from = c(x,y),
-                names_from = c(individual, keypoint)) |>
-    mutate(across(!time, ~ .x - lag(.x))) |>
-    mutate(across(!time, ~ filter_highpass(.x, cutoff_freq = 0.5, sampling_rate = 30)))
-
-
-
-  d2 <- d |>
-    pivot_longer(cols = -time,
-                 values_to = "value",
-                 names_to = c("coord", "individual", "keypoint"),
-                 names_sep = "_") |>
-    pivot_wider(id_cols = c(time, individual, keypoint),
-                values_from = "value",
-                names_from = coord)
-  d2 <- d2 |>
-    group_by(individual, keypoint) |>
-    mutate(x1 = abs(x),
-           x1 = x1 / max(x1),
-           y1 = abs(y),
-           y1 = y1 / max(y1),
-           ) |>
-    group_by(individual, keypoint, time) |>
-    mutate(e = mean(c(max(.data$x1), abs(.data$y1))),
-           e = filter_rollmean(e, window_width = 3),
-           # e = e - lag(e),
-           peaks = if_else(e > 0.25, TRUE, FALSE))
-
-  d3 <- filter(d2, peaks == TRUE) |>
-    ungroup() |>
-    group_by(individual, keypoint) |>
-    mutate(row = row_number(),
-           onset = if_else(row %% 2 == 0, FALSE, TRUE),
-           offset = if_else(row %% 2 == 0, TRUE, FALSE))
-  d2 |>
-    ggplot(aes(time, e, colour = interaction(individual, keypoint))) +
-    geom_line() +
-    geom_point(data = filter(d3, peaks == TRUE), aes(colour = onset)) +
-    facet_grid(rows = vars(individual),
-               cols = vars(keypoint))
-
-  # Find best match after detecting peaks
-
-  # Swap data around
-}
+filtered_pose_data <- filter_hungarian(plot_data)
+filtered_pose_data <- greedy_matching(plot_data)
+filtered_pose_data |>
+  ggplot() +
+  geom_line(aes(x=time, y=y, color=interaction(individual, keypoint, type),
+                linetype=type)) +
+  geom_rect(data=swap_regions_df,
+            aes(xmin=start, xmax=end, ymin=-Inf, ymax=Inf),
+            fill="pink", alpha=0.3) +
+  facet_grid(cols = vars(individual),
+             rows = vars(keypoint)) +
+  theme_bw() +
+  labs(title="Raw vs Corrected Trajectories",
+       subtitle="Pink regions show introduced swaps")
