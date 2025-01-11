@@ -227,17 +227,31 @@ extendData <- function(data, m, fit_weights) {
 
   # Left boundary
   fit_y <- data[1:fit_length]
-  fit_result <- fitWeighted(fit_x, fit_y, fit_weights)
-  offset <- fit_result[1]
-  slope <- fit_result[2]
-  left_ext <- offset + seq(-m+1, 0) * slope
+  # Handle case where all points are NA
+  if(all(is.na(fit_y))) {
+    left_ext <- rep(data[min(which(!is.na(data)))], m)
+  } else {
+    fit_result <- fitWeighted(fit_x[!is.na(fit_y)],
+                              fit_y[!is.na(fit_y)],
+                              fit_weights[!is.na(fit_y)])
+    offset <- fit_result[1]
+    slope <- fit_result[2]
+    left_ext <- offset + seq(-m+1, 0) * slope
+  }
 
   # Right boundary
   fit_y <- rev(data[(dat_length-fit_length+1):dat_length])
-  fit_result <- fitWeighted(fit_x, fit_y, fit_weights)
-  offset <- fit_result[1]
-  slope <- fit_result[2]
-  right_ext <- offset + seq(0, -m+1, by=-1) * slope
+  # Handle case where all points are NA
+  if(all(is.na(fit_y))) {
+    right_ext <- rep(data[max(which(!is.na(data)))], m)
+  } else {
+    fit_result <- fitWeighted(fit_x[!is.na(fit_y)],
+                              fit_y[!is.na(fit_y)],
+                              fit_weights[!is.na(fit_y)])
+    offset <- fit_result[1]
+    slope <- fit_result[2]
+    right_ext <- offset + seq(0, -m+1, by=-1) * slope
+  }
 
   ext_data <- c(left_ext, data, right_ext)
   return(ext_data)

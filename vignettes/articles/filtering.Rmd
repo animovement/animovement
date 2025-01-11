@@ -1,0 +1,44 @@
+---
+title: "filtering"
+output: html_document
+---
+
+```{r}
+library(animovement)
+
+path_sleap_single <- testthat::test_path("data", "sleap", "SLEAP_single-mouse_EPM.analysis.h5")
+df_sleap_single <- read_sleap(path_sleap_single)
+
+deg <- 6  # degree
+m <- 7    # kernel halfwidth
+# Check parameters for your data
+df_sleap_single |> 
+  filter(keypoint == "centre") |> 
+  pull(x) |> 
+  get_ms_params() |> 
+  str()
+
+df_sleap_single |> 
+  # filter(time %in% 1000:2000) |> 
+  group_by(keypoint) |> 
+  mutate(x1 = filter_ms(x, auto_params = FALSE, deg, m),
+         y1 = filter_ms(y, auto_params = FALSE, deg, m),
+         x2 = filter_ms(x, auto_params = FALSE, deg, m*2),
+         y2 = filter_ms(y, auto_params = FALSE, deg, m),
+         x3 = filter_ms(x),
+         y3 = filter_ms(y),
+         x4 = replace_na_stine(x3),
+         y4 = replace_na_stine(y3),
+         x4 = filter_ms(x4),
+         y4 = filter_ms(y4)
+         ) |> 
+  filter(keypoint == "left_ear") |> 
+  ggplot(aes(time)) +
+  geom_line(aes(y = x), alpha = 0.6) +
+  geom_line(aes(y = x1), colour = "red") +
+  geom_line(aes(y = x2), colour = "blue") +
+  geom_line(aes(y = x4), colour = "purple") +
+  labs(title = "Adaptive MS Filter for Tracking Data")
+
+```
+
