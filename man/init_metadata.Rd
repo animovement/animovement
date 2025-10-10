@@ -8,6 +8,8 @@ init_metadata(data, metadata = list())
 }
 \arguments{
 \item{data}{movement data frame}
+
+\item{metadata}{metadata as list}
 }
 \value{
 data frame with metadata

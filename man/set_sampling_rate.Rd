@@ -11,7 +11,7 @@ set_sampling_rate(data, sampling_rate, old_sampling_rate = 1)
 
 \item{sampling_rate}{The new target sampling rate to convert to}
 
-\item{old_framerate}{The original sampling rate of the data (defaults to 1)}
+\item{old_sampling_rate}{The original sampling rate of the data (defaults to 1)}
 }
 \value{
 A modified data frame with adjusted time values and updated metadata

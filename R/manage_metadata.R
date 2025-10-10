@@ -6,7 +6,7 @@ default_metadata <- function() {
     source_version = as.character(NA),
     filename = as.character(NA),
     sampling_rate = as.numeric(NA),
-    start_datetime = lubridate::as_datetime(NA),
+    start_datetime = as.POSIXct(NA),
     reference_frame = factor("allocentric"),
     coordinate_system = factor("cartesian"),
     point_of_reference = factor("bottom_left")
@@ -19,7 +19,9 @@ default_metadata <- function() {
 #' `r lifecycle::badge('experimental')`
 #'
 #' @param data movement data frame
+#' @param metadata metadata as list
 #'
+#' @importFrom rlang is_empty
 #' @return data frame with metadata
 #' @export
 init_metadata <- function(
@@ -154,7 +156,7 @@ set_individual <- function(data, individual) {
 #'
 #' @param data A data frame or tibble containing the time series data
 #' @param sampling_rate The new target sampling rate to convert to
-#' @param old_framerate The original sampling rate of the data (defaults to 1)
+#' @param old_sampling_rate The original sampling rate of the data (defaults to 1)
 #'
 #' @return A modified data frame with adjusted time values and updated metadata
 #'

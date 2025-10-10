@@ -29,6 +29,7 @@ Imports:
     lifecycle,
     methods,
     patchwork,
+    pillar,
     rhdf5,
     rlang,
     roll,
