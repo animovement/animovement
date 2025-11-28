@@ -1,58 +1,35 @@
 Package: animovement
 Type: Package
-Title: An R toolbox for analysing animal movement across space and time
-Version: 0.6.0
+Title: An R toolbox for analysing movement across space and time
+Version: 0.7.0
 Authors@R: 
     person(
       "Mikkel", 
       "Roald-Arbøl", 
       role = c("aut", "cre"), 
-      email = "trackballr.htmc8@passmail.net",
+      email = "animovement.84w1m@passmail.com",
       comment = c(ORCID = "0000-0002-9998-0058")
       )
-Description: An R toolbox for analysing animal movement across space and time.
-License: MIT + file LICENSE
-URL: http://www.roald-arboel.com/animovement/, https://github.com/roaldarbol/animovement/
-BugReports: https://github.com/roaldarbol/animovement/issues
+Description: An R toolbox for analysing movement across space and time.
+License: GPL-3 + file LICENSE
+URL: https://animovement.dev, https://animovement.dev/animovement, https://github.com/animovement/animovement
+BugReports: https://github.com/animovement/animovement/issues
 Encoding: UTF-8
-LazyData: true
-biocViews:
+Depends: 
+    R (>= 4.1)
 Imports: 
-    anytime,
-    circular,
-    cli,
-    collapse,
-    dplyr,
-    ggplot2,
-    ggtext,
-    janitor,
-    lifecycle,
-    methods,
-    patchwork,
-    pillar,
-    rhdf5,
-    rlang,
-    roll,
-    scales,
-    signal,
-    stinepack,
-    stringi,
-    tidyr,
-    tidyselect,
-    vroom
-Suggests: 
-    knitr,
-    rmarkdown,
-    testthat (>= 3.0.0),
-    here,
-    readxl,
-    stringr,
-    tinytable,
-    markdown,
-    pkgdown,
-    usethis,
-    devtools
-Config/testthat/edition: 3
+    aniframe, 
+    aniread, 
+    aniprocess, 
+    anicheck, 
+    animetric, 
+    anivis
+Suggests:
+    knitr (>= 1.41),
+    rmarkdown (>= 2.20),
+    testthat (>= 3.1.6)
+Additional_repositories: https://animovement.r-universe.dev
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
+NeedsCompilation: no
 VignetteBuilder: knitr

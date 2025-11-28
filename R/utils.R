@@ -1,40 +1,137 @@
-.find_nearest <- function(x, v) {
-  which.min(abs(v - x))
-}
 
-.get_file_ext <- function(filename) {
-  nameSplit <- strsplit(x = filename, split = "\\.")[[1]]
-  return(nameSplit[length(nameSplit)])
-}
+.c <- function (...) as.character(substitute(c(...))[-1L])
 
-.is.POSIXt <- function(x) inherits(x, "POSIXt")
+is_attached <- function(x) paste0("package:", x) %in% search()
+is_installed <- function(x) vapply(x, requireNamespace, TRUE, quietly = TRUE)
 
-.scale_values <- function(data, variables, scaling_factor) {
-  # Adjust distances for mouse sensor "dots-per-cm"
-  if (!is.null(scaling_factor)) {
-    data <- data |>
-      dplyr::mutate(across(all_of(variables), ~ .x / scaling_factor))
+
+msg <- function(..., startup = FALSE) {
+  if(!isTRUE(getOption("animovement.quiet"))) {
+    if(startup) packageStartupMessage(...) else message(...)
   }
 }
 
-.has_attributes <- function(data, attributes) {
-  attributes %in% names(attributes(data))
+project_packages <- function() {
+  fileConn <- file(".animovement")
+  pkg <- readLines(fileConn, warn = FALSE, skipNul = TRUE)
+  close(fileConn)
+  pkg <- trimws(pkg[nzchar(pkg)])
+  pkg <- pkg[!startsWith(pkg, "_")]
+  pkg <- trimws(unlist(strsplit(pkg, ", | ,|,| "), use.names = FALSE)) # This will always work!
+  pkg <- pkg[nzchar(pkg)]
+  if(!length(pkg)) stop("Empty config file. Please write package names into your .animovement config file, separated by commas, spaces or line breaks.")
+  pkg
 }
 
-.has_all_attributes <- function(data, attributes) {
-  attributes %in% names(attributes(data)) |> all()
+project_options <- function() {
+  fileConn <- file(".animovement")
+  pkg <- readLines(fileConn, warn = FALSE, skipNul = TRUE)
+  close(fileConn)
+  pkg <- trimws(pkg[nzchar(pkg)])
+  optl <- startsWith(pkg, "_")
+  if(!any(optl)) return(list(before = NULL, after = NULL))
+  if(all(optl)) {
+    before <- pkg
+    after <- NULL
+  } else {
+    ppos <- which.min(optl)
+    before <- if(ppos > 1L) pkg[1:(ppos-1L)] else NULL
+    after <- if(ppos < length(pkg)) pkg[ppos:length(pkg)][optl[ppos:length(pkg)]] else NULL
+  }
+  lapply(list(before = before, after = after), function(x) {
+    if(is.null(x)) return(NULL)
+    ol <- startsWith(x, "_opt_")
+    x <- substr(x, 6L, 100000L)
+    r <- "function() {"
+    if(any(ol)) r <- paste0(r, "options(", paste(x[ol], collapse = ", "), ")")
+    if(all(ol)) r <- paste0(r, "}") else {
+      r <- if(any(ol)) paste0(r, "; Sys.setenv(", paste(x[!ol], collapse = ", "), ")}") else
+        paste0(r, "Sys.setenv(", paste(x[!ol], collapse = ", "), ")}")
+    }
+    eval(str2lang(r), NULL, NULL)
+  })
 }
 
-convert_nan_to_na <- function(data) {
-  dplyr::mutate(
-    data,
-    across(where(is.numeric), function(x) ifelse(is.nan(x), NA, x))
-  )
+#' List all packages in the animovement
+#'
+#' Core packages are first fetched from a project-level configuration file (named \code{.animovement}, if found), otherwise the standard set of core packages is returned.
+#' In addition, if \code{extensions = TRUE}, any packages used to extend the \emph{animovement} for the current
+#' session are also returned.
+#'
+#' @param extensions logical. \code{TRUE} appends the set of core packages with all packages found in \code{options("animovement.extend")}.
+#' @param include.self logical. Include the \emph{animovement} package in the list?
+#'
+#' @returns A character vector of package names.
+#' @export
+#' @seealso \code{\link{animovement_extend}}, \code{\link{animovement}}
+#' @examples
+#' animovement_packages()
+animovement_packages <- function(extensions = TRUE, include.self = TRUE) {
+  if(file.exists(".animovement")) {
+    pkg <- project_packages()
+  } else {
+    pkg <- .core_pkg
+  }
+  if(extensions && length(ex <- getOption("animovement.extend"))) pkg <- unique(c(pkg, ex))
+  if(include.self) pkg <- c(pkg, "animovement")
+  pkg
 }
 
-# For TRex files
-get_individual_from_path <- function(path) {
-  strsplit(tools::file_path_sans_ext(basename(path)), "_(?!.*_)", perl = TRUE)[[
-    1
-  ]]
+
+package_version <- function(x) paste(unclass(packageVersion(x))[[1L]], collapse = ".")
+
+green <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[32m", x, "\033[39m")
+blue <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[34m", x, "\033[39m")
+cyan <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[36m", x, "\033[39m")
+magenta2 <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[38;5;198m", x, "\033[39m")
+gold <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[38;5;214m", x, "\033[39m")
+lightblue <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[38;5;45m", x, "\033[39m")
+kingsblue <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[38;5;33m", x, "\033[39m")
+grey70 <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[0;38;5;249m", x, "\033[39m")
+red <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[31m", x, "\033[39m")
+yellow <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[33m", x, "\033[39m")
+bold <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[1m", x, "\033[22m")
+# Crayons white is more gray-isch
+# white <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[37m", x, "\033[39m")
+# Using bright white: https://i.stack.imgur.com/9UVnC.png
+# white <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[97m", x, "\033[39m")
+# Problem: If console is white: cannot read..
+
+
+text_col <- function(x) {
+  # If RStudio not available, messages already printed in black
+  if (!identical(.Platform$GUI, "RStudio")) return(x)
+  grey70(x)
+}
+
+rule <- function(left, right = NULL, style.left = identity, style.right = identity, style.rule = FALSE) {
+  n <- getOption("width")
+  left <- as.character(left)
+  if(length(right)) {
+    right <- as.character(right)
+    width <- n - nchar(left) - nchar(right) - 8L
+    if(!is.finite(width) || width <= 2L) width <- 2L
+    if(style.rule) {
+      res <- paste(c(text_col("-- "), style.left(left), " ", text_col(paste(rep("-", width), collapse = "")), " ", style.right(right), text_col(" --")), collapse = "")
+    } else {
+      res <- paste(c("-- ", style.left(left), " ", rep("-", width), " ", style.right(right), " --"), collapse = "")
+    }
+  } else {
+    width <- n - nchar(left) - 4L
+    if(!is.finite(width) || width <= 2L) width <- 2L
+    if(style.rule) {
+      res <- paste(c(text_col("-- "), style.left(left), " ", text_col(paste(rep("-", width), collapse = ""))), collapse = "")
+    } else {
+      res <- paste(c("-- ", style.left(left), " ", rep("-", width)), collapse = "")
+    }
+  }
+  class(res) <- "animovement_rule"
+  res
+}
+
+# Not needed, but better than not..
+#' @export
+print.animovement_rule <- function(x, ..., sep = "\n") {
+  cat(x, ..., sep = sep)
+  invisible(x)
 }

@@ -5,43 +5,17 @@
       {
         "Name": "CRAN",
         "URL": "https://packagemanager.posit.co/cran/latest"
+      },
+      {
+        "Name": "animovement",
+        "URL": "https://animovement.r-universe.dev"
       }
     ]
   },
-  "Bioconductor": {
-    "Version": "3.20"
-  },
   "Packages": {
-    "BH": {
-      "Package": "BH",
-      "Version": "1.87.0-1",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Hash": "468d9a03ba57f22ebde50060fd13ba9f"
-    },
-    "BiocManager": {
-      "Package": "BiocManager",
-      "Version": "1.30.26",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "utils"
-      ],
-      "Hash": "2db62ff6044e2c49f466f0cc9a21c149"
-    },
-    "BiocVersion": {
-      "Package": "BiocVersion",
-      "Version": "3.20.0",
-      "Source": "Bioconductor",
-      "Repository": "Bioconductor 3.20",
-      "Requirements": [
-        "R"
-      ],
-      "Hash": "3c70eb3b78929c0ee452350cea8432a5"
-    },
     "MASS": {
       "Package": "MASS",
-      "Version": "7.3-61",
+      "Version": "7.3-65",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -52,11 +26,11 @@
         "stats",
         "utils"
       ],
-      "Hash": "0cafd6f0500e5deba33be22c46bf6055"
+      "Hash": "a41d0fc833ea756a1136b60a437efe26"
     },
     "Matrix": {
       "Package": "Matrix",
-      "Version": "1.7-1",
+      "Version": "1.7-4",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -69,7 +43,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "5122bb14d8736372411f955e1b16bc8a"
+      "Hash": "7dbe8933065523bfc227027091bf2b1f"
     },
     "R6": {
       "Package": "R6",
@@ -102,51 +76,115 @@
       ],
       "Hash": "0d3d8867aa41b0d9ad113b50c169ecb2"
     },
-    "RcppArmadillo": {
-      "Package": "RcppArmadillo",
-      "Version": "15.0.2-2",
+    "S7": {
+      "Package": "S7",
+      "Version": "0.2.1",
       "Source": "Repository",
       "Repository": "RSPM",
       "Requirements": [
         "R",
-        "Rcpp",
-        "methods",
-        "stats",
         "utils"
       ],
-      "Hash": "58f3d2b5e2b8d44756c2d21e24b719e9"
+      "Hash": "9da85950949574264f92f91f0e23de26"
     },
-    "RcppParallel": {
-      "Package": "RcppParallel",
-      "Version": "5.1.11-1",
+    "anicheck": {
+      "Package": "anicheck",
+      "Version": "0.1.0",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "https://animovement.r-universe.dev",
       "Requirements": [
-        "R"
-      ],
-      "Hash": "07d228a359f31d8aebe6d2f643c1f012"
-    },
-    "Rhdf5lib": {
-      "Package": "Rhdf5lib",
-      "Version": "1.29.2",
-      "Source": "Bioconductor",
-      "Repository": "https://roaldarbol.r-universe.dev",
-      "Requirements": [
-        "R"
-      ],
-      "Hash": "d7912830ac7267719897a1e5e2539503"
-    },
-    "anytime": {
-      "Package": "anytime",
-      "Version": "0.3.12",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "BH",
         "R",
-        "Rcpp"
+        "aniframe",
+        "cli",
+        "dplyr",
+        "rlang"
       ],
-      "Hash": "ee899a8e3cb0eb4b01268cc5c3b75671"
+      "Hash": "c079bc7da5b8ef1d0fe79e3bb0f3c641"
+    },
+    "aniframe": {
+      "Package": "aniframe",
+      "Version": "0.2.5",
+      "Source": "Repository",
+      "Repository": "https://animovement.r-universe.dev",
+      "Requirements": [
+        "R",
+        "cli",
+        "dplyr",
+        "pillar",
+        "rlang"
+      ],
+      "Hash": "92acd53d2184de25996430510384e338"
+    },
+    "animetric": {
+      "Package": "animetric",
+      "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "https://animovement.r-universe.dev",
+      "Requirements": [
+        "R",
+        "aniframe",
+        "cli",
+        "dplyr",
+        "rlang"
+      ],
+      "Hash": "8d6d3ac1a66564f23ac749c7945f68ab"
+    },
+    "aniprocess": {
+      "Package": "aniprocess",
+      "Version": "0.1.1",
+      "Source": "Repository",
+      "Repository": "https://animovement.r-universe.dev",
+      "Requirements": [
+        "R",
+        "aniframe",
+        "cli",
+        "collapse",
+        "dplyr",
+        "methods",
+        "rlang"
+      ],
+      "Hash": "af8edac12b3598b8e19bd4709d0caced"
+    },
+    "aniread": {
+      "Package": "aniread",
+      "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "https://animovement.r-universe.dev",
+      "Requirements": [
+        "R",
+        "aniframe",
+        "cli",
+        "dplyr",
+        "janitor",
+        "rlang",
+        "tidyr",
+        "tidyselect",
+        "vroom"
+      ],
+      "Hash": "afd1259c81b1eb1b02bb7a8cd7236e73"
+    },
+    "anivis": {
+      "Package": "anivis",
+      "Version": "0.1.0",
+      "Source": "Repository",
+      "Repository": "https://animovement.r-universe.dev",
+      "Requirements": [
+        "ggplot2",
+        "marquee",
+        "patchwork",
+        "rlang"
+      ],
+      "Hash": "5fab3507dd289963ec46932413539a0a"
+    },
+    "base64enc": {
+      "Package": "base64enc",
+      "Version": "0.1-3",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "543776ae6848fde2f48ff3816d0628bc"
     },
     "bit": {
       "Package": "bit",
@@ -173,31 +211,6 @@
       ],
       "Hash": "4f572fbc586294afff277db583b9060f"
     },
-    "boot": {
-      "Package": "boot",
-      "Version": "1.3-31",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "graphics",
-        "stats"
-      ],
-      "Hash": "de2a4646c18661d6a0a08ec67f40b7ed"
-    },
-    "circular": {
-      "Package": "circular",
-      "Version": "0.5-1",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "boot",
-        "mvtnorm",
-        "stats"
-      ],
-      "Hash": "3cf8da958fff9dcb209dd1e549a60a05"
-    },
     "cli": {
       "Package": "cli",
       "Version": "3.6.5",
@@ -219,13 +232,6 @@
         "Rcpp"
       ],
       "Hash": "9eb917c60c1a32bf417cabccaa4d7b29"
-    },
-    "commonmark": {
-      "Package": "commonmark",
-      "Version": "2.0.0",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Hash": "8cba62334c1088d21689d353a7e87663"
     },
     "cpp11": {
       "Package": "cpp11",
@@ -249,21 +255,11 @@
       ],
       "Hash": "859d96e65ef198fd43e82b9628d593ef"
     },
-    "curl": {
-      "Package": "curl",
-      "Version": "7.0.0",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R"
-      ],
-      "Hash": "aa27e963d3deccf4bade44d06b976977"
-    },
     "dplyr": {
       "Package": "dplyr",
       "Version": "1.1.4",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "R6",
@@ -337,21 +333,6 @@
       ],
       "Hash": "7ad64861e028a777d7d67ff83231b548"
     },
-    "ggtext": {
-      "Package": "ggtext",
-      "Version": "0.1.2",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "ggplot2",
-        "grid",
-        "gridtext",
-        "rlang",
-        "scales"
-      ],
-      "Hash": "c5ba8f5056487403a299b91984be86ca"
-    },
     "glue": {
       "Package": "glue",
       "Version": "1.8.0",
@@ -362,26 +343,6 @@
         "methods"
       ],
       "Hash": "5899f1eaa825580172bb56c08266f37c"
-    },
-    "gridtext": {
-      "Package": "gridtext",
-      "Version": "0.1.5",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "Rcpp",
-        "curl",
-        "grDevices",
-        "grid",
-        "jpeg",
-        "markdown",
-        "png",
-        "rlang",
-        "stringr",
-        "xml2"
-      ],
-      "Hash": "05e4f5fffb1eecfeaac9ea0b7f255fef"
     },
     "gtable": {
       "Package": "gtable",
@@ -456,6 +417,16 @@
       ],
       "Hash": "c23ab23c370d1ce3a7a80d8c0bdfa105"
     },
+    "jsonlite": {
+      "Package": "jsonlite",
+      "Version": "2.0.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "methods"
+      ],
+      "Hash": "b0776f526d36d8bd4a3344a88fe165c4"
+    },
     "labeling": {
       "Package": "labeling",
       "Version": "0.4.3",
@@ -469,7 +440,7 @@
     },
     "lattice": {
       "Package": "lattice",
-      "Version": "0.22-6",
+      "Version": "0.22-7",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -480,13 +451,13 @@
         "stats",
         "utils"
       ],
-      "Hash": "cc5ac1ba4c238c7ca9fa6a87ca11a7e2"
+      "Hash": "934f30aea6442867f57a610034ab06d3"
     },
     "lifecycle": {
       "Package": "lifecycle",
       "Version": "1.0.4",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "cli",
@@ -494,19 +465,6 @@
         "rlang"
       ],
       "Hash": "b8552d117e1b808b09a832f589b79035"
-    },
-    "litedown": {
-      "Package": "litedown",
-      "Version": "0.7",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "commonmark",
-        "utils",
-        "xfun"
-      ],
-      "Hash": "6145ea7089736f7b6585243bd3992508"
     },
     "lubridate": {
       "Package": "lubridate",
@@ -525,28 +483,39 @@
       "Package": "magrittr",
       "Version": "2.0.3",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R"
       ],
       "Hash": "7ce2733a9826b3aeb1775d56fd305472"
     },
-    "markdown": {
-      "Package": "markdown",
-      "Version": "2.0",
+    "marquee": {
+      "Package": "marquee",
+      "Version": "1.2.1",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
-        "litedown",
+        "S7",
+        "cli",
+        "cpp11",
+        "glue",
+        "grDevices",
+        "grid",
+        "jpeg",
+        "lifecycle",
+        "png",
+        "rlang",
+        "systemfonts",
+        "textshaping",
         "utils",
-        "xfun"
+        "vctrs"
       ],
-      "Hash": "b4349847250b103bbbb8bc6819c4fbca"
+      "Hash": "25c7b72bc58dd685b1c47fe0f5e415a7"
     },
     "mgcv": {
       "Package": "mgcv",
-      "Version": "1.9-1",
+      "Version": "1.9-4",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -559,22 +528,11 @@
         "stats",
         "utils"
       ],
-      "Hash": "110ee9d83b496279960e162ac97764ce"
-    },
-    "mvtnorm": {
-      "Package": "mvtnorm",
-      "Version": "1.3-3",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "stats"
-      ],
-      "Hash": "c7241e6be9d6df551a2e539a50f5c875"
+      "Hash": "347e906be9f134c45ee8ed36430cad5a"
     },
     "nlme": {
       "Package": "nlme",
-      "Version": "3.1-166",
+      "Version": "3.1-168",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -584,7 +542,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "ccbb8846be320b627e6aa2b4616a2ded"
+      "Hash": "b1d2ea08d5d392831fbc32c872362b06"
     },
     "patchwork": {
       "Package": "patchwork",
@@ -680,11 +638,6 @@
       ],
       "Hash": "9240cfb47489133f809918a0d3cc60cb"
     },
-    "readxl": {
-      "Package": "readxl",
-      "Version": "1.4.5",
-      "Source": "Repository"
-    },
     "renv": {
       "Package": "renv",
       "Version": "1.0.3",
@@ -694,29 +647,6 @@
         "utils"
       ],
       "Hash": "41b847654f567341725473431dd0d5ab"
-    },
-    "rhdf5": {
-      "Package": "rhdf5",
-      "Version": "2.53.5",
-      "Source": "Bioconductor",
-      "Repository": "https://roaldarbol.r-universe.dev",
-      "Requirements": [
-        "R",
-        "Rhdf5lib",
-        "methods",
-        "rhdf5filters"
-      ],
-      "Hash": "69e703cdb5de62545ad9d67d7f3c2e95"
-    },
-    "rhdf5filters": {
-      "Package": "rhdf5filters",
-      "Version": "1.19.2",
-      "Source": "Bioconductor",
-      "Repository": "https://roaldarbol.r-universe.dev",
-      "Requirements": [
-        "Rhdf5lib"
-      ],
-      "Hash": "3c80fa2587ad489370acefee9a573363"
     },
     "rlang": {
       "Package": "rlang",
@@ -728,18 +658,6 @@
         "utils"
       ],
       "Hash": "892124978869b74935dc3934c42bfe5a"
-    },
-    "roll": {
-      "Package": "roll",
-      "Version": "1.2.0",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "Rcpp",
-        "RcppArmadillo",
-        "RcppParallel"
-      ],
-      "Hash": "ec009bacac03c8d9443f4c2dbe3c10c1"
     },
     "scales": {
       "Package": "scales",
@@ -760,26 +678,6 @@
       ],
       "Hash": "c5bba8f0d1df8c4b9538a40570798d9b"
     },
-    "signal": {
-      "Package": "signal",
-      "Version": "1.8-1",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "MASS",
-        "R",
-        "grDevices",
-        "graphics",
-        "stats",
-        "utils"
-      ],
-      "Hash": "2f286162ac1320c8e244331368cf9029"
-    },
-    "sloop": {
-      "Package": "sloop",
-      "Version": "1.0.1",
-      "Source": "Repository"
-    },
     "snakecase": {
       "Package": "snakecase",
       "Version": "0.11.1",
@@ -791,16 +689,6 @@
         "stringr"
       ],
       "Hash": "58767e44739b76965332e8a4fe3f91f1"
-    },
-    "stinepack": {
-      "Package": "stinepack",
-      "Version": "1.5",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "stats"
-      ],
-      "Hash": "7d69ba03bf4a5c4ac28db30c777b3626"
     },
     "stringi": {
       "Package": "stringi",
@@ -831,6 +719,39 @@
         "vctrs"
       ],
       "Hash": "8f28c568a22dde52d2c8b11958776ac2"
+    },
+    "systemfonts": {
+      "Package": "systemfonts",
+      "Version": "1.2.3",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "base64enc",
+        "cpp11",
+        "grid",
+        "jsonlite",
+        "lifecycle",
+        "tools",
+        "utils"
+      ],
+      "Hash": "fe31683d2c6fd9a5724bcdf8ed44ded9"
+    },
+    "textshaping": {
+      "Package": "textshaping",
+      "Version": "1.0.3",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "cpp11",
+        "lifecycle",
+        "stats",
+        "stringi",
+        "systemfonts",
+        "utils"
+      ],
+      "Hash": "2fd3d0b32fc922bac1121f5409b96910"
     },
     "tibble": {
       "Package": "tibble",
@@ -901,11 +822,6 @@
       ],
       "Hash": "c5f3c201b931cd6474d17d8700ccb1c8"
     },
-    "tinytable": {
-      "Package": "tinytable",
-      "Version": "0.14.0",
-      "Source": "Repository"
-    },
     "tzdb": {
       "Package": "tzdb",
       "Version": "0.5.0",
@@ -931,7 +847,7 @@
       "Package": "vctrs",
       "Version": "0.6.5",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "cli",
@@ -988,32 +904,6 @@
         "graphics"
       ],
       "Hash": "cc2d62c76458d425210d1eb1478b30b4"
-    },
-    "xfun": {
-      "Package": "xfun",
-      "Version": "0.53",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "grDevices",
-        "stats",
-        "tools"
-      ],
-      "Hash": "1befe97a0d56060b3964e3986d408df9"
-    },
-    "xml2": {
-      "Package": "xml2",
-      "Version": "1.4.0",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "cli",
-        "methods",
-        "rlang"
-      ],
-      "Hash": "3dfd9ffbe221af775cb37f95e7e893ec"
     }
   }
 }
