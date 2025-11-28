@@ -124,8 +124,9 @@ animovement_show_suggested <- function(package = "animovement") {
 
 #' @keywords internal
 .exclude_dev_packages <- function(packages) {
-  dev_packages <- c("knitr", "rmarkdown", "testthat")
-  setdiff(packages, dev_packages)
+  dev_packages <- c("knitr", "rmarkdown", "testthat", "pak")
+  animovement_packages <- .get_animovement_packages()
+  setdiff(packages, c(dev_packages, animovement_packages))
 }
 
 
