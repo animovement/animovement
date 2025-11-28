@@ -1,13 +1,12 @@
-
-.c <- function (...) as.character(substitute(c(...))[-1L])
+.c <- function(...) as.character(substitute(c(...))[-1L])
 
 is_attached <- function(x) paste0("package:", x) %in% search()
 is_installed <- function(x) vapply(x, requireNamespace, TRUE, quietly = TRUE)
 
 
 msg <- function(..., startup = FALSE) {
-  if(!isTRUE(getOption("animovement.quiet"))) {
-    if(startup) packageStartupMessage(...) else message(...)
+  if (!isTRUE(getOption("animovement.quiet"))) {
+    if (startup) packageStartupMessage(...) else message(...)
   }
 }
 
@@ -19,7 +18,11 @@ project_packages <- function() {
   pkg <- pkg[!startsWith(pkg, "_")]
   pkg <- trimws(unlist(strsplit(pkg, ", | ,|,| "), use.names = FALSE)) # This will always work!
   pkg <- pkg[nzchar(pkg)]
-  if(!length(pkg)) stop("Empty config file. Please write package names into your .animovement config file, separated by commas, spaces or line breaks.")
+  if (!length(pkg)) {
+    stop(
+      "Empty config file. Please write package names into your .animovement config file, separated by commas, spaces or line breaks."
+    )
+  }
   pkg
 }
 
@@ -29,24 +32,39 @@ project_options <- function() {
   close(fileConn)
   pkg <- trimws(pkg[nzchar(pkg)])
   optl <- startsWith(pkg, "_")
-  if(!any(optl)) return(list(before = NULL, after = NULL))
-  if(all(optl)) {
+  if (!any(optl)) {
+    return(list(before = NULL, after = NULL))
+  }
+  if (all(optl)) {
     before <- pkg
     after <- NULL
   } else {
     ppos <- which.min(optl)
-    before <- if(ppos > 1L) pkg[1:(ppos-1L)] else NULL
-    after <- if(ppos < length(pkg)) pkg[ppos:length(pkg)][optl[ppos:length(pkg)]] else NULL
+    before <- if (ppos > 1L) pkg[1:(ppos - 1L)] else NULL
+    after <- if (ppos < length(pkg)) {
+      pkg[ppos:length(pkg)][optl[ppos:length(pkg)]]
+    } else {
+      NULL
+    }
   }
   lapply(list(before = before, after = after), function(x) {
-    if(is.null(x)) return(NULL)
+    if (is.null(x)) {
+      return(NULL)
+    }
     ol <- startsWith(x, "_opt_")
     x <- substr(x, 6L, 100000L)
     r <- "function() {"
-    if(any(ol)) r <- paste0(r, "options(", paste(x[ol], collapse = ", "), ")")
-    if(all(ol)) r <- paste0(r, "}") else {
-      r <- if(any(ol)) paste0(r, "; Sys.setenv(", paste(x[!ol], collapse = ", "), ")}") else
+    if (any(ol)) {
+      r <- paste0(r, "options(", paste(x[ol], collapse = ", "), ")")
+    }
+    if (all(ol)) {
+      r <- paste0(r, "}")
+    } else {
+      r <- if (any(ol)) {
+        paste0(r, "; Sys.setenv(", paste(x[!ol], collapse = ", "), ")}")
+      } else {
         paste0(r, "Sys.setenv(", paste(x[!ol], collapse = ", "), ")}")
+      }
     }
     eval(str2lang(r), NULL, NULL)
   })
@@ -67,62 +85,178 @@ project_options <- function() {
 #' @examples
 #' animovement_packages()
 animovement_packages <- function(extensions = TRUE, include.self = TRUE) {
-  if(file.exists(".animovement")) {
+  if (file.exists(".animovement")) {
     pkg <- project_packages()
   } else {
     pkg <- .core_pkg
   }
-  if(extensions && length(ex <- getOption("animovement.extend"))) pkg <- unique(c(pkg, ex))
-  if(include.self) pkg <- c(pkg, "animovement")
+  if (extensions && length(ex <- getOption("animovement.extend"))) {
+    pkg <- unique(c(pkg, ex))
+  }
+  if (include.self) {
+    pkg <- c(pkg, "animovement")
+  }
   pkg
 }
 
 
-package_version <- function(x) paste(unclass(packageVersion(x))[[1L]], collapse = ".")
+package_version <- function(x) {
+  paste(unclass(packageVersion(x))[[1L]], collapse = ".")
+}
 
-green <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[32m", x, "\033[39m")
-blue <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[34m", x, "\033[39m")
-cyan <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[36m", x, "\033[39m")
-magenta2 <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[38;5;198m", x, "\033[39m")
-gold <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[38;5;214m", x, "\033[39m")
-lightblue <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[38;5;45m", x, "\033[39m")
-kingsblue <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[38;5;33m", x, "\033[39m")
-grey70 <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[0;38;5;249m", x, "\033[39m")
-red <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[31m", x, "\033[39m")
-yellow <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[33m", x, "\033[39m")
-bold <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[1m", x, "\033[22m")
+green <- function(x) {
+  if (isFALSE(getOption("animovement.styling"))) {
+    x
+  } else {
+    paste0("\033[32m", x, "\033[39m")
+  }
+}
+blue <- function(x) {
+  if (isFALSE(getOption("animovement.styling"))) {
+    x
+  } else {
+    paste0("\033[34m", x, "\033[39m")
+  }
+}
+cyan <- function(x) {
+  if (isFALSE(getOption("animovement.styling"))) {
+    x
+  } else {
+    paste0("\033[36m", x, "\033[39m")
+  }
+}
+magenta2 <- function(x) {
+  if (isFALSE(getOption("animovement.styling"))) {
+    x
+  } else {
+    paste0("\033[38;5;198m", x, "\033[39m")
+  }
+}
+gold <- function(x) {
+  if (isFALSE(getOption("animovement.styling"))) {
+    x
+  } else {
+    paste0("\033[38;5;214m", x, "\033[39m")
+  }
+}
+lightblue <- function(x) {
+  if (isFALSE(getOption("animovement.styling"))) {
+    x
+  } else {
+    paste0("\033[38;5;45m", x, "\033[39m")
+  }
+}
+kingsblue <- function(x) {
+  if (isFALSE(getOption("animovement.styling"))) {
+    x
+  } else {
+    paste0("\033[38;5;33m", x, "\033[39m")
+  }
+}
+grey70 <- function(x) {
+  if (isFALSE(getOption("animovement.styling"))) {
+    x
+  } else {
+    paste0("\033[0;38;5;249m", x, "\033[39m")
+  }
+}
+red <- function(x) {
+  if (isFALSE(getOption("animovement.styling"))) {
+    x
+  } else {
+    paste0("\033[31m", x, "\033[39m")
+  }
+}
+yellow <- function(x) {
+  if (isFALSE(getOption("animovement.styling"))) {
+    x
+  } else {
+    paste0("\033[33m", x, "\033[39m")
+  }
+}
+bold <- function(x) {
+  if (isFALSE(getOption("animovement.styling"))) {
+    x
+  } else {
+    paste0("\033[1m", x, "\033[22m")
+  }
+}
 # Crayons white is more gray-isch
 # white <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[37m", x, "\033[39m")
 # Using bright white: https://i.stack.imgur.com/9UVnC.png
 # white <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[97m", x, "\033[39m")
 # Problem: If console is white: cannot read..
 
-
 text_col <- function(x) {
   # If RStudio not available, messages already printed in black
-  if (!identical(.Platform$GUI, "RStudio")) return(x)
+  if (!identical(.Platform$GUI, "RStudio")) {
+    return(x)
+  }
   grey70(x)
 }
 
-rule <- function(left, right = NULL, style.left = identity, style.right = identity, style.rule = FALSE) {
+rule <- function(
+  left,
+  right = NULL,
+  style.left = identity,
+  style.right = identity,
+  style.rule = FALSE
+) {
   n <- getOption("width")
   left <- as.character(left)
-  if(length(right)) {
+  if (length(right)) {
     right <- as.character(right)
     width <- n - nchar(left) - nchar(right) - 8L
-    if(!is.finite(width) || width <= 2L) width <- 2L
-    if(style.rule) {
-      res <- paste(c(text_col("-- "), style.left(left), " ", text_col(paste(rep("-", width), collapse = "")), " ", style.right(right), text_col(" --")), collapse = "")
+    if (!is.finite(width) || width <= 2L) {
+      width <- 2L
+    }
+    if (style.rule) {
+      res <- paste(
+        c(
+          text_col("-- "),
+          style.left(left),
+          " ",
+          text_col(paste(rep("-", width), collapse = "")),
+          " ",
+          style.right(right),
+          text_col(" --")
+        ),
+        collapse = ""
+      )
     } else {
-      res <- paste(c("-- ", style.left(left), " ", rep("-", width), " ", style.right(right), " --"), collapse = "")
+      res <- paste(
+        c(
+          "-- ",
+          style.left(left),
+          " ",
+          rep("-", width),
+          " ",
+          style.right(right),
+          " --"
+        ),
+        collapse = ""
+      )
     }
   } else {
     width <- n - nchar(left) - 4L
-    if(!is.finite(width) || width <= 2L) width <- 2L
-    if(style.rule) {
-      res <- paste(c(text_col("-- "), style.left(left), " ", text_col(paste(rep("-", width), collapse = ""))), collapse = "")
+    if (!is.finite(width) || width <= 2L) {
+      width <- 2L
+    }
+    if (style.rule) {
+      res <- paste(
+        c(
+          text_col("-- "),
+          style.left(left),
+          " ",
+          text_col(paste(rep("-", width), collapse = ""))
+        ),
+        collapse = ""
+      )
     } else {
-      res <- paste(c("-- ", style.left(left), " ", rep("-", width)), collapse = "")
+      res <- paste(
+        c("-- ", style.left(left), " ", rep("-", width)),
+        collapse = ""
+      )
     }
   }
   class(res) <- "animovement_rule"

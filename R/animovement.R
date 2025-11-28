@@ -47,5 +47,3 @@
 #' @import anivis
 #'
 "_PACKAGE"
-
-
