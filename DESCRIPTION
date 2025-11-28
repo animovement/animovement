@@ -1,7 +1,7 @@
 Package: animovement
 Type: Package
 Title: An R toolbox for analysing movement across space and time
-Version: 0.7.0
+Version: 0.7.1
 Authors@R: 
     person(
       "Mikkel", 
@@ -23,7 +23,8 @@ Imports:
     aniprocess, 
     anicheck, 
     animetric, 
-    anivis
+    anivis,
+    cli
 Suggests:
     knitr (>= 1.41),
     rmarkdown (>= 2.20),

@@ -23,6 +23,8 @@ reference:
   - animovement_install
   - animovement_sitrep
   - animovement_packages
+  - animovement_install_suggested
+  - animovement_show_suggested
 
 
 navbar:
