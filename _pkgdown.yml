@@ -15,7 +15,6 @@ reference:
 - title: "animovement"
   desc: These functions allow you to manage your animovement packages.
   contents:
-  - animovement_attach
   - animovement_detach
   - animovement_extend
   - animovement_conflicts

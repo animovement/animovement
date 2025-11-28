@@ -46,4 +46,5 @@
 #' @import animetric
 #' @import anivis
 #'
+#' @keywords internal
 "_PACKAGE"
