@@ -44,15 +44,15 @@ the type of data (e.g. pose estimation, centroid tracking, trackball,
 treadmill). See our docs to go through the steps, one-by-one:
 
 - [Introduction to
-  `animovement`](https://www.roald-arboel.com/animovement/articles/animovement.html)
+  `animovement`](https://animovement.dev/animovement/articles/animovement.html)
 - [Read trackball
-  data](https://www.roald-arboel.com/animovement/articles/read-trackball.html)
+  data](https://animovement.dev/animovement/articles/read-trackball.html)
 - [Clean
-  tracks](https://www.roald-arboel.com/animovement/articles/clean-tracks.html)
+  tracks](https://animovement.dev/animovement/articles/clean-tracks.html)
 - [Calculate
-  kinematics](https://www.roald-arboel.com/animovement/articles/calculate-kinematics.html)
+  kinematics](https://animovement.dev/animovement/articles/calculate-kinematics.html)
 - [Calculate summary
-  statistics](https://www.roald-arboel.com/animovement/articles/calculate-summary-statistics.html)
+  statistics](https://animovement.dev/animovement/articles/calculate-summary-statistics.html)
 
 ## Status
 
@@ -67,7 +67,7 @@ treadmill). See our docs to go through the steps, one-by-one:
 would love to get a sample of your data to support it!**
 
 If you enjoy the package, please make sure to [cite it](#citation). If
-you find a bug, feel free to open an issue.
+you find a bug, feel free to open an issue!
 
 <!-- ## Acknowledgements -->
 

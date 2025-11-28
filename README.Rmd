@@ -62,7 +62,7 @@ Analysis of animal movement follows a similar workflow irrespective of the type 
 
 **If your favourite type of movement data is not currently supported, we would love to get a sample of your data to support it!** 
 
-If you enjoy the package, please make sure to [cite it](#citation). If you find a bug, feel free to open an issue.
+If you enjoy the package, please make sure to [cite it](#citation). If you find a bug, feel free to open an issue!
 
 <!-- ## Acknowledgements -->
 
