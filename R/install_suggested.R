@@ -52,7 +52,9 @@ animovement_install_suggested <- function(package = "animovement") {
   } else {
     to_install <- suggested_packages[!installed_packages]
 
-    cli::cli_alert_info("Installing {length(to_install)} package{?s}: {.pkg {to_install}}")
+    cli::cli_alert_info(
+      "Installing {length(to_install)} package{?s}: {.pkg {to_install}}"
+    )
 
     if (.check_if_installed("pak")) {
       repos <- c(
@@ -98,7 +100,15 @@ animovement_show_suggested <- function(package = "animovement") {
 
 #' @keywords internal
 .get_animovement_packages <- function() {
-  c("animovement", "aniframe", "aniread", "aniprocess", "animetric", "anicheck", "anivis")
+  c(
+    "animovement",
+    "aniframe",
+    "aniread",
+    "aniprocess",
+    "animetric",
+    "anicheck",
+    "anivis"
+  )
 }
 
 
