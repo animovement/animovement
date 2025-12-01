@@ -246,7 +246,7 @@
     },
     "aniframe": {
       "Package": "aniframe",
-      "Version": "0.2.5",
+      "Version": "0.3.1",
       "Source": "Repository",
       "Type": "Package",
       "Title": "An R package providing core data structures for movement data",
@@ -256,6 +256,9 @@
       "URL": "http://animovement.dev/aniframe/, https://github.com/animovement/aniframe/",
       "BugReports": "https://github.com/animovement/aniframe/issues",
       "Encoding": "UTF-8",
+      "Depends": [
+        "R (>= 4.1.0)"
+      ],
       "Imports": [
         "cli",
         "dplyr",
@@ -275,17 +278,14 @@
       "Repository": "https://animovement.r-universe.dev",
       "RemoteUrl": "https://github.com/animovement/aniframe",
       "RemoteRef": "HEAD",
-      "RemoteSha": "7721bbee47a373e7df8e2f65f3c519e0ebb879cc",
+      "RemoteSha": "ffe83978345d6029cf9390555b3c427e132453ae",
       "NeedsCompilation": "no",
       "Author": "Mikkel Roald-Arbøl [aut, cre] (ORCID: <https://orcid.org/0000-0002-9998-0058>)",
-      "Maintainer": "Mikkel Roald-Arbøl <animovement.84w1m@passmail.com>",
-      "Depends": [
-        "R (>= 4.1.0)"
-      ]
+      "Maintainer": "Mikkel Roald-Arbøl <animovement.84w1m@passmail.com>"
     },
     "animetric": {
       "Package": "animetric",
-      "Version": "0.2.0",
+      "Version": "0.2.1",
       "Source": "Repository",
       "Type": "Package",
       "Title": "An R package for calculating movement-based metrics",
@@ -295,8 +295,12 @@
       "URL": "http://animovement.dev/animetric/, https://github.com/animovement/animetric/",
       "BugReports": "https://github.com/animovement/animetric/issues",
       "Encoding": "UTF-8",
+      "Depends": [
+        "R (>= 4.1.0)"
+      ],
       "Imports": [
         "aniframe",
+        "anispace",
         "cli",
         "dplyr",
         "rlang"
@@ -316,13 +320,10 @@
       "Repository": "https://animovement.r-universe.dev",
       "RemoteUrl": "https://github.com/animovement/animetric",
       "RemoteRef": "HEAD",
-      "RemoteSha": "6256c9f402c32871ef77786837bdd0f984d4adcd",
+      "RemoteSha": "f4de5ab33ecaab766759090a19d924d5b203c35d",
       "NeedsCompilation": "no",
       "Author": "Mikkel Roald-Arbøl [aut, cre] (ORCID: <https://orcid.org/0000-0002-9998-0058>)",
-      "Maintainer": "Mikkel Roald-Arbøl <animovement.84w1m@passmail.com>",
-      "Depends": [
-        "R (>= 4.1.0)"
-      ]
+      "Maintainer": "Mikkel Roald-Arbøl <animovement.84w1m@passmail.com>"
     },
     "aniprocess": {
       "Package": "aniprocess",
@@ -1816,7 +1817,7 @@
       "NeedsCompilation": "no",
       "Author": "Kevin Ushey [aut, cre] (ORCID: <https://orcid.org/0000-0003-2880-7407>), Hadley Wickham [aut] (ORCID: <https://orcid.org/0000-0003-4757-117X>), Posit Software, PBC [cph, fnd]",
       "Maintainer": "Kevin Ushey <kevin@rstudio.com>",
-      "Repository": "RSPM"
+      "Repository": "CRAN"
     },
     "rlang": {
       "Package": "rlang",

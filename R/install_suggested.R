@@ -103,6 +103,7 @@ animovement_show_suggested <- function(package = "animovement") {
   c(
     "animovement",
     "aniframe",
+    "anispace",
     "aniread",
     "aniprocess",
     "animetric",
