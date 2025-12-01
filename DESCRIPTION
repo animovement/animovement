@@ -28,6 +28,7 @@ Imports:
     cli
 Suggests:
     pak,
+    here,
     knitr (>= 1.41),
     rmarkdown (>= 2.20),
     testthat (>= 3.1.6)
