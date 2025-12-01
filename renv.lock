@@ -412,6 +412,45 @@
         "R (>= 4.1.0)"
       ]
     },
+    "anispace": {
+      "Package": "anispace",
+      "Version": "0.1.1",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "An R package providing spatial transformation methods for movement data",
+      "Authors@R": "person( \"Mikkel\",  \"Roald-Arbøl\",  role = c(\"aut\", \"cre\"),  email = \"animovement.84w1m@passmail.com\", comment = c(ORCID = \"0000-0002-9998-0058\") )",
+      "Description": "An R package providing spatial transformation methods for movement data.",
+      "License": "MIT + file LICENSE",
+      "URL": "http://animovement.dev/anispace/, https://github.com/animovement/anispace/",
+      "BugReports": "https://github.com/animovement/anispace/issues",
+      "Encoding": "UTF-8",
+      "Depends": [
+        "R (>= 4.1.0)"
+      ],
+      "Imports": [
+        "aniframe",
+        "cli",
+        "dplyr",
+        "rlang"
+      ],
+      "Suggests": [
+        "knitr",
+        "rmarkdown",
+        "testthat (>= 3.0.0)"
+      ],
+      "Config/testthat/edition": "3",
+      "Roxygen": "list(markdown = TRUE)",
+      "RoxygenNote": "7.3.3",
+      "VignetteBuilder": "knitr",
+      "Config/Needs/website": "rmarkdown",
+      "Repository": "https://animovement.r-universe.dev",
+      "RemoteUrl": "https://github.com/animovement/anispace",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "b67e3a19f4893ce4bc0a9c61033ac7d46c37985a",
+      "NeedsCompilation": "no",
+      "Author": "Mikkel Roald-Arbøl [aut, cre] (ORCID: <https://orcid.org/0000-0002-9998-0058>)",
+      "Maintainer": "Mikkel Roald-Arbøl <animovement.84w1m@passmail.com>"
+    },
     "anivis": {
       "Package": "anivis",
       "Version": "0.1.0",
