@@ -1,6 +1,7 @@
 .core_pkg <- c(
   'aniframe',
   'aniread',
+  'anispace',
   'aniprocess',
   'anicheck',
   'animetric',

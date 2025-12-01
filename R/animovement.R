@@ -41,6 +41,7 @@
 #' @importFrom tools package_dependencies
 #' @import aniframe
 #' @import aniread
+#' @import anispace
 #' @import aniprocess
 #' @import anicheck
 #' @import animetric
