@@ -5,3 +5,6 @@
 docs
 inst/doc
 *.DS_Store
+README_files
+/.quarto/
+**/*.quarto_ipynb

@@ -1,0 +1,133 @@
+---
+title: Analyse trackball data
+---
+In this example, we will go through a full workflow, from reading the data through inspecting, checking, cleaning, filtering, calculating kinematics, all the way to useful output metrics. We will stop short of doing a full-blown statistical analysis, but we will get to the point that such an analysis would be the logical next step. 
+
+First a brief description of the data set: In this experiment, ground beetles were placed on a trackball to assess whether beetles exhibited individual traits in their movement patterns. Think of it as personality through movement. The data was collected by using optical flow sensors to read the movement of the ball in two locations. The sensors were connected to Arduino microcontrollers, and the data was collected through [Bonsai](https://bonsai-rx.org), a visual programming language that is widely used for experimental control in the neurosciences. We can then turn this data into normal 2D paths, and whatever follows from there are the same steps we would use to process any other movement data. Let's dig in!
+
+First, we need to load the *animovement* toolbox:
+```{r}
+library(animovement)
+```
+
+## Read data
+We provide access to sample data with the `get_sample_data` function[^1], so anyone can try out the analysis on their own too. This function downloads a sample data set to a temporary location and returns the path to the data - that way we just have to pass the path to our data reader function.
+```{r}
+paths <- get_sample_data("trackball")
+```
+
+Let's inspect the path:
+
+```{r}
+paths
+```
+
+Next we need to read the data with a `read_` function, which brings the data into the standardised *aniframe* format. 
+We can see that we get *two* different paths - remember that we used two sensors to track the balls motion? - that makes `read_trackball` a special case, because *animovement* needs to re-create the path from the sensor data. We also need to specify the `setup`, as the beetle can either be contrained to only face a single direction on the ball (`setup = "of_fixed"`), or left to rotate atop the ball freely (`setup = "of_free"`). In the present experiment the setup was `of_fixed`. 
+
+```{r}
+data <- read_trackball(
+    paths, 
+    setup = "of_fixed", 
+    sampling_rate = 60, 
+    col_time = 3, 
+    col_dx = 1, 
+    col_dy = 2,
+    ball_diameter = 5,
+    dots_per_cm = 155
+    )
+```
+
+## Inspect data
+Now we have read our data, let's inspect it:
+
+```{r}
+data
+```
+
+We can also inspect the associated metadata:
+
+```{r}
+get_metadata(data)
+```
+
+If we want to change some of the metadata, we can easily do so:
+
+```{r}
+data <- data |> 
+    set_metadata(
+        start_datetime = "2022-03-09"
+    )
+
+get_metadata(data)$start_datetime
+```
+
+### Calibrate spatial units
+The optic flow sensors return readings in an arbitrary format. So if we would wish to calibrate the spatial units to *e.g.* mm, then we would need to make a calibration. Let's say the ball was **5 cm in diameter** and we made a test trial where we rotated the ball **10 times** by hand. We could then read that data and feed it to `calibrate_trackball` like this, And then use that to set the spatial unit with `set_unit_space`:
+
+```{r}
+#| eval: FALSE
+calibration_factor <- calibrate_trackball(
+    calibration_paths, 
+    ball_diameter = 5, 
+    ball_rotations = 10
+    )
+
+data <- data |> 
+    set_unit_space(
+        to_unit = "cm", 
+        calibration_factor = calibration_factor
+        )
+```
+
+## Inspect and check data
+The next step is for us to inspect the quality of the data. Common checks include assessing the confidence we have in the collected data, which uses the `confidence` variable in the *aniframe*, and assessing the frequency and distribution of missing values (`NA`) in the data. However, for this type of trackball data, the readings are very reliable and it is hard to get a good estimate of the .
+
+```{r}
+check_confidence(data)
+```
+
+## Remove outliers
+Next, we would remove outliers - data points that we have little faith in. We have introduced a variety of functions for doing this, all starting with `filter_na`. Bug, again, for this data we would not expect any outliers.
+
+## Filter/smooth paths
+We could however expect some noise in the sampling process. Thus, we may want to filter our data, which is commonly done for movement data across fields, although the preferred method differs between fields. These are our `filter_` functions. We can try a few different ones to see the difference. Importantly, for this data, since the raw collected data are *changes* between timepoints and not absolute positions (*e.g. position in an image), we need to convert the data back to its original state, do the filtering, and then convert back to positions in 2D; luckily, `filter_aniframe` can do that for us, simply by enabling `use_derivatives = TRUE`.
+
+```{r}
+data <- data |> 
+    filter_aniframe( 
+        method = "rollmean", 
+        use_derivatives = TRUE
+    )
+```
+
+When we are finally happy that our data is of the best possible quality, then - **and only then** - can we move on to doing calculations based on our data.
+
+## Calculate kinematics
+For this experiment, the researchers were particularly interested in kinematics and path tortuosity measures. 
+
+```{r}
+data <- data |> 
+    calculate_tortuosity() |> 
+    calculate_kinematics()
+    
+```
+
+Note that `calculate_tortuosity` uses a sliding window which can be set by specifying `window_width` (which should be an odd number).
+
+Now the data also has a new class, `aniframe_kin`, which provides a new way of plotting the data:
+```{r}
+plot(data)
+```
+
+## Summarise paths
+
+```{r}
+data_summary <- data |> 
+    summarise_aniframe()
+
+data_summary
+```
+
+
+[^1]: For a list of the possible data sets, run `?get_sample_data`.

@@ -11,4 +11,5 @@
 ^\.github$
 ^CITATION\.cff$
 ^README\.Rmd$
+^README\.qmd$
 ^vignettes/articles$
