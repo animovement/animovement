@@ -1,7 +1,7 @@
 Package: animovement
 Type: Package
 Title: An R toolbox for analysing movement across space and time
-Version: 0.7.2
+Version: 0.7.3
 Authors@R: 
     person(
       "Mikkel", 
@@ -31,9 +31,10 @@ Suggests:
     here,
     knitr (>= 1.41),
     rmarkdown (>= 2.20),
-    testthat (>= 3.1.6)
+    testthat (>= 3.0.0)
 Additional_repositories: https://animovement.r-universe.dev
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 NeedsCompilation: no
 VignetteBuilder: knitr
+Config/testthat/edition: 3
