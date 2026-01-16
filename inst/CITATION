@@ -6,7 +6,7 @@ bibentry(bibtype = "Misc",
                          family = "Roald-Arbøl",
                          email = "animovement.84w1m@passmail.com",
                          comment = c(ORCID = "0000-0002-9998-0058")),
-         year = "2025",
+         year = "2026",
          url = "http://animovement.dev/", "https://animovement.dev/animovement/",
          abstract = "An R toolbox for analysing movement across space and time.",
-         version = "0.7.0")
+         version = "0.7.3")

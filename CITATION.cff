@@ -8,8 +8,8 @@ message: 'To cite package "animovement" in publications use:'
 type: software
 license: MIT
 title: 'animovement: An R toolbox for analysing movement across space and time.'
-version: 0.7.0
-date-released: 2025-11-28
+version: 0.7.3
+date-released: 2026-01-16
 abstract: An R toolbox for analysing movement across space and time.
 authors:
 - family-names: Roald-Arbøl

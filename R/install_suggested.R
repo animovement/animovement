@@ -65,7 +65,8 @@ animovement_install_suggested <- function(package = "animovement") {
     } else {
       repos <- c(
         "https://animovement.r-universe.dev",
-        "https://cloud.r-project.org"
+        "https://cloud.r-project.org",
+        "https://repo.r-wasm.org"
       )
       utils::install.packages(to_install, repos = repos)
     }
