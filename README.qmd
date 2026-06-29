@@ -1,25 +1,36 @@
 ---
-output: github_document
+format: 
+  gfm:
+    fig-format: png
+knitr:
+  opts_chunk:
+    fig.path: "man/figures/README-"
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md is generated from README.qmd. Please edit that file -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
   out.width = "100%"
 )
+
+if (!requireNamespace("animovement", quietly = TRUE)) {
+   devtools::load_all()
+} else {
+   library(animovement)
+}
 ```
 
 
 # animovement
 <!-- badges: start -->
+
 [![DOI](https://zenodo.org/badge/773406370.svg)](https://zenodo.org/doi/10.5281/zenodo.13235277)
 [![R-CMD-check](https://github.com/animovement/animovement/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/animovement/animovement/actions/workflows/R-CMD-check.yaml)
-[![animovement status
-badge](https://animovement.r-universe.dev/badges/animovement)](https://animovement.r-universe.dev)
+[![animovement status badge](https://animovement.r-universe.dev/animovement/badges/version)](https://animovement.r-universe.dev/animovement)
+
 <!-- badges: end -->
 
 *An R toolbox for analysing movement across space and time*

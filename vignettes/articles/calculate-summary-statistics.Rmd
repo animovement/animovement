@@ -19,24 +19,25 @@ here::i_am("vignettes/articles/calculate-summary-statistics.Rmd")
 ```
 
 ```{r include=FALSE}
-filepath_1 <- here("inst", "extdata", "multi", "GB_COM6_2021-08-05T15_37_55.csv")
-filepath_2 <- here("inst", "extdata", "multi", "GB_COM7_2021-08-05T15_37_55.csv")
-filepaths <- c(filepath_1, filepath_2)
+filepaths <- get_sample_data("trackball", quiet = TRUE)
 
 df <- read_trackball(
   filepaths,
   setup = "of_free",
-  col_time = 4,
-  sampling_rate = 60,
-  distance_scale = 394
-)
+  col_time = "datetime",
+  sampling_rate = 60
+) |>
+  # Trackball coordinates come out in sensor dots; calibrate to cm
+  # (394 dots per cm for this mouse sensor).
+  set_unit_space(to_unit = "cm", calibration_factor = 1 / 394)
 
 # Smooth tracks
 df_kinematics_clean <- df |>
-  animovement::filter_na_speed() |> 
-  mutate(x = animovement::replace_na(x, method = "stine"),
-         y = animovement::replace_na(y, method = "stine")) |> 
-  filter_movement(method = "rollmedian", window_width = 5, use_derivatives = TRUE) |> 
+  # Outlier removal + interpolation will be handled separately — disabled for now.
+  # filter_na_speed() |>
+  # mutate(x = replace_na(x, method = "stine"),
+  #        y = replace_na(y, method = "stine")) |>
+  filter_aniframe(method = "rollmedian", window_width = 5, use_derivatives = TRUE) |>
   calculate_kinematics()
 ```
 
@@ -45,14 +46,13 @@ Voilá! We've arrived at the final step, and all that's left is to calculate sum
 ```{r}
 library(tinytable)
 df_kinematics_clean |>
-  filter(v_translation > 0) |> 
-  calculate_statistics(measures = "median_mad") |> 
+  summarise_aniframe(measures = "median_mad") |>
   mutate(across(where(is.numeric), as.numeric)) |>
   tidyr::pivot_longer(where(is.numeric),
     names_to = "Measure",
     values_to = "Value"
   ) |> 
-  select(-c("individual", "keypoint")) |> 
+  select(-any_of(c("individual", "keypoint"))) |>
   tt() |>
   format_tt(digits = 2)
 ```

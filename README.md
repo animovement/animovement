@@ -1,5 +1,6 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+<!-- README.md is generated from README.qmd. Please edit that file -->
 
 # animovement
 
@@ -8,7 +9,8 @@
 [![DOI](https://zenodo.org/badge/773406370.svg)](https://zenodo.org/doi/10.5281/zenodo.13235277)
 [![R-CMD-check](https://github.com/animovement/animovement/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/animovement/animovement/actions/workflows/R-CMD-check.yaml)
 [![animovement status
-badge](https://animovement.r-universe.dev/badges/animovement)](https://animovement.r-universe.dev)
+badge](https://animovement.r-universe.dev/animovement/badges/version.png)](https://animovement.r-universe.dev/animovement)
+
 <!-- badges: end -->
 
 *An R toolbox for analysing movement across space and time*
@@ -89,18 +91,16 @@ To cite *animovement* in publications use:
 citation("animovement")
 #> To cite package 'animovement' in publications use:
 #> 
-#>   Roald-Arbøl M (2025). "animovement: An R toolbox for analysing animal
-#>   movement across space and time."
-#>   <http://www.roald-arboel.com/animovement/>.
+#>   https://animovement.dev/animovement/
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Misc{roaldarbol:2025,
-#>     title = {animovement: An R toolbox for analysing animal movement across space and time.},
+#>     title = {animovement: An R toolbox for analysing movement across space and time.},
 #>     author = {Mikkel Roald-Arbøl},
 #>     year = {2025},
-#>     url = {http://www.roald-arboel.com/animovement/},
-#>     abstract = {An R toolbox for analysing animal movement across space and time.},
-#>     version = {0.6.0},
+#>     url = {http://animovement.dev/},
+#>     abstract = {An R toolbox for analysing movement across space and time.},
+#>     version = {0.7.0},
 #>   }
 ```
