@@ -81,9 +81,12 @@ data <- data |>
 ```
 
 ## Inspect and check data
-The next step is for us to inspect the quality of the data. Common checks include assessing the confidence we have in the collected data, which uses the `confidence` variable in the *aniframe*, and assessing the frequency and distribution of missing values (`NA`) in the data. However, for this type of trackball data, the readings are very reliable and it is hard to get a good estimate of the .
+The next step is for us to inspect the quality of the data. Common checks include assessing the confidence we have in the collected data, which uses the `confidence` variable in the *aniframe*, and assessing the frequency and distribution of missing values (`NA`) in the data. However, for this type of trackball data, the readings are very reliable and there is no `confidence` variable to assess, so these checks are demonstrated in the [DeepLabCut article](deeplabcut.html) instead.
 
 ```{r}
+#| eval: FALSE
+# `check_confidence()` needs a `confidence` column, which trackball optical-flow
+# data does not have. See the DeepLabCut article for the checks in action.
 check_confidence(data)
 ```
 

@@ -20,21 +20,21 @@ here::i_am("vignettes/articles/calculate-kinematics.Rmd")
 ```
 
 ```{r include=FALSE}
-filepath_1 <- here("inst", "extdata", "multi", "GB_COM6_2021-08-05T15_37_55.csv")
-filepath_2 <- here("inst", "extdata", "multi", "GB_COM7_2021-08-05T15_37_55.csv")
-filepaths <- c(filepath_1, filepath_2)
+filepaths <- get_sample_data("trackball", quiet = TRUE)
 
 df <- read_trackball(
   filepaths,
   setup = "of_free",
-  col_time = 4,
-  sampling_rate = 60,
-  distance_scale = 394
-)
+  col_time = "datetime",
+  sampling_rate = 60
+) |>
+  # Trackball coordinates come out in sensor dots; calibrate to cm
+  # (394 dots per cm for this mouse sensor).
+  set_unit_space(to_unit = "cm", calibration_factor = 1 / 394)
 
 # Smooth tracks
 df_smooth <- df |>
-  filter_movement(method = "rollmedian", window_width = 5, use_derivatives = TRUE)
+  filter_aniframe(method = "rollmedian", window_width = 5, use_derivatives = TRUE)
 ```
 
 ## Calculate kinematics
@@ -62,20 +62,23 @@ df_kinematics_clean <- df_kinematics |>
   filter_na_speed(threshold = 100)
 ```
 
+<!-- TODO: Commented out for now — these chunks use kinematics columns from the
+previous calculate_kinematics() output (v_translation, v_rotation, direction,
+d_rotation). The output schema has changed (speed, angular_velocity, heading,
+angular_speed, …); re-enable once these plots are remapped to the new columns.
+
 Alternatively, you can perform your own data cleaning methods.
 
-```{r}
+```r
 df_kinematics_alternative <- df_kinematics |>
   filter(v_translation > 0.25 & v_rotation < 200)
 ```
 
-Whatever way you choose is all up to you, but do make sure you do not just calculate summaries without knowing what's in it. 
+Whatever way you choose is all up to you, but do make sure you do not just calculate summaries without knowing what's in it.
 
 Kinematics are much more prone to small values change. We assess these in two ways:
 
-
-
-```{r}
+```r
 library(patchwork)
 a <- df_kinematics_clean |>
   ggplot(aes(x, y, colour = time)) +
@@ -88,8 +91,6 @@ c <- df_kinematics_clean |>
   ggplot(aes(time, v_translation)) +
   geom_line()
 d <- df_kinematics_clean |>
-  # filter(time < 20) |>
-  # filter(v_translation > 0) |>
   ggplot(aes(time, v_rotation)) +
   geom_line()
 e <- df_kinematics_clean |>
@@ -105,9 +106,8 @@ df_kinematics_clean |>
   select(d_rotation)
 ```
 
-```{r}
+```r
 pl_direction <- df_kinematics_clean |>
-  # filter(time < 20) |>
   ggplot(aes(x = direction, y = v_translation)) +
   stat_density_2d(
     geom = "tile",
@@ -116,12 +116,10 @@ pl_direction <- df_kinematics_clean |>
     contour = F
   ) +
   scale_fill_viridis_c() +
-  # scale_fill_gradientn(colours=rev(rainbow(32)[1:23])) +
   coord_polar(
     direction = -1,
     start = -pi / 2
   ) +
-  # scale_x_continuous(limits = c(0,2*pi)) +
   theme_minimal()
 
 max_coord <- max(abs(c(df_kinematics_clean$x, df_kinematics_clean$y)), na.rm = TRUE)
@@ -137,4 +135,5 @@ pl_path <- df_kinematics_clean |>
 pl_path + pl_direction +
   plot_layout(guides = "collect")
 ```
+-->
 

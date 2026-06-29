@@ -18,17 +18,17 @@ here::i_am("vignettes/articles/clean-tracks.Rmd")
 ```
 
 ```{r include=FALSE}
-filepath_1 <- here("inst", "extdata", "multi", "GB_COM6_2021-08-05T15_37_55.csv")
-filepath_2 <- here("inst", "extdata", "multi", "GB_COM7_2021-08-05T15_37_55.csv")
-filepaths <- c(filepath_1, filepath_2)
+filepaths <- get_sample_data("trackball", quiet = TRUE)
 
 df <- read_trackball(
   filepaths,
   setup = "of_free",
-  col_time = 4,
-  sampling_rate = 60,
-  distance_scale = 394
-)
+  col_time = "datetime",
+  sampling_rate = 60
+) |>
+  # Trackball coordinates come out in sensor dots; calibrate to cm
+  # (394 dots per cm for this mouse sensor).
+  set_unit_space(to_unit = "cm", calibration_factor = 1 / 394)
 ```
 
 The next step in our workflow is to clean the tracks. This step commonly covers three separate components:
@@ -39,12 +39,16 @@ The next step in our workflow is to clean the tracks. This step commonly covers 
 
 Although these are not always completely separate steps in practice, we will treat them as such to ensure the integrity of our tracks.
 
+<!-- TODO: Commented out for now — the outlier-detection workflow is being
+reworked. It relied on raw `dx`/`dy` sensor columns, which `read_trackball()`
+no longer returns (output is `x`/`y`). Re-enable once the new approach lands.
+
 ## Outlier detection {#outlier-detection}
-**If you are confident that your sensors give correct readings, you can skip this step.**. Even in a typical trackball setup with optical flow sensors (e.g. computer mice), there is a chance that we will get a few spurious readings from the sensors. The aim of this step is to root out those readings. 
+**If you are confident that your sensors give correct readings, you can skip this step.**. Even in a typical trackball setup with optical flow sensors (e.g. computer mice), there is a chance that we will get a few spurious readings from the sensors. The aim of this step is to root out those readings.
 
 We'll use the data we read in the [Read data](https://www.roald-arboel.com/animovement/articles/Read-trackball-data.html) article, so if you've missed that step you need to revisit [how to read data](https://www.roald-arboel.com/animovement/articles/Read-trackball-data.html). Let us first visualise our `dx` and `dy` values.
 
-```{r}
+```r
 library(ggplot2)
 df <- df |>
   mutate(displacement = sqrt(dx^2 + dy^2))
@@ -71,7 +75,7 @@ full_trace / partial_trace / hist_dist
 
 Some animals spend a significant amount of time sitting still (as was the case here). To ensure that these zero-readings do not skew our outlier detection, let's filter them out and have another look at the histograms.
 
-```{r}
+```r
 hist_dist2 <- df |>
   filter(displacement != 0) |>
   ggplot(aes(displacement)) +
@@ -80,22 +84,23 @@ hist_dist2 <- df |>
 hist_dist2
 ```
 
-Now we can see that there might be a few observations with extreme observations. **It is now up to each researcher to decide whether to attempt filtering out outliers, or whether we are happy with what we have**. 
+Now we can see that there might be a few observations with extreme observations. **It is now up to each researcher to decide whether to attempt filtering out outliers, or whether we are happy with what we have**.
 
-we may want to filter out all the `0` readings At first sight, it all looks fine. We could stop here and say we're confident there are no *spurious* outliers. We could also apply a variety of automated outlier detection techniques. There are several ways of achieving this, but luckily the [*performance*]() package has got us covered with their [`check_outliers()`]() function. Since most of these methods rely on histograms/probability density functions, 
+we may want to filter out all the `0` readings At first sight, it all looks fine. We could stop here and say we're confident there are no *spurious* outliers. We could also apply a variety of automated outlier detection techniques. There are several ways of achieving this, but luckily the [*performance*]() package has got us covered with their [`check_outliers()`]() function. Since most of these methods rely on histograms/probability density functions,
 
-```{r}
+```r
 library(tidyr)
 df |>
   mutate(
     ax = dx - lag(dx),
     ay = dy - lag(dy)
   ) |>
-  tidyr::drop_na(ax, ay) |> 
+  tidyr::drop_na(ax, ay) |>
   filter(time < 200) |>
   filter(dx != 0) |>
   select(ax, ay)
 ```
+-->
 
 
 ## Interpolation {#interpolation}
@@ -121,19 +126,19 @@ Let's try smoothing our data with a `rolling_mean` filter with 0.5 second (30 ob
 
 ```{r}
 df_rollmedian <- df |>
-  filter_movement(method = "rollmedian", 
+  filter_aniframe(method = "rollmedian", 
                   window_width = 3, 
                   use_derivatives = TRUE)
 df_kalman <- df |>
-  filter_movement(method = "kalman", 
+  filter_aniframe(method = "kalman", 
                   sampling_rate = 60, 
                   use_derivatives = TRUE)
 df_sgolay <- df |>
-  filter_movement(method = "sgolay", 
+  filter_aniframe(method = "sgolay", 
                   sampling_rate = 60, 
                   use_derivatives = TRUE)
 df_lowpass <- df |>
-  filter_movement(method = "lowpass", 
+  filter_aniframe(method = "lowpass", 
                   cutoff_freq = 0.1, 
                   sampling_rate = 60, 
                   use_derivatives = TRUE)
