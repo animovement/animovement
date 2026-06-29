@@ -38,6 +38,10 @@ jobs:
           extra-packages: any::pkgdown, any::quarto, local::.
           needs: website
 
+      - name: Install ecosystem suggested packages
+        run: animovement::animovement_install_suggested()
+        shell: Rscript {0}
+
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
         shell: Rscript {0}
