@@ -3,13 +3,13 @@ url: http://animovement.dev/animovement/
 home:
   title: Analyse movement across space and time
 
-authors:
-  Mikkel Roald-Arbøl:
-    href: https://roald-arboel.com
-
+# Theme, author details, and the shared navbar components (the animovement
+# ecosystem dropdown + Zulip link) are inherited from animovementtemplate.
+# The Tutorial/Articles menus and the navbar layout below are specific to
+# this umbrella site.
 template:
-  light-switch: true
   bootstrap: 5
+  package: animovementtemplate
 
 reference:
 - title: "animovement"
@@ -49,5 +49,5 @@ navbar:
       - text: How to contribute
   structure:
     left:  [intro, tutorial, articles, reference, news]
-    right: [search, github, lightswitch]
+    right: [search, animovement, zulip, github, lightswitch]
 
