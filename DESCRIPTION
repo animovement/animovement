@@ -36,6 +36,7 @@ Suggests:
     ggplot2,
     patchwork,
     readxl,
+    signal,
     tibble,
     tidyr,
     tinytable
