@@ -1,0 +1,87 @@
+# Introduction to animovement
+
+The primary goal of the *animovement* package is to offer a streamlined
+and standardised workflow for analysing animal movement data, with a
+syntax designed to integrate seamlessly into the *tidyverse* ecosystem.
+
+Animal movement, whether produced by humans or other animals, is crucial
+for navigating and interacting with the environment. Understanding these
+movements is of great interest to scientists in diverse fields such as
+ethology, behavioral ecology, biomechanics, and neuroscience. While
+there are numerous tools available for quantifying movement, the data
+they produce — whether from video tracking software or hardware like
+treadmills, trackballs, or accelerometers — often lack a standardised
+approach for analysis. This makes it difficult to easily process and
+compare movement data across different studies and platforms.
+
+The *animovement* package addresses this gap by establishing a
+standardised workflow for processing movement data, leveraging common
+data formats (in collaboration with movement) and offering a “recipe”
+for streamlined data analysis.
+
+At its core, *animovement* processes the trajectories of individual
+keypoints through time. The spatial position of an individual is
+represented by one (centroid) or more keypoints (pose), provided in 1D
+(x), 2D (x, y), or 3D (x, y, z) coordinates. These sequentially
+collected positions form tracks over time.
+
+In neuroscience and ethology, tracks are commonly generated from:
+
+1.  Pose estimation tools like DeepLabCut or SLEAP, which track multiple
+    keypoints for each individual.
+2.  Centroid tracking software like TRex or idtracker.ai, which focuses
+    on a single point (the centroid) per individual.
+3.  Treadmills or trackballs, which record the movement of a belt or
+    ball, serving as proxies for 1D (treadmill) and 2D (trackball)
+    centroid tracking. Our vision is to provide an intuitive and
+    accessible workflow using the familiar tidyverse syntax. animovement
+    is designed to handle data from various sources, supporting 1D, 2D,
+    and 3D tracking for single or multiple individuals.
+
+In practice, our goal is to make it possible to derive meaningful
+insights from movement data in fewer than 10 lines of code. For example:
+
+``` r
+
+library(animovement)
+movement_summary <- read_deeplabcut(path) |>
+  clean_tracks() |>
+  calculate_kinematics() |>
+  clean_kinematics() |>
+  calculate_statistics()
+```
+
+## Data structure
+
+A movement data frame contains information about the *spatial position*
+of *at least one keypoint* along *at least one axis* at a point in
+*time*.
+
+In practice, a movement data frame contains the following:
+
+| Variable | Conditional | Use-case | Description |
+|----|----|----|----|
+| `time` | Required |  |  |
+| `keypoint` | Required |  |  |
+| `x` | Required |  |  |
+| `y` | Optional | All except treadmills |  |
+| `z` | Optional | 3D tracking |  |
+| `confidence` | Optional |  | In pose estimation, a *confidence* score is often given which can be leveraged to filter outlier observations. |
+
+## Getting started with *animovement*
+
+To get started, first install the package.
+
+Next, we have put together a tutorial that takes you through all the
+necessary steps, from reading your data to summarising the movements. We
+recommend going through the steps in the specified order which is the
+recommended workflow.
+
+- [Read trackball
+  data](https://www.roald-arboel.com/animovement/articles/read-trackball.html)
+- [Clean
+  tracks](https://www.roald-arboel.com/animovement/articles/clean-tracks.html)
+- [Compute
+  kinematics](https://www.roald-arboel.com/animovement/articles/calculate-kinematics.html)
+- [Compute movement
+  statistics](https://www.roald-arboel.com/animovement/articles/calculate-summary-statistics.html)

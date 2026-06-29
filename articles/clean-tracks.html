@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Clean tracks • animovement</title>
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Clean tracks">
 </head>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">animovement</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,14 +47,28 @@
     <li><h6 class="dropdown-header" data-toc-skip>How to contribute</h6></li>
   </ul>
 </li>
-<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html" aria-label="Reference"><span class="fa fa-file-code"></span> Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html" aria-label="News"><span class="fa fa-newspaper"></span> News</a></li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/roaldarbol/animovement/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-animovement" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="animovement"><span class="fa fab fa-r-project"></span> animovement</button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-animovement">
+<li><a class="external-link dropdown-item" href="https://animovement.dev/anicheck/">anicheck</a></li>
+    <li><a class="external-link dropdown-item" href="https://animovement.dev/aniframe/">aniframe</a></li>
+    <li><a class="external-link dropdown-item" href="https://animovement.dev/animetric/">animetric</a></li>
+    <li><a class="external-link dropdown-item" href="https://animovement.dev/animovement/">animovement</a></li>
+    <li><a class="external-link dropdown-item" href="https://animovement.dev/aniprocess/">aniprocess</a></li>
+    <li><a class="external-link dropdown-item" href="https://animovement.dev/aniread/">aniread</a></li>
+    <li><a class="external-link dropdown-item" href="https://animovement.dev/anispace/">anispace</a></li>
+    <li><a class="external-link dropdown-item" href="https://animovement.dev/anivis/">anivis</a></li>
+  </ul>
+</li>
+<li class="nav-item"><a class="external-link nav-link" href="https://animovement.zulipchat.com" aria-label="Chat on Zulip"><span class="fa fa-comments"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/animovement/animovement/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
@@ -79,14 +93,19 @@
       <h1>Clean tracks</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/roaldarbol/animovement/blob/main/vignettes/articles/clean-tracks.Rmd" class="external-link"><code>vignettes/articles/clean-tracks.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/animovement/animovement/blob/main/vignettes/articles/clean-tracks.Rmd" class="external-link"><code>vignettes/articles/clean-tracks.Rmd</code></a></small>
       <div class="d-none name"><code>clean-tracks.Rmd</code></div>
     </div>
 
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.roald-arboel.com/animovement/">animovement</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://animovement.dev" class="external-link">animovement</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; -- <span style="font-weight: bold;">Attaching packages</span> ------------------------------------- <span style="color: #0087FF;">animovement</span> 0.7.3 --</span></span>
+<span><span class="co">#&gt; <span style="color: #0087FF;">v</span> <span style="color: #FF0087;">aniframe  </span> 0.6.0     <span style="color: #0087FF;">v</span> <span style="color: #FF0087;">anicheck  </span> 0.2.0</span></span>
+<span><span class="co">#&gt; <span style="color: #0087FF;">v</span> <span style="color: #FF0087;">aniread   </span> 0.5.0     <span style="color: #0087FF;">v</span> <span style="color: #FF0087;">animetric </span> 0.3.2</span></span>
+<span><span class="co">#&gt; <span style="color: #0087FF;">v</span> <span style="color: #FF0087;">anispace  </span> 0.1.3     <span style="color: #0087FF;">v</span> <span style="color: #FF0087;">anivis    </span> 0.2.0</span></span>
+<span><span class="co">#&gt; <span style="color: #0087FF;">v</span> <span style="color: #FF0087;">aniprocess</span> 0.2.0</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/" class="external-link">tibble</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/" class="external-link">here</a></span><span class="op">)</span></span>
@@ -103,98 +122,68 @@ detection</strong></a></li>
 </ul>
 <p>Although these are not always completely separate steps in practice,
 we will treat them as such to ensure the integrity of our tracks.</p>
-<div class="section level2">
-<h2 id="outlier-detection">Outlier detection<a class="anchor" aria-label="anchor" href="#outlier-detection"></a>
-</h2>
-<p><strong>If you are confident that your sensors give correct readings,
-you can skip this step.</strong>. Even in a typical trackball setup with
-optical flow sensors (e.g. computer mice), there is a chance that we
-will get a few spurious readings from the sensors. The aim of this step
-is to root out those readings.</p>
-<p>We’ll use the data we read in the <a href="https://www.roald-arboel.com/animovement/articles/Read-trackball-data.html" class="external-link">Read
-data</a> article, so if you’ve missed that step you need to revisit <a href="https://www.roald-arboel.com/animovement/articles/Read-trackball-data.html" class="external-link">how
-to read data</a>. Let us first visualise our <code>dx</code> and
-<code>dy</code> values.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>displacement <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">dx</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">dy</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">full_trace</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">displacement</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Time (s)"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"dx, dy (dots)"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">partial_trace</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">time</span> <span class="op">&lt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">displacement</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Time (s)"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"dx, dy (dots)"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">hist_dist</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">displacement</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span>
-<span><span class="va">full_trace</span> <span class="op">/</span> <span class="va">partial_trace</span> <span class="op">/</span> <span class="va">hist_dist</span></span>
-<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span></code></pre></div>
-<p><img src="clean-tracks_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
-<p>Some animals spend a significant amount of time sitting still (as was
-the case here). To ensure that these zero-readings do not skew our
-outlier detection, let’s filter them out and have another look at the
-histograms.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hist_dist2</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">displacement</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">displacement</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">hist_dist2</span></span>
-<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span></code></pre></div>
-<p><img src="clean-tracks_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
-<p>Now we can see that there might be a few observations with extreme
-observations. <strong>It is now up to each researcher to decide whether
-to attempt filtering out outliers, or whether we are happy with what we
-have</strong>.</p>
-<p>we may want to filter out all the <code>0</code> readings At first
-sight, it all looks fine. We could stop here and say we’re confident
-there are no <em>spurious</em> outliers. We could also apply a variety
-of automated outlier detection techniques. There are several ways of
-achieving this, but luckily the <a href=""><em>performance</em></a>
-package has got us covered with their <a href=""><code>check_outliers()</code></a> function. Since most of these
-methods rely on histograms/probability density functions,</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'tidyr'</span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:animovement':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     replace_na</span></span>
-<span><span class="va">df</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    ax <span class="op">=</span> <span class="va">dx</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html" class="external-link">lag</a></span><span class="op">(</span><span class="va">dx</span><span class="op">)</span>,</span>
-<span>    ay <span class="op">=</span> <span class="va">dy</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html" class="external-link">lag</a></span><span class="op">(</span><span class="va">dy</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="va">ax</span>, <span class="va">ay</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">time</span> <span class="op">&lt;</span> <span class="fl">200</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dx</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ax</span>, <span class="va">ay</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5,620 × 2</span></span></span>
-<span><span class="co">#&gt;          ax       ay</span></span>
-<span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> -<span style="color: #BB0000;">0.005</span><span style="color: #BB0000; text-decoration: underline;">08</span> -<span style="color: #BB0000;">0.010</span><span style="color: #BB0000; text-decoration: underline;">2</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  0.002<span style="text-decoration: underline;">54</span>  0.017<span style="text-decoration: underline;">8</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  0.010<span style="text-decoration: underline;">2</span>   0.020<span style="text-decoration: underline;">3</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> -<span style="color: #BB0000;">0.002</span><span style="color: #BB0000; text-decoration: underline;">54</span> -<span style="color: #BB0000;">0.038</span><span style="color: #BB0000; text-decoration: underline;">1</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  0.005<span style="text-decoration: underline;">08</span>  0.058<span style="text-decoration: underline;">4</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  0.005<span style="text-decoration: underline;">08</span>  0.012<span style="text-decoration: underline;">7</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  0.025<span style="text-decoration: underline;">4</span>  -<span style="color: #BB0000;">0.010</span><span style="color: #BB0000; text-decoration: underline;">2</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> -<span style="color: #BB0000;">0.010</span><span style="color: #BB0000; text-decoration: underline;">2</span>  -<span style="color: #BB0000;">0.022</span><span style="color: #BB0000; text-decoration: underline;">8</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  0        0.005<span style="text-decoration: underline;">08</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  0.002<span style="text-decoration: underline;">54</span> -<span style="color: #BB0000;">0.007</span><span style="color: #BB0000; text-decoration: underline;">61</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 5,610 more rows</span></span></span></code></pre></div>
-</div>
+<!-- TODO: Commented out for now — the outlier-detection workflow is being
+reworked. It relied on raw `dx`/`dy` sensor columns, which `read_trackball()`
+no longer returns (output is `x`/`y`). Re-enable once the new approach lands.
+
+## Outlier detection {#outlier-detection}
+**If you are confident that your sensors give correct readings, you can skip this step.**. Even in a typical trackball setup with optical flow sensors (e.g. computer mice), there is a chance that we will get a few spurious readings from the sensors. The aim of this step is to root out those readings.
+
+We'll use the data we read in the [Read data](https://www.roald-arboel.com/animovement/articles/Read-trackball-data.html) article, so if you've missed that step you need to revisit [how to read data](https://www.roald-arboel.com/animovement/articles/Read-trackball-data.html). Let us first visualise our `dx` and `dy` values.
+
+```r
+library(ggplot2)
+df <- df |>
+  mutate(displacement = sqrt(dx^2 + dy^2))
+full_trace <- df |>
+  ggplot(aes(time, displacement)) +
+  geom_line() +
+  xlab("Time (s)") +
+  ylab("dx, dy (dots)")
+
+partial_trace <- df |>
+  filter(time < 20) |>
+  ggplot(aes(time, displacement)) +
+  geom_line() +
+  xlab("Time (s)") +
+  ylab("dx, dy (dots)")
+
+hist_dist <- df |>
+  ggplot(aes(displacement)) +
+  geom_histogram()
+
+library(patchwork)
+full_trace / partial_trace / hist_dist
+```
+
+Some animals spend a significant amount of time sitting still (as was the case here). To ensure that these zero-readings do not skew our outlier detection, let's filter them out and have another look at the histograms.
+
+```r
+hist_dist2 <- df |>
+  filter(displacement != 0) |>
+  ggplot(aes(displacement)) +
+  geom_histogram()
+
+hist_dist2
+```
+
+Now we can see that there might be a few observations with extreme observations. **It is now up to each researcher to decide whether to attempt filtering out outliers, or whether we are happy with what we have**.
+
+we may want to filter out all the `0` readings At first sight, it all looks fine. We could stop here and say we're confident there are no *spurious* outliers. We could also apply a variety of automated outlier detection techniques. There are several ways of achieving this, but luckily the [*performance*]() package has got us covered with their [`check_outliers()`]() function. Since most of these methods rely on histograms/probability density functions,
+
+```r
+library(tidyr)
+df |>
+  mutate(
+    ax = dx - lag(dx),
+    ay = dy - lag(dy)
+  ) |>
+  tidyr::drop_na(ax, ay) |>
+  filter(time < 200) |>
+  filter(dx != 0) |>
+  select(ax, ay)
+```
+-->
 <div class="section level2">
 <h2 id="interpolation">Interpolation<a class="anchor" aria-label="anchor" href="#interpolation"></a>
 </h2>
@@ -236,28 +225,28 @@ with 0.5 second (30 observations at at a sampling rate of 60Hz) window
 width. In case we work with multiple keypoints and/or individuals we can
 use <code>group_by</code> with our metadata for a
 <em>tidyverse</em>-friendly workflow.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_rollmedian</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/filter_movement.html">filter_movement</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"rollmedian"</span>, </span>
+<span>  <span class="fu">filter_aniframe</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"rollmedian"</span>, </span>
 <span>                  window_width <span class="op">=</span> <span class="fl">3</span>, </span>
 <span>                  use_derivatives <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">df_kalman</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/filter_movement.html">filter_movement</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"kalman"</span>, </span>
+<span>  <span class="fu">filter_aniframe</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"kalman"</span>, </span>
 <span>                  sampling_rate <span class="op">=</span> <span class="fl">60</span>, </span>
 <span>                  use_derivatives <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">df_sgolay</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/filter_movement.html">filter_movement</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"sgolay"</span>, </span>
+<span>  <span class="fu">filter_aniframe</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"sgolay"</span>, </span>
 <span>                  sampling_rate <span class="op">=</span> <span class="fl">60</span>, </span>
 <span>                  use_derivatives <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">df_lowpass</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/filter_movement.html">filter_movement</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lowpass"</span>, </span>
+<span>  <span class="fu">filter_aniframe</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lowpass"</span>, </span>
 <span>                  cutoff_freq <span class="op">=</span> <span class="fl">0.1</span>, </span>
 <span>                  sampling_rate <span class="op">=</span> <span class="fl">60</span>, </span>
 <span>                  use_derivatives <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s visualise how they compare. Note that although the difference
 may seem negligible when plotting paths, they may become important when
 computing derivatives such as velocity and acceleration.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_path</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, colour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -266,8 +255,10 @@ computing derivatives such as velocity and acceleration.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_path</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_sgolay</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, colour <span class="op">=</span> <span class="st">"purple"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_path</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_lowpass</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, colour <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removed 1 row containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_path()`).</span></span>
+<span><span class="co">#&gt; Warning: Removed 19 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_path()`).</span></span></code></pre></div>
-<p><img src="clean-tracks_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+<p><img src="clean-tracks_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="" width="700"></p>
 <p>Not that different as the sensors are doing a good job! But we can
 see that the smoothed track end a bit further to the left than the raw
 version.</p>
@@ -283,7 +274,7 @@ version.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
