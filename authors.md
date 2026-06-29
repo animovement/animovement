@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/animovement/animovement/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/animovement/animovement/blob/v0.7.3/inst/CITATION)
 
 https://animovement.dev/animovement/
 

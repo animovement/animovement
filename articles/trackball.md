@@ -55,8 +55,8 @@ Let’s inspect the path:
 paths
 ```
 
-    [1] "/tmp/RtmpZGoTc1/trackball_beetles/named_cols_opticalflow_sensor_1.csv"
-    [2] "/tmp/RtmpZGoTc1/trackball_beetles/named_cols_opticalflow_sensor_2.csv"
+    [1] "/tmp/Rtmp98hvo9/trackball_beetles/named_cols_opticalflow_sensor_1.csv"
+    [2] "/tmp/Rtmp98hvo9/trackball_beetles/named_cols_opticalflow_sensor_2.csv"
 
 Next we need to read the data with a `read_` function, which brings the
 data into the standardised *aniframe* format. We can see that we get
@@ -124,7 +124,7 @@ get_metadata(data)
     ── animovement metadata ────────────────────────────────────────────────────────
     source            (character) : "trackball_bonsai"
     source_version    (character) : <NA>
-    filename          (character) : "/tmp/RtmpZGoTc1/trackball_beetles/named_cols_opticalflow_sensor_1.csv, /tmp/RtmpZGoTc1/trackball_beetles/named_cols_opticalflow_sensor_2.csv"
+    filename          (character) : "/tmp/Rtmp98hvo9/trackball_beetles/named_cols_opticalflow_sensor_1.csv, /tmp/Rtmp98hvo9/trackball_beetles/named_cols_opticalflow_sensor_2.csv"
     sampling_rate     (numeric)   : 60
     start_datetime    (POSIXct)   : <NA>
     variables_what    (character) : "keypoint"

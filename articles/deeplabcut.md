@@ -54,7 +54,7 @@ Let’s inspect the path:
 paths
 ```
 
-    [1] "/tmp/Rtmp3QJRjD/sleap_single-mouse_EPM.h5"
+    [1] "/tmp/RtmpU1Hocj/sleap_single-mouse_EPM.h5"
 
 Next we need to read the data with a `read_` function, which brings the
 data into the standardised *aniframe* format. We can see that we get
