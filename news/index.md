@@ -1,6 +1,66 @@
 # Changelog
 
+## animovement 0.7.3
+
+- Added `here` and `signal` to Suggests, and `circular` for
+  `summarise_aniframe()`.
+- Suggested packages can now be installed from the r-universe and
+  Bioconductor (`rhdf5`) r-universe mirrors.
+- Documentation overhaul: articles converted to Quarto (`.qmd`),
+  trackball articles modernised to the current API, and shared pkgdown
+  theming inherited from `animovementtemplate`.
+- Added webR / `r-wasm` support so the package can run in the browser.
+
+## animovement 0.7.2
+
+- Added `anispace` to the bundled suite, bringing spatial analysis
+  functionality into animovement.
+
+## animovement 0.7.1
+
+- Added
+  [`animovement_install_suggested()`](http://animovement.dev/animovement/reference/animovement_install_suggested.md)
+  to help users install the optional packages used by some functions.
+- Updated CI workflows, README and citation metadata.
+
+## animovement 0.7.0
+
+**animovement is now a metapackage.** The codebase has been split into a
+suite of focused packages that animovement bundles and re-exports:
+
+- `aniframe` — the standardised `ani_df` data class
+- `aniread` — data readers
+- `aniprocess` — cleaning, filtering and processing
+- `anicheck` — quality-control checks
+- `animetric` — movement metrics
+- `anivis` — visualisation
+
+Other changes:
+
+- New `ani_df` class with accompanying improvements and tests.
+- Continued metadata improvements.
+- `frame rate` terminology replaced with `sampling rate` throughout.
+- Removed the `classify_` functions.
+- Switched to [Air](https://posit-dev.github.io/air/) for code
+  formatting.
+
 ## animovement 0.6.0
+
+A large feature release focused on filtering, calculations and movement
+classification:
+
+- Added Kalman filters and improved bandwidth filters for smoothing.
+- Added
+  [`replace_na()`](https://tidyr.tidyverse.org/reference/replace_na.html)/NA-handling
+  functions and `classify_low_periods()`.
+- Added coordinate rotation and egocentric transformation, plus centroid
+  and coordinate transformations.
+- Added peak/trough (extrema) detection and timeseries alignment, with
+  improved detection of active periods.
+- Added kinematics calculations and a `filter_by_speed()` fix.
+- Added `set_individual()`/`set_framerate()` helpers and a `return_type`
+  parameter to several functions.
+- Many new tests and documentation improvements.
 
 ## animovement 0.5.1
 

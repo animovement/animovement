@@ -134,8 +134,8 @@ Extracting trackball_beetles.zip...</code></pre>
 <div class="sourceCode cell-code" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">paths</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/tmp/RtmptCWmxg/trackball_beetles/named_cols_opticalflow_sensor_1.csv"
-[2] "/tmp/RtmptCWmxg/trackball_beetles/named_cols_opticalflow_sensor_2.csv"</code></pre>
+<pre><code>[1] "/tmp/RtmpZGoTc1/trackball_beetles/named_cols_opticalflow_sensor_1.csv"
+[2] "/tmp/RtmpZGoTc1/trackball_beetles/named_cols_opticalflow_sensor_2.csv"</code></pre>
 </div>
 </div>
 <p>Next we need to read the data with a <code>read_</code> function, which brings the data into the standardised <em>aniframe</em> format. We can see that we get <em>two</em> different paths - remember that we used two sensors to track the balls motion? - that makes <code>read_trackball</code> a special case, because <em>animovement</em> needs to re-create the path from the sensor data. We also need to specify the <code>setup</code>, as the beetle can either be contrained to only face a single direction on the ball (<code>setup = "of_fixed"</code>), or left to rotate atop the ball freely (<code>setup = "of_free"</code>). In the present experiment the setup was <code>of_fixed</code>.</p>
@@ -191,7 +191,7 @@ Extracting trackball_beetles.zip...</code></pre>
 <pre><code>── animovement metadata ────────────────────────────────────────────────────────
 source            (character) : "trackball_bonsai"
 source_version    (character) : &lt;NA&gt;
-filename          (character) : "/tmp/RtmptCWmxg/trackball_beetles/named_cols_opticalflow_sensor_1.csv, /tmp/RtmptCWmxg/trackball_beetles/named_cols_opticalflow_sensor_2.csv"
+filename          (character) : "/tmp/RtmpZGoTc1/trackball_beetles/named_cols_opticalflow_sensor_1.csv, /tmp/RtmpZGoTc1/trackball_beetles/named_cols_opticalflow_sensor_2.csv"
 sampling_rate     (numeric)   : 60
 start_datetime    (POSIXct)   : &lt;NA&gt;
 variables_what    (character) : "keypoint"

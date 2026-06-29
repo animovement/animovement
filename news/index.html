@@ -65,8 +65,55 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.7.3" id="animovement-073">animovement 0.7.3<a class="anchor" aria-label="anchor" href="#animovement-073"></a></h2>
+<ul><li>Added <code>here</code> and <code>signal</code> to Suggests, and <code>circular</code> for <code>summarise_aniframe()</code>.</li>
+<li>Suggested packages can now be installed from the r-universe and Bioconductor (<code>rhdf5</code>) r-universe mirrors.</li>
+<li>Documentation overhaul: articles converted to Quarto (<code>.qmd</code>), trackball articles modernised to the current API, and shared pkgdown theming inherited from <code>animovementtemplate</code>.</li>
+<li>Added webR / <code>r-wasm</code> support so the package can run in the browser.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.7.2" id="animovement-072">animovement 0.7.2<a class="anchor" aria-label="anchor" href="#animovement-072"></a></h2>
+<ul><li>Added <code>anispace</code> to the bundled suite, bringing spatial analysis functionality into animovement.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.7.1" id="animovement-071">animovement 0.7.1<a class="anchor" aria-label="anchor" href="#animovement-071"></a></h2>
+<ul><li>Added <code><a href="../reference/animovement_install_suggested.html">animovement_install_suggested()</a></code> to help users install the optional packages used by some functions.</li>
+<li>Updated CI workflows, README and citation metadata.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.7.0" id="animovement-070">animovement 0.7.0<a class="anchor" aria-label="anchor" href="#animovement-070"></a></h2>
+<p><strong>animovement is now a metapackage.</strong> The codebase has been split into a suite of focused packages that animovement bundles and re-exports:</p>
+<ul><li>
+<code>aniframe</code> — the standardised <code>ani_df</code> data class</li>
+<li>
+<code>aniread</code> — data readers</li>
+<li>
+<code>aniprocess</code> — cleaning, filtering and processing</li>
+<li>
+<code>anicheck</code> — quality-control checks</li>
+<li>
+<code>animetric</code> — movement metrics</li>
+<li>
+<code>anivis</code> — visualisation</li>
+</ul><p>Other changes:</p>
+<ul><li>New <code>ani_df</code> class with accompanying improvements and tests.</li>
+<li>Continued metadata improvements.</li>
+<li>
+<code>frame rate</code> terminology replaced with <code>sampling rate</code> throughout.</li>
+<li>Removed the <code>classify_</code> functions.</li>
+<li>Switched to <a href="https://posit-dev.github.io/air/" class="external-link">Air</a> for code formatting.</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.0" id="animovement-060">animovement 0.6.0<a class="anchor" aria-label="anchor" href="#animovement-060"></a></h2>
-</div>
+<p>A large feature release focused on filtering, calculations and movement classification:</p>
+<ul><li>Added Kalman filters and improved bandwidth filters for smoothing.</li>
+<li>Added <code><a href="https://tidyr.tidyverse.org/reference/replace_na.html" class="external-link">replace_na()</a></code>/NA-handling functions and <code>classify_low_periods()</code>.</li>
+<li>Added coordinate rotation and egocentric transformation, plus centroid and coordinate transformations.</li>
+<li>Added peak/trough (extrema) detection and timeseries alignment, with improved detection of active periods.</li>
+<li>Added kinematics calculations and a <code>filter_by_speed()</code> fix.</li>
+<li>Added <code>set_individual()</code>/<code>set_framerate()</code> helpers and a <code>return_type</code> parameter to several functions.</li>
+<li>Many new tests and documentation improvements.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.1" id="animovement-051">animovement 0.5.1<a class="anchor" aria-label="anchor" href="#animovement-051"></a></h2>
 <p>Previously, <code>smooth_track</code> was only built to smoothen trackball data. In this fix, we fixed it by doing the following: - Changed the name to <code>smooth_movement</code> - Added parameter <code>use_derivatives</code> (default: <code>FALSE</code>) which is how trackball data should be smoothed - Written the non-derivative code</p>
