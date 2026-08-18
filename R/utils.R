@@ -3,6 +3,47 @@
 is_attached <- function(x) paste0("package:", x) %in% search()
 is_installed <- function(x) vapply(x, requireNamespace, TRUE, quietly = TRUE)
 
+wasm_repo <- "https://repo.r-wasm.org"
+
+# WebR runs R in the browser, where packages are Emscripten builds that cannot
+# be compiled locally -- utils::install.packages() fails there, so installation
+# has to go through webr::install(). This affects every entry point that
+# installs, not just animovement_install_suggested().
+#' @keywords internal
+.is_webr <- function() {
+  identical(R.version$os, "emscripten") ||
+    grepl("emscripten", R.version$platform, fixed = TRUE)
+}
+
+# Single installation route for animovement_update(), animovement_install() and
+# animovement_install_suggested(), so WebR and pak handling stay consistent.
+#' @keywords internal
+.install_packages <- function(packages, repos, use_pak = FALSE) {
+  if (.is_webr()) {
+    return(invisible(.install_webr(packages, repos)))
+  }
+  if (use_pak && .check_if_installed("pak")) {
+    # pak::pkg_install() has no `repos` argument -- passing one aborts with
+    # "unused argument". It reads getOption("repos") instead.
+    old_repos <- options(repos = repos)
+    on.exit(options(old_repos), add = TRUE)
+    return(invisible(pak::pkg_install(packages)))
+  }
+  utils::install.packages(packages, repos = repos)
+}
+
+#' @keywords internal
+.install_webr <- function(packages, repos) {
+  if (.check_if_installed("webr")) {
+    # webr only ever exists inside WebR, so it cannot go in Suggests. Reach it
+    # without a `::` literal so R CMD check does not flag an undeclared package.
+    webr_install <- get("install", envir = asNamespace("webr"))
+    return(webr_install(packages))
+  }
+  # Without webr itself, the r-wasm repository is the next best thing.
+  utils::install.packages(packages, repos = c(repos, wasm = wasm_repo))
+}
+
 
 msg <- function(..., startup = FALSE) {
   if (!isTRUE(getOption("animovement.quiet"))) {

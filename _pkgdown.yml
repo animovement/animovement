@@ -19,6 +19,7 @@ reference:
   - animovement_extend
   - animovement_conflicts
   - animovement_deps
+  - animovement_repos
   - animovement_update
   - animovement_install
   - animovement_sitrep
