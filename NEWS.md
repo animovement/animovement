@@ -1,3 +1,10 @@
+# animovement (development version)
+
+* `animovement_update()`, `animovement_install()` and `animovement_deps()` now look in the animovement r-universe by default, via the new `animovement_repos()`, instead of failing unless `repos` was set by hand (#144).
+* `animovement_install_suggested()` works again: it no longer passes an unsupported `repos` argument to `pak::pkg_install()`, and finds `rhdf5` on the Bioconductor r-universe (#146).
+* Installation under webR goes through `webr::install()` for every install function, not just `animovement_install_suggested()` (#139).
+* Suggested packages no longer include development tooling, or packages already required by the suite, cutting the set from 21 to 8 (#143).
+
 # animovement 0.7.3
 
 * Added `here` and `signal` to Suggests, and `circular` for `summarise_aniframe()`.
