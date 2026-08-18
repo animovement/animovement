@@ -19,7 +19,9 @@
 #' This function will check the `Suggests` field of animovement and all its
 #' imported packages (aniframe, aniread, aniprocess, animetric, anicheck, anivis),
 #' excluding packages only needed for development or documentation workflows
-#' (knitr, rmarkdown, testthat, pak, here, covr, pkgdown, withr, ragg).
+#' (knitr, rmarkdown, testthat, pak, here, covr, pkgdown, withr, ragg, curl,
+#' readxl, tibble, tinytable), and packages already required by an ecosystem
+#' package, which are installed regardless.
 #'
 #' Under WebR, packages are installed with `webr::install()`, since
 #' `utils::install.packages()` cannot build Emscripten packages in the browser.
@@ -76,8 +78,7 @@ animovement_show_suggested <- function(package = "animovement") {
   cli::cli_h2("Suggested packages for animovement ecosystem")
 
   for (pkg in all_packages) {
-    suggested <- .find_suggested(pkg)
-    suggested <- .exclude_dev_packages(suggested)
+    suggested <- .filter_suggested(.find_suggested(pkg))
 
     if (!is.null(suggested) && length(suggested) > 0) {
       cli::cli_text("{.field {pkg}}: {paste(suggested, collapse = ', ')}")
@@ -130,8 +131,7 @@ bioc_universe <- "https://bioc.r-universe.dev"
   all_suggested <- character(0)
 
   for (pkg in all_packages) {
-    suggested <- .find_suggested(pkg)
-    suggested <- .exclude_dev_packages(suggested)
+    suggested <- .filter_suggested(.find_suggested(pkg))
     if (!is.null(suggested)) {
       all_suggested <- c(all_suggested, suggested)
     }
@@ -146,6 +146,9 @@ bioc_universe <- "https://bioc.r-universe.dev"
 .exclude_dev_packages <- function(packages) {
   # Packages used only for development or documentation workflows, which
   # users of the ecosystem have no reason to install (animovement#143).
+  # `curl` is here because testthat::skip_if_offline() needs it present in CI;
+  # nothing in the ecosystem ever calls curl::. The rest appear only in
+  # vignettes.
   dev_packages <- c(
     "knitr",
     "rmarkdown",
@@ -155,10 +158,65 @@ bioc_universe <- "https://bioc.r-universe.dev"
     "covr",
     "pkgdown",
     "withr",
-    "ragg"
+    "ragg",
+    "curl",
+    "readxl",
+    "tibble",
+    "tinytable"
   )
   animovement_packages <- .get_animovement_packages()
   setdiff(packages, c(dev_packages, animovement_packages))
+}
+
+
+#' @keywords internal
+.exclude_required_packages <- function(packages) {
+  setdiff(packages, .required_packages())
+}
+
+
+# Packages already in Depends/Imports of an ecosystem package are installed as
+# a matter of course, so there is nothing to suggest. Computing this rather
+# than listing it keeps working as dependencies move between packages -- which
+# is how ggplot2 and patchwork (anivis) and tidyr (aniread) ended up being
+# suggested despite always being present.
+#
+# This reads installed metadata, so a package that is absent contributes
+# nothing. That is the right way round: if anivis is not installed, ggplot2 may
+# genuinely be missing too.
+#' @keywords internal
+.required_packages <- function() {
+  fields <- c("Depends", "Imports")
+  required <- lapply(.get_animovement_packages(), function(pkg) {
+    desc <- tryCatch(
+      suppressWarnings(utils::packageDescription(pkg)),
+      error = function(e) NULL
+    )
+    if (is.null(desc) || !is.list(desc)) {
+      return(character(0))
+    }
+    unlist(lapply(fields, function(field) .parse_package_field(desc[[field]])))
+  })
+  setdiff(unique(unlist(required)), "R")
+}
+
+
+#' @keywords internal
+.filter_suggested <- function(packages) {
+  .exclude_required_packages(.exclude_dev_packages(packages))
+}
+
+
+#' @keywords internal
+.parse_package_field <- function(field) {
+  if (is.null(field) || length(field) == 0 || all(is.na(field))) {
+    return(character(0))
+  }
+  # Strip version constraints and newlines, then split on commas
+  parsed <- trimws(
+    gsub("(\n|\\(.*\\))", "", unlist(strsplit(field, ",", fixed = TRUE)))
+  )
+  parsed[nzchar(parsed)]
 }
 
 
@@ -174,12 +232,7 @@ bioc_universe <- "https://bioc.r-universe.dev"
     return(NULL)
   }
 
-  # parse package names from Suggests field
-  suggested_packages <- trimws(
-    gsub("(\n|\\(.*\\))", "", unlist(strsplit(suggests, ",", fixed = TRUE)))
-  )
-
-  suggested_packages
+  .parse_package_field(suggests)
 }
 
 

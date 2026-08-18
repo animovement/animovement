@@ -34,7 +34,9 @@ list of suggested packages.
 This function will check the \code{Suggests} field of animovement and all its
 imported packages (aniframe, aniread, aniprocess, animetric, anicheck, anivis),
 excluding packages only needed for development or documentation workflows
-(knitr, rmarkdown, testthat, pak, here, covr, pkgdown, withr, ragg).
+(knitr, rmarkdown, testthat, pak, here, covr, pkgdown, withr, ragg, curl,
+readxl, tibble, tinytable), and packages already required by an ecosystem
+package, which are installed regardless.
 
 Under WebR, packages are installed with \code{webr::install()}, since
 \code{utils::install.packages()} cannot build Emscripten packages in the browser.
