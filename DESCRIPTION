@@ -32,6 +32,7 @@ Suggests:
     knitr (>= 1.41),
     rmarkdown (>= 2.20),
     testthat (>= 3.0.0),
+    withr,
     circular,
     ggplot2,
     patchwork,

@@ -19,7 +19,7 @@
 #' This function will check the `Suggests` field of animovement and all its
 #' imported packages (aniframe, aniread, aniprocess, animetric, anicheck, anivis),
 #' excluding packages only needed for development or documentation workflows
-#' (knitr, rmarkdown, testthat, pak, here, covr, pkgdown).
+#' (knitr, rmarkdown, testthat, pak, here, covr, pkgdown, withr, ragg).
 #'
 #' Under WebR, packages are installed with `webr::install()`, since
 #' `utils::install.packages()` cannot build Emscripten packages in the browser.
@@ -153,7 +153,9 @@ bioc_universe <- "https://bioc.r-universe.dev"
     "pak",
     "here",
     "covr",
-    "pkgdown"
+    "pkgdown",
+    "withr",
+    "ragg"
   )
   animovement_packages <- .get_animovement_packages()
   setdiff(packages, c(dev_packages, animovement_packages))

@@ -14,15 +14,15 @@
 #
 # Tests for animovement_show_suggested
 # ------------------------------------
-# 8. Returns all suggested packages invisibly
-# 9. Excludes dev packages from results
+# 12. Returns all suggested packages invisibly
+# 13. Excludes dev packages from results
 #
 # Tests for helper functions
 # --------------------------
-# 10. .get_animovement_packages returns expected packages
-# 11. .exclude_dev_packages removes dev and animovement packages
-# 12. .find_suggested parses Suggests field correctly
-# 13. .get_all_suggested excludes animovement packages from results
+# 14. .get_animovement_packages returns expected packages
+# 15. .exclude_dev_packages removes dev and animovement packages
+# 16. .find_suggested parses Suggests field correctly
+# 17. .get_all_suggested excludes animovement packages from results
 
 test_that("animovement_install_suggested returns invisible NULL", {
   local_mocked_bindings(
@@ -245,7 +245,9 @@ test_that("the r-wasm repo is not used outside WebR", {
 test_that("dev-only packages are excluded from installation", {
   # animovement#143
   expect_equal(
-    .exclude_dev_packages(c("here", "covr", "pkgdown", "circular", "sf")),
+    .exclude_dev_packages(
+      c("here", "covr", "pkgdown", "withr", "ragg", "circular", "sf")
+    ),
     c("circular", "sf")
   )
 })
