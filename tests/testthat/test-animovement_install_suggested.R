@@ -3,10 +3,14 @@
 # 1. animovement_install_suggested returns invisible NULL
 # 2. Shows success message when all packages are installed
 # 3. Shows info message when no suggested packages found
-# 4. Uses pak::pkg_install when pak is available
-# 5. Falls back to utils::install.packages when pak is unavailable
-# 6. WebR compatibility: r-wasm repo is included when pak unavailable
-# 7. Only installs packages that are not yet installed
+# 4. Uses pak::pkg_install when pak is available, without a `repos` argument
+# 5. Restores the repos option after the pak install
+# 6. Includes the Bioconductor R-universe so rhdf5 resolves
+# 7. Falls back to utils::install.packages when pak is unavailable
+# 8. WebR installs go through webr::install(), with an r-wasm fallback
+# 9. The r-wasm repo is not used outside WebR
+# 10. Dev-only packages are excluded
+# 11. Only installs packages that are not yet installed
 #
 # Tests for animovement_show_suggested
 # ------------------------------------
@@ -68,9 +72,19 @@ test_that("uses pak::pkg_install when pak is available", {
   )
 
   local_mocked_bindings(
-    pkg_install = function(pkgs, repos) {
+    # Deliberately mirrors the real pak::pkg_install() signature. It has no
+    # `repos` argument, so passing one aborts with "unused argument"
+    # (animovement#146) -- the previous mock invented one and so validated the
+    # bug instead of catching it. pak reads getOption("repos") instead.
+    pkg_install = function(
+      pkg,
+      lib = NULL,
+      upgrade = FALSE,
+      ask = interactive(),
+      dependencies = NA
+    ) {
       install_called <<- TRUE
-      captured_repos <<- repos
+      captured_repos <<- getOption("repos")
     },
     .package = "pak"
   )
@@ -79,6 +93,62 @@ test_that("uses pak::pkg_install when pak is available", {
 
   expect_true(install_called)
   expect_true("https://animovement.r-universe.dev" %in% captured_repos)
+})
+
+test_that("pak::pkg_install() really does not take a repos argument", {
+  skip_if_not_installed("pak")
+
+  # Guards the mock above against drifting from the real signature.
+  expect_false("repos" %in% names(formals(pak::pkg_install)))
+})
+
+test_that("the repos option is restored after the pak install", {
+  before <- getOption("repos")
+
+  local_mocked_bindings(
+    .get_all_suggested = function(pkg) c("dplyr"),
+    .installed_packages = function() "base",
+    .check_if_installed = function(pkg) pkg == "pak",
+    .package = "animovement"
+  )
+  local_mocked_bindings(
+    pkg_install = function(
+      pkg,
+      lib = NULL,
+      upgrade = FALSE,
+      ask = interactive(),
+      dependencies = NA
+    ) {
+      invisible(NULL)
+    },
+    .package = "pak"
+  )
+
+  suppressMessages(animovement_install_suggested("animovement"))
+
+  expect_equal(getOption("repos"), before)
+})
+
+test_that("Bioconductor is included so rhdf5 can be installed", {
+  captured_repos <- NULL
+
+  local_mocked_bindings(
+    .get_all_suggested = function(pkg) c("rhdf5"),
+    .installed_packages = function() "base",
+    .check_if_installed = function(pkg) FALSE,
+    .package = "animovement"
+  )
+  local_mocked_bindings(
+    install.packages = function(pkgs, repos) {
+      captured_repos <<- repos
+    },
+    .package = "utils"
+  )
+
+  suppressMessages(animovement_install_suggested("animovement"))
+
+  # rhdf5 is on neither CRAN nor the animovement R-universe.
+  expect_true("https://bioc.r-universe.dev" %in% captured_repos)
 })
 
 test_that("falls back to install.packages when pak unavailable", {
@@ -105,16 +175,61 @@ test_that("falls back to install.packages when pak unavailable", {
   expect_true(install_called)
 })
 
-test_that("r-wasm repo is included when pak unavailable (WebR compatibility)", {
+test_that("WebR installs go through webr::install(), not install.packages()", {
+  # animovement#139: install.packages() cannot build Emscripten packages in the
+  # browser, so the r-wasm repo alone is not enough.
+  webr_packages <- NULL
+
+  local_mocked_bindings(
+    .get_all_suggested = function(pkg) c("dplyr"),
+    .installed_packages = function() "base",
+    .is_webr = function() TRUE,
+    .install_webr = function(packages, repos) {
+      webr_packages <<- packages
+    },
+    .package = "animovement"
+  )
+  local_mocked_bindings(
+    install.packages = function(...) {
+      stop("install.packages() must not be used under WebR")
+    },
+    .package = "utils"
+  )
+
+  suppressMessages(animovement_install_suggested("animovement"))
+
+  expect_equal(webr_packages, "dplyr")
+})
+
+test_that("WebR without the webr package falls back to the r-wasm repo", {
+  captured_repos <- NULL
+
+  local_mocked_bindings(
+    .check_if_installed = function(pkg) FALSE,
+    .package = "animovement"
+  )
+  local_mocked_bindings(
+    install.packages = function(pkgs, repos) {
+      captured_repos <<- repos
+    },
+    .package = "utils"
+  )
+
+  .install_webr("dplyr", repos = c(CRAN = "https://cloud.r-project.org"))
+
+  expect_true("https://repo.r-wasm.org" %in% captured_repos)
+})
+
+test_that("the r-wasm repo is not used outside WebR", {
   captured_repos <- NULL
 
   local_mocked_bindings(
     .get_all_suggested = function(pkg) c("dplyr"),
     .installed_packages = function() "base",
+    .is_webr = function() FALSE,
     .check_if_installed = function(pkg) FALSE,
     .package = "animovement"
   )
-
   local_mocked_bindings(
     install.packages = function(pkgs, repos) {
       captured_repos <<- repos
@@ -124,10 +239,24 @@ test_that("r-wasm repo is included when pak unavailable (WebR compatibility)", {
 
   suppressMessages(animovement_install_suggested("animovement"))
 
-  expect_true(
-    "https://repo.r-wasm.org" %in% captured_repos,
-    info = "r-wasm repo must be included for WebR compatibility"
+  expect_false("https://repo.r-wasm.org" %in% captured_repos)
+})
+
+test_that("dev-only packages are excluded from installation", {
+  # animovement#143
+  expect_equal(
+    .exclude_dev_packages(c("here", "covr", "pkgdown", "circular", "sf")),
+    c("circular", "sf")
   )
+})
+
+test_that("animovement_update() and animovement_install() route through WebR too", {
+  # The same browser constraint applies to every entry point that installs.
+  for (body_fn in list(animovement_update, animovement_install)) {
+    expect_true(
+      any(grepl(".install_packages", deparse(body(body_fn)), fixed = TRUE))
+    )
+  }
 })
 
 test_that("only installs packages that are not yet installed", {

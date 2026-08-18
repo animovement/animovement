@@ -166,7 +166,11 @@ animovement_deps <- function(
 #' @returns \code{animovement_update} returns \code{NULL} invisibly.
 #' @seealso \code{\link{animovement_deps}}, \code{\link{animovement}}
 #' @export
-animovement_update <- function(..., install = FALSE, repos = animovement_repos()) {
+animovement_update <- function(
+  ...,
+  install = FALSE,
+  repos = animovement_repos()
+) {
   deps <- animovement_deps(..., repos = repos)
   behind <- subset(deps, behind)
 
@@ -194,7 +198,7 @@ animovement_update <- function(..., install = FALSE, repos = animovement_repos()
   }
 
   if (install) {
-    install.packages(behind$package, repos = repos)
+    .install_packages(behind$package, repos = repos)
   } else {
     cat("\nStart a clean R session then run:\n")
     pkg_str <- paste0(deparse(behind$package), collapse = "\n")
@@ -245,7 +249,7 @@ animovement_install <- function(
 
   if (length(needed)) {
     if (install) {
-      install.packages(needed, repos = repos)
+      .install_packages(needed, repos = repos)
     } else {
       cat("\nStart a clean R session then run:\n")
       pkg_str <- paste0(deparse(needed), collapse = "\n")

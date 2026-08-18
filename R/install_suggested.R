@@ -18,11 +18,15 @@
 #'
 #' This function will check the `Suggests` field of animovement and all its
 #' imported packages (aniframe, aniread, aniprocess, animetric, anicheck, anivis),
-#' excluding development packages (knitr, rmarkdown, testthat).
+#' excluding packages only needed for development or documentation workflows
+#' (knitr, rmarkdown, testthat, pak, here, covr, pkgdown).
 #'
-#' If package `{pak}` is installed, `pak::pkg_install()` will be used to install
-#' packages. Otherwise, `utils::install.packages()` is used with the animovement
-#' R-universe repository.
+#' Under WebR, packages are installed with `webr::install()`, since
+#' `utils::install.packages()` cannot build Emscripten packages in the browser.
+#' Otherwise, if `{pak}` is installed then `pak::pkg_install()` is used, and
+#' failing that `utils::install.packages()`. Repositories searched are CRAN, the
+#' animovement R-universe and the Bioconductor R-universe -- the last of which
+#' is where `rhdf5` comes from.
 #'
 #' @return Invisible `NULL`. Used for side-effect of installing packages.
 #'
@@ -56,20 +60,8 @@ animovement_install_suggested <- function(package = "animovement") {
       "Installing {length(to_install)} package{?s}: {.pkg {to_install}}"
     )
 
-    if (.check_if_installed("pak")) {
-      repos <- c(
-        "https://animovement.r-universe.dev",
-        "https://cloud.r-project.org"
-      )
-      pak::pkg_install(to_install, repos = repos)
-    } else {
-      repos <- c(
-        "https://animovement.r-universe.dev",
-        "https://cloud.r-project.org",
-        "https://repo.r-wasm.org"
-      )
-      utils::install.packages(to_install, repos = repos)
-    }
+    # pak is preferred here because it resolves Bioconductor (rhdf5) itself.
+    .install_packages(to_install, repos = .suggested_repos(), use_pak = TRUE)
   }
 
   invisible(NULL)
@@ -98,6 +90,22 @@ animovement_show_suggested <- function(package = "animovement") {
 
 
 # Helper functions --------------------------------------------------------
+
+# The suggested packages are spread across three places: CRAN, the animovement
+# R-universe, and Bioconductor (rhdf5, which is on neither of the other two).
+# `utils::install.packages()` needs all of them named explicitly; pak resolves
+# Bioconductor by itself but still reads getOption("repos") for the rest.
+bioc_universe <- "https://bioc.r-universe.dev"
+
+#' @keywords internal
+.suggested_repos <- function() {
+  repos <- animovement_repos()
+  if (!any(repos == bioc_universe)) {
+    repos <- c(repos, bioc = bioc_universe)
+  }
+  repos
+}
+
 
 #' @keywords internal
 .get_animovement_packages <- function() {
@@ -136,7 +144,17 @@ animovement_show_suggested <- function(package = "animovement") {
 
 #' @keywords internal
 .exclude_dev_packages <- function(packages) {
-  dev_packages <- c("knitr", "rmarkdown", "testthat", "pak")
+  # Packages used only for development or documentation workflows, which
+  # users of the ecosystem have no reason to install (animovement#143).
+  dev_packages <- c(
+    "knitr",
+    "rmarkdown",
+    "testthat",
+    "pak",
+    "here",
+    "covr",
+    "pkgdown"
+  )
   animovement_packages <- .get_animovement_packages()
   setdiff(packages, c(dev_packages, animovement_packages))
 }

@@ -33,11 +33,15 @@ list of suggested packages.
 
 This function will check the \code{Suggests} field of animovement and all its
 imported packages (aniframe, aniread, aniprocess, animetric, anicheck, anivis),
-excluding development packages (knitr, rmarkdown, testthat).
+excluding packages only needed for development or documentation workflows
+(knitr, rmarkdown, testthat, pak, here, covr, pkgdown).
 
-If package \code{{pak}} is installed, \code{pak::pkg_install()} will be used to install
-packages. Otherwise, \code{utils::install.packages()} is used with the animovement
-R-universe repository.
+Under WebR, packages are installed with \code{webr::install()}, since
+\code{utils::install.packages()} cannot build Emscripten packages in the browser.
+Otherwise, if \code{{pak}} is installed then \code{pak::pkg_install()} is used, and
+failing that \code{utils::install.packages()}. Repositories searched are CRAN, the
+animovement R-universe and the Bioconductor R-universe -- the last of which
+is where \code{rhdf5} comes from.
 }
 \examples{
 # download all suggested packages
