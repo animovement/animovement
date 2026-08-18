@@ -15,6 +15,55 @@ local_empty_repo <- function(envir = parent.frame()) {
   paste0("file:///", gsub("^/", "", normalizePath(dir, winslash = "/")))
 }
 
+test_that("animovement_repos() adds the R-universe by default", {
+  withr::local_options(repos = c(CRAN = "https://cloud.r-project.org"))
+
+  expect_equal(
+    animovement_repos(),
+    c(
+      animovement = "https://animovement.r-universe.dev",
+      CRAN = "https://cloud.r-project.org"
+    )
+  )
+})
+
+test_that("animovement_repos() does not duplicate an R-universe already present", {
+  repos <- c(
+    CRAN = "https://cloud.r-project.org",
+    myuniverse = "https://animovement.r-universe.dev"
+  )
+  withr::local_options(repos = repos)
+
+  expect_equal(animovement_repos(), repos)
+})
+
+test_that("animovement_repos() resolves the @CRAN@ placeholder", {
+  # A fresh R install leaves this in place, and available.packages() aborts on
+  # it with "trying to use CRAN without setting a mirror".
+  withr::local_options(repos = c(CRAN = "@CRAN@"))
+
+  out <- animovement_repos()
+
+  expect_false(any(out == "@CRAN@"))
+  expect_true(any(out == "https://animovement.r-universe.dev"))
+  expect_named(out, c("animovement", "CRAN"))
+})
+
+test_that("animovement_repos() keeps CRAN, since dependencies live there", {
+  withr::local_options(repos = c(CRAN = "https://cloud.r-project.org"))
+
+  expect_true("https://cloud.r-project.org" %in% animovement_repos())
+})
+
+test_that("the update entry points default to a repos containing R-universe", {
+  withr::local_options(repos = c(CRAN = "https://cloud.r-project.org"))
+
+  for (fn in list(animovement_deps, animovement_update, animovement_install)) {
+    default <- eval(formals(fn)$repos)
+    expect_true("https://animovement.r-universe.dev" %in% default)
+  }
+})
+
 test_that("animovement_deps() aborts when no requested package is in repos", {
   repo <- local_empty_repo()
 

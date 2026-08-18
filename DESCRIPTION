@@ -43,8 +43,8 @@ Suggests:
     tinytable
 Additional_repositories: https://animovement.r-universe.dev, https://bioc.r-universe.dev
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 NeedsCompilation: no
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 Config/Needs/website: animovement/animovementtemplate
+Config/roxygen2/version: 8.1.0

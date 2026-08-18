@@ -7,7 +7,7 @@
 animovement_deps(
   pkg = animovement_packages(),
   recursive = FALSE,
-  repos = getOption("repos"),
+  repos = animovement_repos(),
   include.self = FALSE,
   check.deps = TRUE
 )
@@ -18,7 +18,7 @@ animovement_deps(
 \item{recursive}{logical. \code{TRUE} recursively determines all packages required to operate these packages.
 \code{FALSE} will only list the packages and their direct dependencies.}
 
-\item{repos}{the repositories to use to check for updates. Defaults to \code{getOptions("repos")}.}
+\item{repos}{the repositories to use to check for updates. Defaults to \code{\link{animovement_repos}()}, which is \code{getOption("repos")} plus the R-universe the \emph{animovement} packages are published on.}
 
 \item{include.self}{logical. \code{TRUE} also includes the \emph{animovement} package and checks against the CRAN version.}
 

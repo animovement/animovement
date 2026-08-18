@@ -8,7 +8,7 @@ animovement_install(
   ...,
   only.missing = TRUE,
   install = TRUE,
-  repos = getOption("repos")
+  repos = animovement_repos()
 )
 }
 \arguments{
@@ -18,7 +18,7 @@ animovement_install(
 
 \item{install}{logical. \code{TRUE} will proceed to install packages, whereas \code{FALSE} (recommended) will print the installation command asking you to run it in a clean R session.}
 
-\item{repos}{the repositories to install from. Defaults to \code{getOption("repos")}. Note that the \emph{animovement} packages are published on R-universe, so this must include \code{https://animovement.r-universe.dev}.}
+\item{repos}{the repositories to install from. Defaults to \code{\link{animovement_repos}()}, which adds the \emph{animovement} R-universe to \code{getOption("repos")}.}
 }
 \value{
 \code{animovement_install} returns \code{NULL} invisibly.
