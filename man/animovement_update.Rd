@@ -4,12 +4,14 @@
 \alias{animovement_update}
 \title{Update animovement packages}
 \usage{
-animovement_update(..., install = FALSE)
+animovement_update(..., install = FALSE, repos = getOption("repos"))
 }
 \arguments{
 \item{\dots}{arguments passed to \code{\link{animovement_deps}}.}
 
 \item{install}{logical. \code{TRUE} will proceed to install outdated packages, whereas \code{FALSE} (recommended) will print the installation command asking you to run it in a clean R session.}
+
+\item{repos}{the repositories to check against and install from. Defaults to \code{getOption("repos")}. Note that the \emph{animovement} packages are published on R-universe, so this must include \code{https://animovement.r-universe.dev}.}
 }
 \value{
 \code{animovement_update} returns \code{NULL} invisibly.

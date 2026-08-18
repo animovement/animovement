@@ -4,7 +4,12 @@
 \alias{animovement_install}
 \title{Install (missing) animovement packages}
 \usage{
-animovement_install(..., only.missing = TRUE, install = TRUE)
+animovement_install(
+  ...,
+  only.missing = TRUE,
+  install = TRUE,
+  repos = getOption("repos")
+)
 }
 \arguments{
 \item{\dots}{comma-separated package names, quoted or unquoted, or vectors of package names. If left empty, all packages returned by \code{\link{animovement_packages}} are checked.}
@@ -12,6 +17,8 @@ animovement_install(..., only.missing = TRUE, install = TRUE)
 \item{only.missing}{logical. \code{TRUE} only installs packages that are unavailable. \code{FALSE} installs all packages, even if they are available.}
 
 \item{install}{logical. \code{TRUE} will proceed to install packages, whereas \code{FALSE} (recommended) will print the installation command asking you to run it in a clean R session.}
+
+\item{repos}{the repositories to install from. Defaults to \code{getOption("repos")}. Note that the \emph{animovement} packages are published on R-universe, so this must include \code{https://animovement.r-universe.dev}.}
 }
 \value{
 \code{animovement_install} returns \code{NULL} invisibly.

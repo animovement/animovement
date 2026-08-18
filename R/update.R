@@ -1,5 +1,43 @@
 packageVersion2 <- function(pkg) {
-  if (requireNamespace(pkg, quietly = TRUE)) packageVersion(pkg) else 0
+  # A bare 0 cannot be compared against a package_version -- Ops.numeric_version
+  # aborts with "invalid non-character version specification". Use a version
+  # object that still prints as "0" so any not-installed package counts as
+  # behind rather than erroring.
+  if (requireNamespace(pkg, quietly = TRUE)) {
+    packageVersion(pkg)
+  } else {
+    numeric_version("0", strict = FALSE)
+  }
+}
+
+# The animovement packages are published on R-universe rather than CRAN, so a
+# default repos setting will not find them. Build a message that names the
+# repositories actually searched and, when the missing packages are our own,
+# says how to add R-universe.
+animovement_universe <- "https://animovement.r-universe.dev"
+
+missing_from_repos_msg <- function(missing, repos) {
+  msg <- paste0(
+    "Ignoring package(s) ",
+    paste(missing, collapse = ", "),
+    " not available in the configured repositories:\n",
+    paste0("  ", repos, collapse = "\n")
+  )
+  if (any(missing %in% animovement_packages(include.self = TRUE))) {
+    msg <- paste0(
+      msg,
+      "\nThe animovement packages are published on R-universe. Add it with:\n",
+      "  options(repos = c(animovement = \"",
+      animovement_universe,
+      "\", getOption(\"repos\")))"
+    )
+  }
+  msg
+}
+
+# Render a repos vector back into pasteable code for the printed install command
+deparse_repos <- function(repos) {
+  paste0(deparse(repos), collapse = "")
 }
 
 #' List all animovement dependencies
@@ -57,13 +95,15 @@ animovement_deps <- function(
   }
 
   if (!all(pnmiss <- pkg_deps %in% rownames(pkgs))) {
-    warning(paste(
-      "Ignoring package(s)",
-      paste(pkg_deps[!pnmiss], collapse = ", "),
-      "not available on CRAN"
-    ))
+    msg <- missing_from_repos_msg(pkg_deps[!pnmiss], repos)
     pkg_deps <- pkg_deps[pnmiss]
-    if (!length(pkg_deps)) return()
+    # Nothing left to report on. Returning early here would hand callers a NULL
+    # where they expect a data frame, so abort with the actionable message
+    # instead -- reporting "up-to-date" would be worse than failing.
+    if (!length(pkg_deps)) {
+      stop(msg, call. = FALSE)
+    }
+    warning(msg, call. = FALSE)
   }
 
   cran_version <- lapply(pkgs[pkg_deps, "Version"], base::package_version)
@@ -88,12 +128,13 @@ animovement_deps <- function(
 #'
 #' @param \dots arguments passed to \code{\link{animovement_deps}}.
 #' @param install logical. \code{TRUE} will proceed to install outdated packages, whereas \code{FALSE} (recommended) will print the installation command asking you to run it in a clean R session.
+#' @param repos the repositories to check against and install from. Defaults to \code{getOption("repos")}. Note that the \emph{animovement} packages are published on R-universe, so this must include \code{https://animovement.r-universe.dev}.
 #'
 #' @returns \code{animovement_update} returns \code{NULL} invisibly.
 #' @seealso \code{\link{animovement_deps}}, \code{\link{animovement}}
 #' @export
-animovement_update <- function(..., install = FALSE) {
-  deps <- animovement_deps(...)
+animovement_update <- function(..., install = FALSE, repos = getOption("repos")) {
+  deps <- animovement_deps(..., repos = repos)
   behind <- subset(deps, behind)
 
   if (nrow(behind) == 0L) {
@@ -120,11 +161,18 @@ animovement_update <- function(..., install = FALSE) {
   }
 
   if (install) {
-    install.packages(behind$package)
+    install.packages(behind$package, repos = repos)
   } else {
     cat("\nStart a clean R session then run:\n")
     pkg_str <- paste0(deparse(behind$package), collapse = "\n")
-    cat("install.packages(", pkg_str, ")\n", sep = "")
+    cat(
+      "install.packages(",
+      pkg_str,
+      ", repos = ",
+      deparse_repos(repos),
+      ")\n",
+      sep = ""
+    )
   }
 
   invisible()
@@ -137,6 +185,7 @@ animovement_update <- function(..., install = FALSE) {
 #' @param \dots comma-separated package names, quoted or unquoted, or vectors of package names. If left empty, all packages returned by \code{\link{animovement_packages}} are checked.
 #' @param only.missing logical. \code{TRUE} only installs packages that are unavailable. \code{FALSE} installs all packages, even if they are available.
 #' @param install logical. \code{TRUE} will proceed to install packages, whereas \code{FALSE} (recommended) will print the installation command asking you to run it in a clean R session.
+#' @param repos the repositories to install from. Defaults to \code{getOption("repos")}. Note that the \emph{animovement} packages are published on R-universe, so this must include \code{https://animovement.r-universe.dev}.
 #'
 #' @note
 #' There is also the possibility to set \code{options(animovement.install = TRUE)} before \code{library(animovement)}, which will call \code{animovement_install()} before loading any packages to make sure all packages are available.
@@ -146,7 +195,12 @@ animovement_update <- function(..., install = FALSE) {
 #' @returns \code{animovement_install} returns \code{NULL} invisibly.
 #' @seealso \code{\link{animovement_update}}, \code{\link{animovement}}
 #' @export
-animovement_install <- function(..., only.missing = TRUE, install = TRUE) {
+animovement_install <- function(
+  ...,
+  only.missing = TRUE,
+  install = TRUE,
+  repos = getOption("repos")
+) {
   if (missing(...)) {
     pkg <- animovement_packages(include.self = FALSE)
   } else {
@@ -158,11 +212,18 @@ animovement_install <- function(..., only.missing = TRUE, install = TRUE) {
 
   if (length(needed)) {
     if (install) {
-      install.packages(needed)
+      install.packages(needed, repos = repos)
     } else {
       cat("\nStart a clean R session then run:\n")
       pkg_str <- paste0(deparse(needed), collapse = "\n")
-      cat("install.packages(", pkg_str, ")\n", sep = "")
+      cat(
+        "install.packages(",
+        pkg_str,
+        ", repos = ",
+        deparse_repos(repos),
+        ")\n",
+        sep = ""
+      )
     }
   } else if (!isTRUE(getOption("animovement.quiet"))) {
     cat("All animovement packages installed\n")
