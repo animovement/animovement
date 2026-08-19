@@ -25,6 +25,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
+          PKG: ${{ github.event.repository.name }}
           EVENT_NAME: ${{ github.event_name }}
           EVENT_TAG: ${{ github.event.release.tag_name }}
           INPUT_TAG: ${{ inputs.tag }}
@@ -38,10 +39,23 @@ jobs:
             tag=$(gh release view --json tagName --jq '.tagName')
           fi
           gh release view "$tag" --json tagName,name,url,body > release.json
+
+          # Release names are written in several styles across the ecosystem:
+          # "v0.4.0", "anicheck 0.2.0", "animovement v0.7.4" and
+          # "v0.4.0 - one source of truth for dimensionality". The heading
+          # already carries the package and tag, so strip any leading package
+          # name, version and separator and keep only the descriptive part.
+          # Names that are nothing but a version leave an empty subtitle.
+          name=$(jq -r '.name // ""' release.json)
+          subtitle=$(printf '%s' "$name" \
+            | sed -E "s/^${PKG}[[:space:]]+//" \
+            | sed -E 's/^v?[0-9]+(\.[0-9]+)*([-.][A-Za-z0-9]+)*[[:space:]]*//' \
+            | sed -E 's/^[[:space:]]*[—–:-][[:space:]]*//')
+
           {
             echo "tag=$(jq -r '.tagName' release.json)"
-            echo "name=$(jq -r '.name' release.json)"
             echo "url=$(jq -r '.url' release.json)"
+            echo "subtitle=$subtitle"
             echo "body<<ZULIP_RELEASE_BODY"
             jq -r '.body' release.json
             echo "ZULIP_RELEASE_BODY"
@@ -56,12 +70,8 @@ jobs:
           to: "announcements"
           type: "stream"
           topic: "releases"
-          # The heading is the package and its tag, so a shared `releases`
-          # topic stays scannable. The release name follows as a subtitle,
-          # suppressed when it only repeats the tag or "<package> <tag>" --
-          # both naming styles are in use across the ecosystem.
           content: |
             # [${{ github.event.repository.name }} ${{ steps.release.outputs.tag }}](${{ steps.release.outputs.url }})
-            ${{ (steps.release.outputs.name != '' && steps.release.outputs.name != steps.release.outputs.tag && steps.release.outputs.name != format('{0} {1}', github.event.repository.name, steps.release.outputs.tag)) && format('**{0}**', steps.release.outputs.name) || '' }}
+            ${{ steps.release.outputs.subtitle != '' && format('**{0}**', steps.release.outputs.subtitle) || '' }}
 
             ${{ steps.release.outputs.body }}
