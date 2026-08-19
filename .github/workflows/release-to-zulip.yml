@@ -1,0 +1,28 @@
+name: Post Release Notes on Zulip
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  notify-zulip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send release notification to Zulip
+        uses: zulip/github-actions-zulip/send-message@v1
+        with:
+          api-key: ${{ secrets.ZULIP_API_KEY }}
+          email: "releases-bot@animovement.zulipchat.com"
+          organization-url: "https://animovement.zulipchat.com"
+          to: "announcements"
+          type: "stream"
+          topic: "releases"
+          # The heading is the package and its tag, so a shared `releases`
+          # topic stays scannable. The release name follows as a subtitle,
+          # suppressed when it only repeats the tag or "<package> <tag>" --
+          # both naming styles are in use across the ecosystem.
+          content: |
+            # [${{ github.event.repository.name }} ${{ github.event.release.tag_name }}](${{ github.event.release.html_url }})
+            ${{ (github.event.release.name != '' && github.event.release.name != github.event.release.tag_name && github.event.release.name != format('{0} {1}', github.event.repository.name, github.event.release.tag_name)) && format('**{0}**', github.event.release.name) || '' }}
+
+            ${{ github.event.release.body }}
