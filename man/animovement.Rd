@@ -61,5 +61,11 @@ Authors:
   \item Mikkel Roald-Arbøl \email{animovement.84w1m@passmail.com} (\href{https://orcid.org/0000-0002-9998-0058}{ORCID})
 }
 
+Other contributors:
+\itemize{
+  \item Sebastian Krantz (Author of the fastverse, from which the package management code is adapted) [contributor]
+  \item Hadley Wickham (Author of the tidyverse, from which that code originally derives) [contributor]
+}
+
 }
 \keyword{internal}
