@@ -35,7 +35,6 @@ jobs:
           use-public-rspm: true
           extra-repositories: |
             https://animovement.r-universe.dev
-            https://bioc.r-universe.dev
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:

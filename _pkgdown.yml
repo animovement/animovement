@@ -5,8 +5,8 @@ home:
 
 # Theme, author details, and the shared navbar components (the animovement
 # ecosystem dropdown + Zulip link) are inherited from animovementtemplate.
-# The Tutorial/Articles menus and the navbar layout below are specific to
-# this umbrella site.
+# This site documents the meta-package only; tutorials for analysing movement
+# data live on the hub, which the Learn link below points at.
 template:
   bootstrap: 5
   package: animovementtemplate
@@ -30,25 +30,10 @@ reference:
 
 navbar:
   components:
-    tutorial:
-      text: Tutorial
-      menu:
-      - text: Read trackball data
-        href: articles/read-trackball.html
-      - text: Clean tracks
-        href: articles/clean-tracks.html
-      - text: Calculate kinematics
-        href: articles/calculate-kinematics.html
-      - text: Calculate summary statistics
-        href: articles/calculate-summary-statistics.html
-    articles:
-      text: Articles
-      menu:
-      - text: Mission & Scope
-        href: articles/mission.html
-      - text: Roadmaps
-      - text: How to contribute
+    learn:
+      icon: fa fa-graduation-cap
+      text: Learn
+      href: https://animovement.dev
+      aria-label: Tutorials on animovement.dev
   structure:
-    left:  [intro, tutorial, articles, reference, news]
-    right: [search, animovement, zulip, github, lightswitch]
-
+    left:  [intro, articles, reference, news, learn]

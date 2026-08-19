@@ -37,12 +37,11 @@ Suggests:
     ggplot2,
     patchwork,
     readxl,
-    rhdf5,
     signal,
     tibble,
     tidyr,
     tinytable
-Additional_repositories: https://animovement.r-universe.dev, https://bioc.r-universe.dev
+Additional_repositories: https://animovement.r-universe.dev
 Roxygen: list(markdown = TRUE)
 NeedsCompilation: no
 VignetteBuilder: knitr
