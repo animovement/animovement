@@ -1,6 +1,6 @@
 # Changelog
 
-## animovement (development version)
+## animovement 0.7.4
 
 - Documentation is now scoped to the meta-package itself. The ecosystem
   tutorials have moved to [animovement.dev](https://animovement.dev);

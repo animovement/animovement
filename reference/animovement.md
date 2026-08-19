@@ -76,3 +76,11 @@ Authors:
 
 - Mikkel Roald-Arbøl <animovement.84w1m@passmail.com>
   ([ORCID](https://orcid.org/0000-0002-9998-0058))
+
+Other contributors:
+
+- Sebastian Krantz (Author of the fastverse, from which the package
+  management code is adapted) \[contributor\]
+
+- Hadley Wickham (Author of the tidyverse, from which that code
+  originally derives) \[contributor\]
