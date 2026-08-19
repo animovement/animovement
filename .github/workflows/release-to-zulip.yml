@@ -3,11 +3,50 @@ name: Post Release Notes on Zulip
 on:
   release:
     types: [published]
+  # Lets an already-published release be announced by hand, and lets a failed
+  # announcement be re-sent. Deliberately not done by re-publishing a release:
+  # some repositories also have Zenodo listening for `release` events, which
+  # would mint a duplicate DOI version.
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to announce. Leave empty for the latest release."
+        required: false
+        type: string
 
 jobs:
   notify-zulip:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
+      - name: Look up the release
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_TAG: ${{ github.event.release.tag_name }}
+          INPUT_TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "release" ]; then
+            tag="$EVENT_TAG"
+          elif [ -n "$INPUT_TAG" ]; then
+            tag="$INPUT_TAG"
+          else
+            tag=$(gh release view --json tagName --jq '.tagName')
+          fi
+          gh release view "$tag" --json tagName,name,url,body > release.json
+          {
+            echo "tag=$(jq -r '.tagName' release.json)"
+            echo "name=$(jq -r '.name' release.json)"
+            echo "url=$(jq -r '.url' release.json)"
+            echo "body<<ZULIP_RELEASE_BODY"
+            jq -r '.body' release.json
+            echo "ZULIP_RELEASE_BODY"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Send release notification to Zulip
         uses: zulip/github-actions-zulip/send-message@v1
         with:
@@ -22,7 +61,7 @@ jobs:
           # suppressed when it only repeats the tag or "<package> <tag>" --
           # both naming styles are in use across the ecosystem.
           content: |
-            # [${{ github.event.repository.name }} ${{ github.event.release.tag_name }}](${{ github.event.release.html_url }})
-            ${{ (github.event.release.name != '' && github.event.release.name != github.event.release.tag_name && github.event.release.name != format('{0} {1}', github.event.repository.name, github.event.release.tag_name)) && format('**{0}**', github.event.release.name) || '' }}
+            # [${{ github.event.repository.name }} ${{ steps.release.outputs.tag }}](${{ steps.release.outputs.url }})
+            ${{ (steps.release.outputs.name != '' && steps.release.outputs.name != steps.release.outputs.tag && steps.release.outputs.name != format('{0} {1}', github.event.repository.name, steps.release.outputs.tag)) && format('**{0}**', steps.release.outputs.name) || '' }}
 
-            ${{ github.event.release.body }}
+            ${{ steps.release.outputs.body }}
