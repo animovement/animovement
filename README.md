@@ -6,7 +6,7 @@
 
 <!-- badges: start -->
 
-[![DOI](https://zenodo.org/badge/773406370.svg)](https://zenodo.org/doi/10.5281/zenodo.13235277)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13235277.svg)](https://doi.org/10.5281/zenodo.13235277)
 [![R-CMD-check](https://github.com/animovement/animovement/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/animovement/animovement/actions/workflows/R-CMD-check.yaml)
 [![animovement status
 badge](https://animovement.r-universe.dev/badges/animovement)](https://animovement.r-universe.dev)
