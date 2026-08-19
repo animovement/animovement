@@ -1,4 +1,10 @@
+# animovement (development version)
+
 # animovement 0.7.4
+
+* The licence declaration is corrected from `GPL-3 + file LICENSE` to `GPL-3`, with the full text as `LICENSE.md`. The `+ file LICENSE` form asserts additional restrictions beyond GPL-3, and the file held nothing but the stock GPL-3 text. The licence that applies is unchanged; only how it is declared. `CITATION.cff` said `MIT`, left over from before the metapackage was rebuilt on the fastverse pattern, and now agrees at `GPL-3.0-only`.
+* Sebastian Krantz (fastverse) and Hadley Wickham (tidyverse) are credited as contributors, for the package management code adapted from the fastverse.
+* The DOI badge now uses the static Zenodo badge rather than the repository-ID one, which answered a redirect before serving anything and often failed to render.
 
 * Documentation is now scoped to the meta-package itself. The ecosystem tutorials have moved to [animovement.dev](https://animovement.dev); the README and the introductory vignette now cover attaching the suite, conflicts, `.animovement` project configuration, extending, updating, and suggested packages (#136, #148).
 * Dropped `rhdf5` and the Bioconductor r-universe from `Suggests` — it was only needed by the tutorials that have moved. `animovement_install_suggested()` still resolves it for the ecosystem packages that suggest it.
