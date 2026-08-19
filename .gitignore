@@ -2,9 +2,18 @@
 .Rhistory
 .RData
 .Ruserdata
-docs
 inst/doc
 *.DS_Store
-README_files
+
+# pkgdown builds the site here; it is published from CI, not committed
+docs
+
+# Quarto
 /.quarto/
 **/*.quarto_ipynb
+
+# Local render output (README_files, knitr-purled vignette code, stray HTML)
+README_files
+.github/*.html
+vignettes/*.html
+vignettes/*.R
