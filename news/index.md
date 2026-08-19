@@ -1,6 +1,24 @@
 # Changelog
 
+## animovement (development version)
+
 ## animovement 0.7.4
+
+- The licence declaration is corrected from `GPL-3 + file LICENSE` to
+  `GPL-3`, with the full text as `LICENSE.md`. The `+ file LICENSE` form
+  asserts additional restrictions beyond GPL-3, and the file held
+  nothing but the stock GPL-3 text. The licence that applies is
+  unchanged; only how it is declared. `CITATION.cff` said `MIT`, left
+  over from before the metapackage was rebuilt on the fastverse pattern,
+  and now agrees at `GPL-3.0-only`.
+
+- Sebastian Krantz (fastverse) and Hadley Wickham (tidyverse) are
+  credited as contributors, for the package management code adapted from
+  the fastverse.
+
+- The DOI badge now uses the static Zenodo badge rather than the
+  repository-ID one, which answered a redirect before serving anything
+  and often failed to render.
 
 - Documentation is now scoped to the meta-package itself. The ecosystem
   tutorials have moved to [animovement.dev](https://animovement.dev);
@@ -9,12 +27,15 @@
   updating, and suggested packages
   ([\#136](https://github.com/animovement/animovement/issues/136),
   [\#148](https://github.com/animovement/animovement/issues/148)).
+
 - Dropped `rhdf5` and the Bioconductor r-universe from `Suggests` — it
   was only needed by the tutorials that have moved.
   [`animovement_install_suggested()`](http://animovement.dev/animovement/reference/animovement_install_suggested.md)
   still resolves it for the ecosystem packages that suggest it.
+
 - Fixed the R-universe and Zulip badges in the README, which Quarto was
   rewriting with a spurious `.png` extension.
+
 - [`animovement_update()`](http://animovement.dev/animovement/reference/animovement_update.md),
   [`animovement_install()`](http://animovement.dev/animovement/reference/animovement_install.md)
   and
@@ -23,15 +44,18 @@
   [`animovement_repos()`](http://animovement.dev/animovement/reference/animovement_repos.md),
   instead of failing unless `repos` was set by hand
   ([\#144](https://github.com/animovement/animovement/issues/144)).
+
 - [`animovement_install_suggested()`](http://animovement.dev/animovement/reference/animovement_install_suggested.md)
   works again: it no longer passes an unsupported `repos` argument to
   [`pak::pkg_install()`](https://pak.r-lib.org/reference/pkg_install.html),
   and finds `rhdf5` on the Bioconductor r-universe
   ([\#146](https://github.com/animovement/animovement/issues/146)).
+
 - Installation under webR goes through `webr::install()` for every
   install function, not just
   [`animovement_install_suggested()`](http://animovement.dev/animovement/reference/animovement_install_suggested.md)
   ([\#139](https://github.com/animovement/animovement/issues/139)).
+
 - Suggested packages no longer include development tooling, or packages
   already required by the suite, cutting the set from 21 to 8
   ([\#143](https://github.com/animovement/animovement/issues/143)).

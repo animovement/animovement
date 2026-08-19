@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">animovement</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.4.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,20 +48,24 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/animovement/animovement/blob/v0.7.4/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/animovement/animovement/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="development version" id="animovement-development-version">animovement (development version)<a class="anchor" aria-label="anchor" href="#animovement-development-version"></a></h2>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.4" id="animovement-074">animovement 0.7.4<a class="anchor" aria-label="anchor" href="#animovement-074"></a></h2>
-<ul><li>Documentation is now scoped to the meta-package itself. The ecosystem tutorials have moved to <a href="https://animovement.dev" class="external-link">animovement.dev</a>; the README and the introductory vignette now cover attaching the suite, conflicts, <code>.animovement</code> project configuration, extending, updating, and suggested packages (<a href="https://github.com/animovement/animovement/issues/136" class="external-link">#136</a>, <a href="https://github.com/animovement/animovement/issues/148" class="external-link">#148</a>).</li>
-<li>Dropped <code>rhdf5</code> and the Bioconductor r-universe from <code>Suggests</code> — it was only needed by the tutorials that have moved. <code><a href="../reference/animovement_install_suggested.html">animovement_install_suggested()</a></code> still resolves it for the ecosystem packages that suggest it.</li>
-<li>Fixed the R-universe and Zulip badges in the README, which Quarto was rewriting with a spurious <code>.png</code> extension.</li>
-<li>
-<code><a href="../reference/animovement_update.html">animovement_update()</a></code>, <code><a href="../reference/animovement_install.html">animovement_install()</a></code> and <code><a href="../reference/animovement_deps.html">animovement_deps()</a></code> now look in the animovement r-universe by default, via the new <code><a href="../reference/animovement_repos.html">animovement_repos()</a></code>, instead of failing unless <code>repos</code> was set by hand (<a href="https://github.com/animovement/animovement/issues/144" class="external-link">#144</a>).</li>
-<li>
-<code><a href="../reference/animovement_install_suggested.html">animovement_install_suggested()</a></code> works again: it no longer passes an unsupported <code>repos</code> argument to <code><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pak::pkg_install()</a></code>, and finds <code>rhdf5</code> on the Bioconductor r-universe (<a href="https://github.com/animovement/animovement/issues/146" class="external-link">#146</a>).</li>
-<li>Installation under webR goes through <code>webr::install()</code> for every install function, not just <code><a href="../reference/animovement_install_suggested.html">animovement_install_suggested()</a></code> (<a href="https://github.com/animovement/animovement/issues/139" class="external-link">#139</a>).</li>
-<li>Suggested packages no longer include development tooling, or packages already required by the suite, cutting the set from 21 to 8 (<a href="https://github.com/animovement/animovement/issues/143" class="external-link">#143</a>).</li>
+<ul><li><p>The licence declaration is corrected from <code>GPL-3 + file LICENSE</code> to <code>GPL-3</code>, with the full text as <code>LICENSE.md</code>. The <code>+ file LICENSE</code> form asserts additional restrictions beyond GPL-3, and the file held nothing but the stock GPL-3 text. The licence that applies is unchanged; only how it is declared. <code>CITATION.cff</code> said <code>MIT</code>, left over from before the metapackage was rebuilt on the fastverse pattern, and now agrees at <code>GPL-3.0-only</code>.</p></li>
+<li><p>Sebastian Krantz (fastverse) and Hadley Wickham (tidyverse) are credited as contributors, for the package management code adapted from the fastverse.</p></li>
+<li><p>The DOI badge now uses the static Zenodo badge rather than the repository-ID one, which answered a redirect before serving anything and often failed to render.</p></li>
+<li><p>Documentation is now scoped to the meta-package itself. The ecosystem tutorials have moved to <a href="https://animovement.dev" class="external-link">animovement.dev</a>; the README and the introductory vignette now cover attaching the suite, conflicts, <code>.animovement</code> project configuration, extending, updating, and suggested packages (<a href="https://github.com/animovement/animovement/issues/136" class="external-link">#136</a>, <a href="https://github.com/animovement/animovement/issues/148" class="external-link">#148</a>).</p></li>
+<li><p>Dropped <code>rhdf5</code> and the Bioconductor r-universe from <code>Suggests</code> — it was only needed by the tutorials that have moved. <code><a href="../reference/animovement_install_suggested.html">animovement_install_suggested()</a></code> still resolves it for the ecosystem packages that suggest it.</p></li>
+<li><p>Fixed the R-universe and Zulip badges in the README, which Quarto was rewriting with a spurious <code>.png</code> extension.</p></li>
+<li><p><code><a href="../reference/animovement_update.html">animovement_update()</a></code>, <code><a href="../reference/animovement_install.html">animovement_install()</a></code> and <code><a href="../reference/animovement_deps.html">animovement_deps()</a></code> now look in the animovement r-universe by default, via the new <code><a href="../reference/animovement_repos.html">animovement_repos()</a></code>, instead of failing unless <code>repos</code> was set by hand (<a href="https://github.com/animovement/animovement/issues/144" class="external-link">#144</a>).</p></li>
+<li><p><code><a href="../reference/animovement_install_suggested.html">animovement_install_suggested()</a></code> works again: it no longer passes an unsupported <code>repos</code> argument to <code><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pak::pkg_install()</a></code>, and finds <code>rhdf5</code> on the Bioconductor r-universe (<a href="https://github.com/animovement/animovement/issues/146" class="external-link">#146</a>).</p></li>
+<li><p>Installation under webR goes through <code>webr::install()</code> for every install function, not just <code><a href="../reference/animovement_install_suggested.html">animovement_install_suggested()</a></code> (<a href="https://github.com/animovement/animovement/issues/139" class="external-link">#139</a>).</p></li>
+<li><p>Suggested packages no longer include development tooling, or packages already required by the suite, cutting the set from 21 to 8 (<a href="https://github.com/animovement/animovement/issues/143" class="external-link">#143</a>).</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.3" id="animovement-073">animovement 0.7.3<a class="anchor" aria-label="anchor" href="#animovement-073"></a></h2>
