@@ -1,4 +1,4 @@
-# animovement (development version)
+# animovement 0.7.4
 
 * Documentation is now scoped to the meta-package itself. The ecosystem tutorials have moved to [animovement.dev](https://animovement.dev); the README and the introductory vignette now cover attaching the suite, conflicts, `.animovement` project configuration, extending, updating, and suggested packages (#136, #148).
 * Dropped `rhdf5` and the Bioconductor r-universe from `Suggests` — it was only needed by the tutorials that have moved. `animovement_install_suggested()` still resolves it for the ecosystem packages that suggest it.
