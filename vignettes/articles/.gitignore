@@ -1,5 +1,0 @@
-/.quarto/
-**/*.quarto_ipynb
-# Local render output (pkgdown builds these into docs/)
-*.html
-*_files/

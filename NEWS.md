@@ -1,5 +1,8 @@
 # animovement (development version)
 
+* Documentation is now scoped to the meta-package itself. The ecosystem tutorials have moved to [animovement.dev](https://animovement.dev); the README and the introductory vignette now cover attaching the suite, conflicts, `.animovement` project configuration, extending, updating, and suggested packages (#136, #148).
+* Dropped `rhdf5` and the Bioconductor r-universe from `Suggests` — it was only needed by the tutorials that have moved. `animovement_install_suggested()` still resolves it for the ecosystem packages that suggest it.
+* Fixed the R-universe and Zulip badges in the README, which Quarto was rewriting with a spurious `.png` extension.
 * `animovement_update()`, `animovement_install()` and `animovement_deps()` now look in the animovement r-universe by default, via the new `animovement_repos()`, instead of failing unless `repos` was set by hand (#144).
 * `animovement_install_suggested()` works again: it no longer passes an unsupported `repos` argument to `pak::pkg_install()`, and finds `rhdf5` on the Bioconductor r-universe (#146).
 * Installation under webR goes through `webr::install()` for every install function, not just `animovement_install_suggested()` (#139).
