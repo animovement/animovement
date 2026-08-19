@@ -1,17 +1,30 @@
 Package: animovement
 Type: Package
 Title: An R toolbox for analysing movement across space and time
-Version: 0.7.3.9000
-Authors@R: 
+Version: 0.7.4
+Authors@R: c(
     person(
       "Mikkel", 
       "Roald-Arbøl", 
       role = c("aut", "cre"), 
       email = "animovement.84w1m@passmail.com",
       comment = c(ORCID = "0000-0002-9998-0058")
+      ),
+    person(
+      "Sebastian",
+      "Krantz",
+      role = "ctb",
+      comment = "Author of the fastverse, from which the package management code is adapted"
+      ),
+    person(
+      "Hadley",
+      "Wickham",
+      role = "ctb",
+      comment = "Author of the tidyverse, from which that code originally derives"
       )
+    )
 Description: An R toolbox for analysing movement across space and time.
-License: GPL-3 + file LICENSE
+License: GPL-3
 URL: https://animovement.dev, https://animovement.dev/animovement, https://github.com/animovement/animovement
 BugReports: https://github.com/animovement/animovement/issues
 Encoding: UTF-8

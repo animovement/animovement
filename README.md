@@ -6,7 +6,7 @@
 
 <!-- badges: start -->
 
-[![DOI](https://zenodo.org/badge/773406370.svg)](https://zenodo.org/doi/10.5281/zenodo.13235277)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13235277.svg)](https://doi.org/10.5281/zenodo.13235277)
 [![R-CMD-check](https://github.com/animovement/animovement/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/animovement/animovement/actions/workflows/R-CMD-check.yaml)
 [![animovement status
 badge](https://animovement.r-universe.dev/badges/animovement)](https://animovement.r-universe.dev)
@@ -85,7 +85,7 @@ When loading the package, the versions and any conflicts are listed:
 
 ``` r
 library(animovement)
-#> -- Attaching packages -------------------------------- animovement 0.7.3.9000 --
+#> -- Attaching packages ------------------------------------- animovement 0.7.4 --
 #> v aniframe   0.7.0.9000     v anicheck   0.2.0     
 #> v aniread    0.6.0.9000     v animetric  0.4.0     
 #> v anispace   0.2.0          v anivis     0.2.0     
@@ -200,7 +200,9 @@ If you enjoy the package, please make sure to cite it. To cite
 citation("animovement")
 #> To cite package 'animovement' in publications use:
 #> 
-#>   https://animovement.dev/animovement/
+#>   Roald-Arbøl M (2026). "animovement: An R toolbox for analysing
+#>   movement across space and time."
+#>   <https://animovement.dev/animovement/>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -208,8 +210,8 @@ citation("animovement")
 #>     title = {animovement: An R toolbox for analysing movement across space and time.},
 #>     author = {Mikkel Roald-Arbøl},
 #>     year = {2026},
-#>     url = {http://animovement.dev/},
+#>     url = {https://animovement.dev/animovement/},
 #>     abstract = {An R toolbox for analysing movement across space and time.},
-#>     version = {0.7.3},
+#>     version = {0.7.4},
 #>   }
 ```
