@@ -6,7 +6,12 @@ missing and installs the missing package(s).
 ## Usage
 
 ``` r
-animovement_install(..., only.missing = TRUE, install = TRUE)
+animovement_install(
+  ...,
+  only.missing = TRUE,
+  install = TRUE,
+  repos = animovement_repos()
+)
 ```
 
 ## Arguments
@@ -28,6 +33,12 @@ animovement_install(..., only.missing = TRUE, install = TRUE)
   logical. `TRUE` will proceed to install packages, whereas `FALSE`
   (recommended) will print the installation command asking you to run it
   in a clean R session.
+
+- repos:
+
+  the repositories to install from. Defaults to
+  [`animovement_repos()`](http://animovement.dev/animovement/reference/animovement_repos.md),
+  which adds the *animovement* R-universe to `getOption("repos")`.
 
 ## Value
 

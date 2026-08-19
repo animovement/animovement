@@ -6,6 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Introduction to animovement • animovement</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -20,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">animovement</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.3.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,25 +35,9 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="active nav-item"><a class="nav-link" href="../articles/animovement.html">Get started</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-tutorial" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Tutorial</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-tutorial">
-<li><a class="dropdown-item" href="../articles/read-trackball.html">Read trackball data</a></li>
-    <li><a class="dropdown-item" href="../articles/clean-tracks.html">Clean tracks</a></li>
-    <li><a class="dropdown-item" href="../articles/calculate-kinematics.html">Calculate kinematics</a></li>
-    <li><a class="dropdown-item" href="../articles/calculate-summary-statistics.html">Calculate summary statistics</a></li>
-  </ul>
-</li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/mission.html">Mission &amp; Scope</a></li>
-    <li><h6 class="dropdown-header" data-toc-skip>Roadmaps</h6></li>
-    <li><h6 class="dropdown-header" data-toc-skip>How to contribute</h6></li>
-  </ul>
-</li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html" aria-label="Reference"><span class="fa fa-file-code"></span> Reference</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html" aria-label="News"><span class="fa fa-newspaper"></span> News</a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://animovement.dev" aria-label="Tutorials on animovement.dev"><span class="fa fa-graduation-cap"></span> Learn</a></li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -89,142 +78,210 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>Introduction to animovement</h1>
+      <img src="../logo.svg" class="logo" alt=""><h1>Introduction to animovement</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/animovement/animovement/blob/v0.7.3/vignettes/animovement.Rmd" class="external-link"><code>vignettes/animovement.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/animovement/animovement/blob/main/vignettes/animovement.Rmd" class="external-link"><code>vignettes/animovement.Rmd</code></a></small>
       <div class="d-none name"><code>animovement.Rmd</code></div>
     </div>
 
     
     
-<p>The primary goal of the <em>animovement</em> package is to offer a
-streamlined and standardised workflow for analysing animal movement
-data, with a syntax designed to integrate seamlessly into the
-<em>tidyverse</em> ecosystem.</p>
-<p>Animal movement, whether produced by humans or other animals, is
-crucial for navigating and interacting with the environment.
-Understanding these movements is of great interest to scientists in
-diverse fields such as ethology, behavioral ecology, biomechanics, and
-neuroscience. While there are numerous tools available for quantifying
-movement, the data they produce — whether from video tracking software
-or hardware like treadmills, trackballs, or accelerometers — often lack
-a standardised approach for analysis. This makes it difficult to easily
-process and compare movement data across different studies and
-platforms.</p>
-<p>The <em>animovement</em> package addresses this gap by establishing a
-standardised workflow for processing movement data, leveraging common
-data formats (in collaboration with movement) and offering a “recipe”
-for streamlined data analysis.</p>
-<p>At its core, <em>animovement</em> processes the trajectories of
-individual keypoints through time. The spatial position of an individual
-is represented by one (centroid) or more keypoints (pose), provided in
-1D (x), 2D (x, y), or 3D (x, y, z) coordinates. These sequentially
-collected positions form tracks over time.</p>
-<p>In neuroscience and ethology, tracks are commonly generated from:</p>
-<ol style="list-style-type: decimal">
-<li>Pose estimation tools like DeepLabCut or SLEAP, which track multiple
-keypoints for each individual.</li>
-<li>Centroid tracking software like TRex or idtracker.ai, which focuses
-on a single point (the centroid) per individual.</li>
-<li>Treadmills or trackballs, which record the movement of a belt or
-ball, serving as proxies for 1D (treadmill) and 2D (trackball) centroid
-tracking. Our vision is to provide an intuitive and accessible workflow
-using the familiar tidyverse syntax. animovement is designed to handle
-data from various sources, supporting 1D, 2D, and 3D tracking for single
-or multiple individuals.</li>
-</ol>
-<p>In practice, our goal is to make it possible to derive meaningful
-insights from movement data in fewer than 10 lines of code. For
-example:</p>
+<p><em>animovement</em> is a meta-package. It does not analyse movement
+data itself — it installs, attaches and keeps in sync the suite of
+packages that do, so that a single <code><a href="https://animovement.dev" class="external-link">library(animovement)</a></code>
+gives you a complete and coherent workflow instead of seven packages to
+track separately. In that respect it is a descendant of the <a href="https://fastverse.github.io/fastverse/" class="external-link"><em>fastverse</em></a>,
+whose approach to package management it borrows.</p>
+<p>Splitting the ecosystem into focused packages keeps each one small,
+testable and useful on its own; bundling them into a meta-package means
+you rarely have to think about that split. You get the whole workflow,
+at versions that are known to work together, and a handful of functions
+for the housekeeping — which is what this vignette is about. For
+tutorials on actually <em>analysing</em> movement data with these
+packages, see <a href="https://animovement.dev" class="external-link">animovement.dev</a>.</p>
+<div class="section level2">
+<h2 id="attaching-the-animovement">Attaching the animovement<a class="anchor" aria-label="anchor" href="#attaching-the-animovement"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://animovement.dev" class="external-link">animovement</a></span><span class="op">)</span></span>
-<span><span class="va">movement_summary</span> <span class="op">&lt;-</span> <span class="fu">read_deeplabcut</span><span class="op">(</span><span class="va">path</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">clean_tracks</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">calculate_kinematics</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">clean_kinematics</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">calculate_statistics</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="section level2">
-<h2 id="data-structure">Data structure<a class="anchor" aria-label="anchor" href="#data-structure"></a>
-</h2>
-<p>A movement data frame contains information about the <em>spatial
-position</em> of <em>at least one keypoint</em> along <em>at least one
-axis</em> at a point in <em>time</em>.</p>
-<p>In practice, a movement data frame contains the following:</p>
+<span><span class="co">#&gt; -- Attaching packages -------------------------------- animovement 0.7.3.9000 --</span></span>
+<span><span class="co">#&gt; v aniframe   0.7.0.9000     v anicheck   0.2.0     </span></span>
+<span><span class="co">#&gt; v aniread    0.6.0.9000     v animetric  0.4.0     </span></span>
+<span><span class="co">#&gt; v anispace   0.2.0          v anivis     0.2.0     </span></span>
+<span><span class="co">#&gt; v aniprocess 0.4.0</span></span></code></pre></div>
+<p>Attaching prints a startup message listing the core packages and
+their versions, followed by any conflicts between them and packages you
+already have loaded. Both can be silenced with
+<code>options(animovement.quiet = TRUE)</code>.</p>
+<p>The core packages are:</p>
 <table class="table">
 <colgroup>
-<col width="25%">
-<col width="25%">
-<col width="25%">
-<col width="25%">
+<col width="50%">
+<col width="50%">
 </colgroup>
 <thead><tr class="header">
-<th>Variable</th>
-<th>Conditional</th>
-<th>Use-case</th>
-<th>Description</th>
+<th>Package</th>
+<th>Role</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><code>time</code></td>
-<td>Required</td>
-<td></td>
-<td></td>
+<td><a href="https://animovement.dev/aniframe" class="external-link"><em>aniframe</em></a></td>
+<td>Core data structures for movement data</td>
 </tr>
 <tr class="even">
-<td><code>keypoint</code></td>
-<td>Required</td>
-<td></td>
-<td></td>
+<td><a href="https://animovement.dev/aniread" class="external-link"><em>aniread</em></a></td>
+<td>Reading and writing movement data</td>
 </tr>
 <tr class="odd">
-<td><code>x</code></td>
-<td>Required</td>
-<td></td>
-<td></td>
+<td><a href="https://animovement.dev/anispace" class="external-link"><em>anispace</em></a></td>
+<td>Spatial transformation methods</td>
 </tr>
 <tr class="even">
-<td><code>y</code></td>
-<td>Optional</td>
-<td>All except treadmills</td>
-<td></td>
+<td><a href="https://animovement.dev/aniprocess" class="external-link"><em>aniprocess</em></a></td>
+<td>Signal processing and filtering</td>
 </tr>
 <tr class="odd">
-<td><code>z</code></td>
-<td>Optional</td>
-<td>3D tracking</td>
-<td></td>
+<td><a href="https://animovement.dev/anicheck" class="external-link"><em>anicheck</em></a></td>
+<td>Diagnosing movement data quality</td>
 </tr>
 <tr class="even">
-<td><code>confidence</code></td>
-<td>Optional</td>
-<td></td>
-<td>In pose estimation, a <em>confidence</em> score is often given which
-can be leveraged to filter outlier observations.</td>
+<td><a href="https://animovement.dev/animetric" class="external-link"><em>animetric</em></a></td>
+<td>Calculating movement-based metrics</td>
+</tr>
+<tr class="odd">
+<td><a href="https://animovement.dev/anivis" class="external-link"><em>anivis</em></a></td>
+<td>Visualising movement data and diagnostics</td>
 </tr>
 </tbody>
 </table>
-<!-- # Data sources --><!-- We can divide the data sources into two different categories: --><!-- 1. Direct measurements, derives the position directly (from video) --><!-- 2. Indirect measurements, derives the position through a proxy measurement  --><!-- | Source | Type | Description | | | --><!-- | ---- | ---- | ---- | --><!-- | Treadmill | --><!-- | Trackball | Optical flow | `dx`,`dy` | Optical flow sensors | --><!-- | Trackball | Video tracking | `x`,`y` | Camera | --><!-- | Accelerometer | Accelerometer | `d2x`,`d2y` | Accelerometer | --><!-- | DeepLabCut | Pose estimation | 2D/3D | Single/multi | Camera | --><!-- | SLEAP | Pose estimation | 2D | Single/multi | Camera | --><!-- | Lightning Pose | Pose estimation | 2D | Single/multi | Camera | --><!-- | anipose | Pose estimation | 3D | Single | min. 2 cameras | --><!-- | TRex | Centroid tracking | 2D | Single/multi | Camera | --><!-- | idtracker.ai | centroid tracking | 2D | single/multi | camera | --><!-- | AnimalTA | centroid tracking | 2D | single/multi | camera | -->
+<p><code><a href="../reference/animovement_packages.html">animovement_packages()</a></code> reports the set that is actually
+in force — the core packages, or whatever a project configuration file
+specifies, plus any session extensions:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/animovement_packages.html">animovement_packages</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "aniframe"    "aniread"     "anispace"    "aniprocess"  "anicheck"   </span></span>
+<span><span class="co">#&gt; [6] "animetric"   "anivis"      "animovement"</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="getting-started-with-animovement">Getting started with <em>animovement</em><a class="anchor" aria-label="anchor" href="#getting-started-with-animovement"></a>
+<h2 id="conflicts">Conflicts<a class="anchor" aria-label="anchor" href="#conflicts"></a>
 </h2>
-<p>To get started, first install the package.</p>
-<p>Next, we have put together a tutorial that takes you through all the
-necessary steps, from reading your data to summarising the movements. We
-recommend going through the steps in the specified order which is the
-recommended workflow.</p>
+<p>When two attached packages export a function of the same name, the
+one attached later masks the other. <code><a href="../reference/animovement_conflicts.html">animovement_conflicts()</a></code>
+lists every such clash involving an animovement package, in search-path
+order:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/animovement_conflicts.html">animovement_conflicts</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>It is also a general-purpose tool — pass it any set of attached
+packages to check those instead:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/animovement_conflicts.html">animovement_conflicts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">"package:"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/search.html" class="external-link">search</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="extending-the-animovement">Extending the animovement<a class="anchor" aria-label="anchor" href="#extending-the-animovement"></a>
+</h2>
+<p><code><a href="../reference/animovement_extend.html">animovement_extend()</a></code> adds packages for the current
+session. They are attached alongside the core packages, their conflicts
+are reported, and they are remembered in
+<code>options("animovement.extend")</code> so
+<code><a href="../reference/animovement_packages.html">animovement_packages()</a></code>, <code><a href="../reference/animovement_update.html">animovement_update()</a></code>
+and friends include them:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/animovement_extend.html">animovement_extend</a></span><span class="op">(</span><span class="va">ggplot2</span>, <span class="va">tidyr</span><span class="op">)</span></span></code></pre></div>
+<p>Use <code>install = TRUE</code> to install anything missing first. To
+extend <em>before</em> attaching, set the option directly:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>animovement.extend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ggplot2"</span>, <span class="st">"tidyr"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://animovement.dev" class="external-link">animovement</a></span><span class="op">)</span></span></code></pre></div>
+<p><code><a href="../reference/animovement_detach.html">animovement_detach()</a></code> is the inverse. With no arguments
+it detaches all animovement packages; <code>session = TRUE</code> also
+clears them from the session options, and <code>unload = TRUE</code>
+unloads the namespaces as well:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/animovement_detach.html">animovement_detach</a></span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span>                     <span class="co"># one package</span></span>
+<span><span class="fu"><a href="../reference/animovement_detach.html">animovement_detach</a></span><span class="op">(</span>session <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>              <span class="co"># everything, for good</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="project-configuration">Project configuration<a class="anchor" aria-label="anchor" href="#project-configuration"></a>
+</h2>
+<p>For a set of packages that belongs to a project rather than a
+session, put a file named <code>.animovement</code> in the project root.
+List the packages one per line, or separated by commas or spaces:</p>
+<pre><code>aniframe, aniread, aniprocess
+ggplot2</code></pre>
+<p>When this file is present, it <em>replaces</em> the standard set of
+core packages — so list everything the project needs.
+<code><a href="../reference/animovement_packages.html">animovement_packages()</a></code> reads it, and
+<code><a href="https://animovement.dev" class="external-link">library(animovement)</a></code> attaches exactly that set.</p>
+<p>Options and environment variables can be set from the same file by
+prefixing them with <code>_opt_</code> (options) or giving them bare
+(environment variables). Entries placed before the package names are
+applied before the packages are attached, those after them
+afterwards:</p>
+<pre><code>_opt_animovement.install = TRUE
+aniframe, aniread, aniprocess</code></pre>
+<p>The options the meta-package recognises are:</p>
 <ul>
-<li><a href="https://www.roald-arboel.com/animovement/articles/read-trackball.html" class="external-link">Read
-trackball data</a></li>
-<li><a href="https://www.roald-arboel.com/animovement/articles/clean-tracks.html" class="external-link">Clean
-tracks</a></li>
-<li><a href="https://www.roald-arboel.com/animovement/articles/calculate-kinematics.html" class="external-link">Compute
-kinematics</a></li>
-<li><a href="https://www.roald-arboel.com/animovement/articles/calculate-summary-statistics.html" class="external-link">Compute
-movement statistics</a></li>
+<li>
+<code>animovement.quiet</code> — <code>TRUE</code> disables startup,
+conflict and installation messages</li>
+<li>
+<code>animovement.styling</code> — <code>FALSE</code> disables
+styling of console output</li>
+<li>
+<code>animovement.extend</code> — packages to attach in addition to
+the core set</li>
+<li>
+<code>animovement.install</code> — <code>TRUE</code> installs
+missing packages on attach</li>
 </ul>
+</div>
+<div class="section level2">
+<h2 id="installing-and-updating">Installing and updating<a class="anchor" aria-label="anchor" href="#installing-and-updating"></a>
+</h2>
+<p>The animovement packages are published on <a href="https://animovement.r-universe.dev" class="external-link">R-universe</a> rather than
+CRAN, so a plain <code>getOption("repos")</code> will not find them.
+<code><a href="../reference/animovement_repos.html">animovement_repos()</a></code> adds the R-universe to a repository
+vector, and is the default for the functions below:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/animovement_repos.html">animovement_repos</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                                                          RSPM </span></span>
+<span><span class="co">#&gt; "https://packagemanager.posit.co/cran/__linux__/noble/latest" </span></span>
+<span><span class="co">#&gt;                                                          CRAN </span></span>
+<span><span class="co">#&gt;                                    "https://cran.rstudio.com" </span></span>
+<span><span class="co">#&gt;                                                               </span></span>
+<span><span class="co">#&gt;                          "https://animovement.r-universe.dev"</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="fu"><a href="../reference/animovement_repos.html">animovement_repos</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># ...or apply it to the whole session</span></span></code></pre></div>
+<p><code><a href="../reference/animovement_update.html">animovement_update()</a></code> checks the installed versions
+against the repositories and installs what is behind;
+<code><a href="../reference/animovement_install.html">animovement_install()</a></code> installs packages that are missing
+altogether:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/animovement_update.html">animovement_update</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/animovement_install.html">animovement_install</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><code><a href="../reference/animovement_sitrep.html">animovement_sitrep()</a></code> gives the situation report the two
+are based on — every package in your animovement, its installed version,
+and whether a newer one is available — and
+<code><a href="../reference/animovement_deps.html">animovement_deps()</a></code> lists the dependencies underneath
+them:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/animovement_sitrep.html">animovement_sitrep</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/animovement_deps.html">animovement_deps</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="suggested-packages">Suggested packages<a class="anchor" aria-label="anchor" href="#suggested-packages"></a>
+</h2>
+<p>To keep installation light, functionality that only some users need
+is a soft dependency of the ecosystem packages rather than a hard one.
+Rather than installing them one error message at a time, you can take
+them all at once:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/animovement_install_suggested.html">animovement_show_suggested</a></span><span class="op">(</span><span class="op">)</span>    <span class="co"># list them</span></span>
+<span><span class="fu"><a href="../reference/animovement_install_suggested.html">animovement_install_suggested</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># install them</span></span></code></pre></div>
+<p>Packages needed only for development or documentation (knitr,
+testthat, and the like) are excluded, as are packages an ecosystem
+package already requires.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -237,7 +294,7 @@ movement statistics</a></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

@@ -12,6 +12,8 @@ These functions allow you to manage your animovement packages.
   : Conflicts between the animovement and other packages
 - [`animovement_deps()`](http://animovement.dev/animovement/reference/animovement_deps.md)
   : List all animovement dependencies
+- [`animovement_repos()`](http://animovement.dev/animovement/reference/animovement_repos.md)
+  : Repositories to find animovement packages in
 - [`animovement_update()`](http://animovement.dev/animovement/reference/animovement_update.md)
   : Update animovement packages
 - [`animovement_install()`](http://animovement.dev/animovement/reference/animovement_install.md)

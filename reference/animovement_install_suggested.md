@@ -36,13 +36,20 @@ current list of suggested packages.
 
 This function will check the `Suggests` field of animovement and all its
 imported packages (aniframe, aniread, aniprocess, animetric, anicheck,
-anivis), excluding development packages (knitr, rmarkdown, testthat).
+anivis), excluding packages only needed for development or documentation
+workflows (knitr, rmarkdown, testthat, pak, here, covr, pkgdown, withr,
+ragg, curl, readxl, tibble, tinytable), and packages already required by
+an ecosystem package, which are installed regardless.
 
-If package `{pak}` is installed,
-[`pak::pkg_install()`](https://pak.r-lib.org/reference/pkg_install.html)
-will be used to install packages. Otherwise,
+Under WebR, packages are installed with `webr::install()`, since
 [`utils::install.packages()`](https://rdrr.io/r/utils/install.packages.html)
-is used with the animovement R-universe repository.
+cannot build Emscripten packages in the browser. Otherwise, if `{pak}`
+is installed then
+[`pak::pkg_install()`](https://pak.r-lib.org/reference/pkg_install.html)
+is used, and failing that
+[`utils::install.packages()`](https://rdrr.io/r/utils/install.packages.html).
+Repositories searched are CRAN, the animovement R-universe and the
+Bioconductor R-universe – the last of which is where `rhdf5` comes from.
 
 ## Examples
 
@@ -57,12 +64,8 @@ animovement_show_suggested()
 #> 
 #> ── Suggested packages for animovement ecosystem ──
 #> 
-#> animovement: here, circular, ggplot2, patchwork, readxl, rhdf5, signal, tibble,
-#> tidyr, tinytable
-#> aniframe: covr, pkgdown
-#> aniread: arrow, covr, curl, rhdf5, xml2, c3dr, withr
-#> aniprocess: covr, signal, stinepack
-#> animetric: circular, data.table, sf
-#> anicheck: withr
-#> anivis: ragg
+#> animovement: circular, signal
+#> aniread: arrow, rhdf5, xml2, c3dr
+#> aniprocess: signal, stinepack
+#> animetric: circular, sf
 ```

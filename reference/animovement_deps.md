@@ -9,7 +9,7 @@ packages and dependencies.
 animovement_deps(
   pkg = animovement_packages(),
   recursive = FALSE,
-  repos = getOption("repos"),
+  repos = animovement_repos(),
   include.self = FALSE,
   check.deps = TRUE
 )
@@ -31,7 +31,9 @@ animovement_deps(
 - repos:
 
   the repositories to use to check for updates. Defaults to
-  `getOptions("repos")`.
+  [`animovement_repos()`](http://animovement.dev/animovement/reference/animovement_repos.md),
+  which is `getOption("repos")` plus the R-universe the *animovement*
+  packages are published on.
 
 - include.self:
 

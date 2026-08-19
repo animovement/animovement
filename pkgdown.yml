@@ -1,18 +1,9 @@
 pandoc: 3.8.3
-pkgdown: 2.2.0
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   animovement: animovement.html
-  articles/batch-processing: batch-processing.html
-  articles/calculate-kinematics: calculate-kinematics.html
-  articles/calculate-summary-statistics: calculate-summary-statistics.html
-  articles/clean-tracks: clean-tracks.html
-  articles/deeplabcut: deeplabcut.html
-  articles/mission: mission.html
-  articles/read-trackball: read-trackball.html
-  articles/roadmaps: roadmaps.html
-  articles/trackball: trackball.html
-last_built: 2026-06-29T17:02Z
+last_built: 2026-08-19T13:50Z
 urls:
   reference: http://animovement.dev/animovement/reference
   article: http://animovement.dev/animovement/articles

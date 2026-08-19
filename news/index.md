@@ -1,5 +1,41 @@
 # Changelog
 
+## animovement (development version)
+
+- Documentation is now scoped to the meta-package itself. The ecosystem
+  tutorials have moved to [animovement.dev](https://animovement.dev);
+  the README and the introductory vignette now cover attaching the
+  suite, conflicts, `.animovement` project configuration, extending,
+  updating, and suggested packages
+  ([\#136](https://github.com/animovement/animovement/issues/136),
+  [\#148](https://github.com/animovement/animovement/issues/148)).
+- Dropped `rhdf5` and the Bioconductor r-universe from `Suggests` — it
+  was only needed by the tutorials that have moved.
+  [`animovement_install_suggested()`](http://animovement.dev/animovement/reference/animovement_install_suggested.md)
+  still resolves it for the ecosystem packages that suggest it.
+- Fixed the R-universe and Zulip badges in the README, which Quarto was
+  rewriting with a spurious `.png` extension.
+- [`animovement_update()`](http://animovement.dev/animovement/reference/animovement_update.md),
+  [`animovement_install()`](http://animovement.dev/animovement/reference/animovement_install.md)
+  and
+  [`animovement_deps()`](http://animovement.dev/animovement/reference/animovement_deps.md)
+  now look in the animovement r-universe by default, via the new
+  [`animovement_repos()`](http://animovement.dev/animovement/reference/animovement_repos.md),
+  instead of failing unless `repos` was set by hand
+  ([\#144](https://github.com/animovement/animovement/issues/144)).
+- [`animovement_install_suggested()`](http://animovement.dev/animovement/reference/animovement_install_suggested.md)
+  works again: it no longer passes an unsupported `repos` argument to
+  [`pak::pkg_install()`](https://pak.r-lib.org/reference/pkg_install.html),
+  and finds `rhdf5` on the Bioconductor r-universe
+  ([\#146](https://github.com/animovement/animovement/issues/146)).
+- Installation under webR goes through `webr::install()` for every
+  install function, not just
+  [`animovement_install_suggested()`](http://animovement.dev/animovement/reference/animovement_install_suggested.md)
+  ([\#139](https://github.com/animovement/animovement/issues/139)).
+- Suggested packages no longer include development tooling, or packages
+  already required by the suite, cutting the set from 21 to 8
+  ([\#143](https://github.com/animovement/animovement/issues/143)).
+
 ## animovement 0.7.3
 
 - Added `here` and `signal` to Suggests, and `circular` for
@@ -50,9 +86,8 @@ A large feature release focused on filtering, calculations and movement
 classification:
 
 - Added Kalman filters and improved bandwidth filters for smoothing.
-- Added
-  [`replace_na()`](https://tidyr.tidyverse.org/reference/replace_na.html)/NA-handling
-  functions and `classify_low_periods()`.
+- Added `replace_na()`/NA-handling functions and
+  `classify_low_periods()`.
 - Added coordinate rotation and egocentric transformation, plus centroid
   and coordinate transformations.
 - Added peak/trough (extrema) detection and timeseries alignment, with

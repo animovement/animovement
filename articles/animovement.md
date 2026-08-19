@@ -1,87 +1,213 @@
 # Introduction to animovement
 
-The primary goal of the *animovement* package is to offer a streamlined
-and standardised workflow for analysing animal movement data, with a
-syntax designed to integrate seamlessly into the *tidyverse* ecosystem.
+*animovement* is a meta-package. It does not analyse movement data
+itself — it installs, attaches and keeps in sync the suite of packages
+that do, so that a single
+[`library(animovement)`](https://animovement.dev) gives you a complete
+and coherent workflow instead of seven packages to track separately. In
+that respect it is a descendant of the
+[*fastverse*](https://fastverse.github.io/fastverse/), whose approach to
+package management it borrows.
 
-Animal movement, whether produced by humans or other animals, is crucial
-for navigating and interacting with the environment. Understanding these
-movements is of great interest to scientists in diverse fields such as
-ethology, behavioral ecology, biomechanics, and neuroscience. While
-there are numerous tools available for quantifying movement, the data
-they produce — whether from video tracking software or hardware like
-treadmills, trackballs, or accelerometers — often lack a standardised
-approach for analysis. This makes it difficult to easily process and
-compare movement data across different studies and platforms.
+Splitting the ecosystem into focused packages keeps each one small,
+testable and useful on its own; bundling them into a meta-package means
+you rarely have to think about that split. You get the whole workflow,
+at versions that are known to work together, and a handful of functions
+for the housekeeping — which is what this vignette is about. For
+tutorials on actually *analysing* movement data with these packages, see
+[animovement.dev](https://animovement.dev).
 
-The *animovement* package addresses this gap by establishing a
-standardised workflow for processing movement data, leveraging common
-data formats (in collaboration with movement) and offering a “recipe”
-for streamlined data analysis.
-
-At its core, *animovement* processes the trajectories of individual
-keypoints through time. The spatial position of an individual is
-represented by one (centroid) or more keypoints (pose), provided in 1D
-(x), 2D (x, y), or 3D (x, y, z) coordinates. These sequentially
-collected positions form tracks over time.
-
-In neuroscience and ethology, tracks are commonly generated from:
-
-1.  Pose estimation tools like DeepLabCut or SLEAP, which track multiple
-    keypoints for each individual.
-2.  Centroid tracking software like TRex or idtracker.ai, which focuses
-    on a single point (the centroid) per individual.
-3.  Treadmills or trackballs, which record the movement of a belt or
-    ball, serving as proxies for 1D (treadmill) and 2D (trackball)
-    centroid tracking. Our vision is to provide an intuitive and
-    accessible workflow using the familiar tidyverse syntax. animovement
-    is designed to handle data from various sources, supporting 1D, 2D,
-    and 3D tracking for single or multiple individuals.
-
-In practice, our goal is to make it possible to derive meaningful
-insights from movement data in fewer than 10 lines of code. For example:
+## Attaching the animovement
 
 ``` r
 
 library(animovement)
-movement_summary <- read_deeplabcut(path) |>
-  clean_tracks() |>
-  calculate_kinematics() |>
-  clean_kinematics() |>
-  calculate_statistics()
+#> -- Attaching packages -------------------------------- animovement 0.7.3.9000 --
+#> v aniframe   0.7.0.9000     v anicheck   0.2.0     
+#> v aniread    0.6.0.9000     v animetric  0.4.0     
+#> v anispace   0.2.0          v anivis     0.2.0     
+#> v aniprocess 0.4.0
 ```
 
-## Data structure
+Attaching prints a startup message listing the core packages and their
+versions, followed by any conflicts between them and packages you
+already have loaded. Both can be silenced with
+`options(animovement.quiet = TRUE)`.
 
-A movement data frame contains information about the *spatial position*
-of *at least one keypoint* along *at least one axis* at a point in
-*time*.
+The core packages are:
 
-In practice, a movement data frame contains the following:
+| Package | Role |
+|----|----|
+| [*aniframe*](https://animovement.dev/aniframe) | Core data structures for movement data |
+| [*aniread*](https://animovement.dev/aniread) | Reading and writing movement data |
+| [*anispace*](https://animovement.dev/anispace) | Spatial transformation methods |
+| [*aniprocess*](https://animovement.dev/aniprocess) | Signal processing and filtering |
+| [*anicheck*](https://animovement.dev/anicheck) | Diagnosing movement data quality |
+| [*animetric*](https://animovement.dev/animetric) | Calculating movement-based metrics |
+| [*anivis*](https://animovement.dev/anivis) | Visualising movement data and diagnostics |
 
-| Variable | Conditional | Use-case | Description |
-|----|----|----|----|
-| `time` | Required |  |  |
-| `keypoint` | Required |  |  |
-| `x` | Required |  |  |
-| `y` | Optional | All except treadmills |  |
-| `z` | Optional | 3D tracking |  |
-| `confidence` | Optional |  | In pose estimation, a *confidence* score is often given which can be leveraged to filter outlier observations. |
+[`animovement_packages()`](http://animovement.dev/animovement/reference/animovement_packages.md)
+reports the set that is actually in force — the core packages, or
+whatever a project configuration file specifies, plus any session
+extensions:
 
-## Getting started with *animovement*
+``` r
 
-To get started, first install the package.
+animovement_packages()
+#> [1] "aniframe"    "aniread"     "anispace"    "aniprocess"  "anicheck"   
+#> [6] "animetric"   "anivis"      "animovement"
+```
 
-Next, we have put together a tutorial that takes you through all the
-necessary steps, from reading your data to summarising the movements. We
-recommend going through the steps in the specified order which is the
-recommended workflow.
+## Conflicts
 
-- [Read trackball
-  data](https://www.roald-arboel.com/animovement/articles/read-trackball.html)
-- [Clean
-  tracks](https://www.roald-arboel.com/animovement/articles/clean-tracks.html)
-- [Compute
-  kinematics](https://www.roald-arboel.com/animovement/articles/calculate-kinematics.html)
-- [Compute movement
-  statistics](https://www.roald-arboel.com/animovement/articles/calculate-summary-statistics.html)
+When two attached packages export a function of the same name, the one
+attached later masks the other.
+[`animovement_conflicts()`](http://animovement.dev/animovement/reference/animovement_conflicts.md)
+lists every such clash involving an animovement package, in search-path
+order:
+
+``` r
+
+animovement_conflicts()
+```
+
+It is also a general-purpose tool — pass it any set of attached packages
+to check those instead:
+
+``` r
+
+animovement_conflicts(sub("package:", "", search()[-1]))
+```
+
+## Extending the animovement
+
+[`animovement_extend()`](http://animovement.dev/animovement/reference/animovement_extend.md)
+adds packages for the current session. They are attached alongside the
+core packages, their conflicts are reported, and they are remembered in
+`options("animovement.extend")` so
+[`animovement_packages()`](http://animovement.dev/animovement/reference/animovement_packages.md),
+[`animovement_update()`](http://animovement.dev/animovement/reference/animovement_update.md)
+and friends include them:
+
+``` r
+
+animovement_extend(ggplot2, tidyr)
+```
+
+Use `install = TRUE` to install anything missing first. To extend
+*before* attaching, set the option directly:
+
+``` r
+
+options(animovement.extend = c("ggplot2", "tidyr"))
+library(animovement)
+```
+
+[`animovement_detach()`](http://animovement.dev/animovement/reference/animovement_detach.md)
+is the inverse. With no arguments it detaches all animovement packages;
+`session = TRUE` also clears them from the session options, and
+`unload = TRUE` unloads the namespaces as well:
+
+``` r
+
+animovement_detach(ggplot2)                     # one package
+animovement_detach(session = TRUE)              # everything, for good
+```
+
+## Project configuration
+
+For a set of packages that belongs to a project rather than a session,
+put a file named `.animovement` in the project root. List the packages
+one per line, or separated by commas or spaces:
+
+    aniframe, aniread, aniprocess
+    ggplot2
+
+When this file is present, it *replaces* the standard set of core
+packages — so list everything the project needs.
+[`animovement_packages()`](http://animovement.dev/animovement/reference/animovement_packages.md)
+reads it, and [`library(animovement)`](https://animovement.dev) attaches
+exactly that set.
+
+Options and environment variables can be set from the same file by
+prefixing them with `_opt_` (options) or giving them bare (environment
+variables). Entries placed before the package names are applied before
+the packages are attached, those after them afterwards:
+
+    _opt_animovement.install = TRUE
+    aniframe, aniread, aniprocess
+
+The options the meta-package recognises are:
+
+- `animovement.quiet` — `TRUE` disables startup, conflict and
+  installation messages
+- `animovement.styling` — `FALSE` disables styling of console output
+- `animovement.extend` — packages to attach in addition to the core set
+- `animovement.install` — `TRUE` installs missing packages on attach
+
+## Installing and updating
+
+The animovement packages are published on
+[R-universe](https://animovement.r-universe.dev) rather than CRAN, so a
+plain `getOption("repos")` will not find them.
+[`animovement_repos()`](http://animovement.dev/animovement/reference/animovement_repos.md)
+adds the R-universe to a repository vector, and is the default for the
+functions below:
+
+``` r
+
+animovement_repos()
+#>                                                          RSPM 
+#> "https://packagemanager.posit.co/cran/__linux__/noble/latest" 
+#>                                                          CRAN 
+#>                                    "https://cran.rstudio.com" 
+#>                                                               
+#>                          "https://animovement.r-universe.dev"
+```
+
+``` r
+
+options(repos = animovement_repos()) # ...or apply it to the whole session
+```
+
+[`animovement_update()`](http://animovement.dev/animovement/reference/animovement_update.md)
+checks the installed versions against the repositories and installs what
+is behind;
+[`animovement_install()`](http://animovement.dev/animovement/reference/animovement_install.md)
+installs packages that are missing altogether:
+
+``` r
+
+animovement_update()
+animovement_install()
+```
+
+[`animovement_sitrep()`](http://animovement.dev/animovement/reference/animovement_sitrep.md)
+gives the situation report the two are based on — every package in your
+animovement, its installed version, and whether a newer one is available
+— and
+[`animovement_deps()`](http://animovement.dev/animovement/reference/animovement_deps.md)
+lists the dependencies underneath them:
+
+``` r
+
+animovement_sitrep()
+animovement_deps()
+```
+
+## Suggested packages
+
+To keep installation light, functionality that only some users need is a
+soft dependency of the ecosystem packages rather than a hard one. Rather
+than installing them one error message at a time, you can take them all
+at once:
+
+``` r
+
+animovement_show_suggested()    # list them
+animovement_install_suggested() # install them
+```
+
+Packages needed only for development or documentation (knitr, testthat,
+and the like) are excluded, as are packages an ecosystem package already
+requires.
