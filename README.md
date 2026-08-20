@@ -198,20 +198,21 @@ If you enjoy the package, please make sure to cite it. To cite
 
 ``` r
 citation("animovement")
-#> To cite package 'animovement' in publications use:
+#> To cite the animovement toolbox in publications use:
 #> 
 #>   Roald-Arbøl M (2026). "animovement: An R toolbox for analysing
-#>   movement across space and time."
+#>   movement across space and time." doi:10.5281/zenodo.13235277
+#>   <https://doi.org/10.5281/zenodo.13235277>.
 #>   <https://animovement.dev/animovement/>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
-#>   @Misc{roaldarbol:2025,
-#>     title = {animovement: An R toolbox for analysing movement across space and time.},
+#>   @Misc{animovement,
+#>     title = {animovement: An R toolbox for analysing movement across space and time},
 #>     author = {Mikkel Roald-Arbøl},
 #>     year = {2026},
+#>     doi = {10.5281/zenodo.13235277},
+#>     version = {0.7.4.9000},
 #>     url = {https://animovement.dev/animovement/},
-#>     abstract = {An R toolbox for analysing movement across space and time.},
-#>     version = {0.7.4},
 #>   }
 ```
