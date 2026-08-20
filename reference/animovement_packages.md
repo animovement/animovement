@@ -29,8 +29,8 @@ A character vector of package names.
 
 ## See also
 
-[`animovement_extend`](http://animovement.dev/animovement/reference/animovement_extend.md),
-[`animovement`](http://animovement.dev/animovement/reference/animovement.md)
+[`animovement_extend`](https://animovement.dev/animovement/reference/animovement_extend.md),
+[`animovement`](https://animovement.dev/animovement/reference/animovement.md)
 
 ## Examples
 

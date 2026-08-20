@@ -18,13 +18,15 @@ Source:
 [`inst/CITATION`](https://github.com/animovement/animovement/blob/main/inst/CITATION)
 
 Roald-Arbøl M (2026). “animovement: An R toolbox for analysing movement
-across space and time.” <https://animovement.dev/animovement/>.
+across space and time.”
+[doi:10.5281/zenodo.13235277](https://doi.org/10.5281/zenodo.13235277).
+<https://animovement.dev/animovement/>.
 
-    @Misc{roaldarbol:2025,
-      title = {animovement: An R toolbox for analysing movement across space and time.},
+    @Misc{animovement,
+      title = {animovement: An R toolbox for analysing movement across space and time},
       author = {Mikkel Roald-Arbøl},
       year = {2026},
+      doi = {10.5281/zenodo.13235277},
+      version = {0.7.4.9000},
       url = {https://animovement.dev/animovement/},
-      abstract = {An R toolbox for analysing movement across space and time.},
-      version = {0.7.4},
     }

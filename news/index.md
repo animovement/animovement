@@ -30,22 +30,22 @@
 
 - Dropped `rhdf5` and the Bioconductor r-universe from `Suggests` — it
   was only needed by the tutorials that have moved.
-  [`animovement_install_suggested()`](http://animovement.dev/animovement/reference/animovement_install_suggested.md)
+  [`animovement_install_suggested()`](https://animovement.dev/animovement/reference/animovement_install_suggested.md)
   still resolves it for the ecosystem packages that suggest it.
 
 - Fixed the R-universe and Zulip badges in the README, which Quarto was
   rewriting with a spurious `.png` extension.
 
-- [`animovement_update()`](http://animovement.dev/animovement/reference/animovement_update.md),
-  [`animovement_install()`](http://animovement.dev/animovement/reference/animovement_install.md)
+- [`animovement_update()`](https://animovement.dev/animovement/reference/animovement_update.md),
+  [`animovement_install()`](https://animovement.dev/animovement/reference/animovement_install.md)
   and
-  [`animovement_deps()`](http://animovement.dev/animovement/reference/animovement_deps.md)
+  [`animovement_deps()`](https://animovement.dev/animovement/reference/animovement_deps.md)
   now look in the animovement r-universe by default, via the new
-  [`animovement_repos()`](http://animovement.dev/animovement/reference/animovement_repos.md),
+  [`animovement_repos()`](https://animovement.dev/animovement/reference/animovement_repos.md),
   instead of failing unless `repos` was set by hand
   ([\#144](https://github.com/animovement/animovement/issues/144)).
 
-- [`animovement_install_suggested()`](http://animovement.dev/animovement/reference/animovement_install_suggested.md)
+- [`animovement_install_suggested()`](https://animovement.dev/animovement/reference/animovement_install_suggested.md)
   works again: it no longer passes an unsupported `repos` argument to
   [`pak::pkg_install()`](https://pak.r-lib.org/reference/pkg_install.html),
   and finds `rhdf5` on the Bioconductor r-universe
@@ -53,7 +53,7 @@
 
 - Installation under webR goes through `webr::install()` for every
   install function, not just
-  [`animovement_install_suggested()`](http://animovement.dev/animovement/reference/animovement_install_suggested.md)
+  [`animovement_install_suggested()`](https://animovement.dev/animovement/reference/animovement_install_suggested.md)
   ([\#139](https://github.com/animovement/animovement/issues/139)).
 
 - Suggested packages no longer include development tooling, or packages
@@ -79,7 +79,7 @@
 ## animovement 0.7.1
 
 - Added
-  [`animovement_install_suggested()`](http://animovement.dev/animovement/reference/animovement_install_suggested.md)
+  [`animovement_install_suggested()`](https://animovement.dev/animovement/reference/animovement_install_suggested.md)
   to help users install the optional packages used by some functions.
 - Updated CI workflows, README and citation metadata.
 

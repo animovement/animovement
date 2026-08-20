@@ -14,7 +14,7 @@ animovement_update(..., install = FALSE, repos = animovement_repos())
 - ...:
 
   arguments passed to
-  [`animovement_deps`](http://animovement.dev/animovement/reference/animovement_deps.md).
+  [`animovement_deps`](https://animovement.dev/animovement/reference/animovement_deps.md).
 
 - install:
 
@@ -25,7 +25,7 @@ animovement_update(..., install = FALSE, repos = animovement_repos())
 - repos:
 
   the repositories to check against and install from. Defaults to
-  [`animovement_repos()`](http://animovement.dev/animovement/reference/animovement_repos.md),
+  [`animovement_repos()`](https://animovement.dev/animovement/reference/animovement_repos.md),
   which adds the *animovement* R-universe to `getOption("repos")`.
 
 ## Value
@@ -34,5 +34,5 @@ animovement_update(..., install = FALSE, repos = animovement_repos())
 
 ## See also
 
-[`animovement_deps`](http://animovement.dev/animovement/reference/animovement_deps.md),
-[`animovement`](http://animovement.dev/animovement/reference/animovement.md)
+[`animovement_deps`](https://animovement.dev/animovement/reference/animovement_deps.md),
+[`animovement`](https://animovement.dev/animovement/reference/animovement.md)

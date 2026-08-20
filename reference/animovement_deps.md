@@ -31,7 +31,7 @@ animovement_deps(
 - repos:
 
   the repositories to use to check for updates. Defaults to
-  [`animovement_repos()`](http://animovement.dev/animovement/reference/animovement_repos.md),
+  [`animovement_repos()`](https://animovement.dev/animovement/reference/animovement_repos.md),
   which is `getOption("repos")` plus the R-universe the *animovement*
   packages are published on.
 
@@ -53,5 +53,5 @@ version.
 
 ## See also
 
-[`animovement_sitrep`](http://animovement.dev/animovement/reference/animovement_sitrep.md),
-[`animovement`](http://animovement.dev/animovement/reference/animovement.md)
+[`animovement_sitrep`](https://animovement.dev/animovement/reference/animovement_sitrep.md),
+[`animovement`](https://animovement.dev/animovement/reference/animovement.md)

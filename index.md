@@ -82,7 +82,7 @@ library(animovement)
 
 If a function name is exported by two attached packages, the one
 attached later masks the other, and the startup message says so.
-[`animovement_conflicts()`](http://animovement.dev/animovement/reference/animovement_conflicts.md)
+[`animovement_conflicts()`](https://animovement.dev/animovement/reference/animovement_conflicts.md)
 lists them again at any point, and works for any attached packages — not
 just ours. To see what is currently in your animovement, and how it is
 doing:
@@ -98,11 +98,11 @@ animovement_detach()    # Remove them from the search path again
 ## Extending
 
 Most analyses need more than the core set.
-[`animovement_extend()`](http://animovement.dev/animovement/reference/animovement_extend.md)
+[`animovement_extend()`](https://animovement.dev/animovement/reference/animovement_extend.md)
 adds packages to your animovement for the session — attaching them,
 checking their conflicts alongside the core ones, and including them in
 everything that follows, such as
-[`animovement_update()`](http://animovement.dev/animovement/reference/animovement_update.md):
+[`animovement_update()`](https://animovement.dev/animovement/reference/animovement_update.md):
 
 ``` r
 
@@ -150,7 +150,7 @@ animovement_install() # Install any ecosystem packages you are missing
 ```
 
 Both look in the animovement R-universe by default, via
-[`animovement_repos()`](http://animovement.dev/animovement/reference/animovement_repos.md).
+[`animovement_repos()`](https://animovement.dev/animovement/reference/animovement_repos.md).
 To point the rest of your session at the same repositories:
 
 ``` r
@@ -188,7 +188,7 @@ would love to get a sample of your data to support it!**
   minimal, reproducible example) is the fastest route to an answer.
 
 - See
-  [CONTRIBUTING.md](http://animovement.dev/animovement/CONTRIBUTING.md)
+  [CONTRIBUTING.md](https://animovement.dev/animovement/CONTRIBUTING.md)
   for the pull request process.
 
 ## Citation
@@ -199,20 +199,21 @@ If you enjoy the package, please make sure to cite it. To cite
 ``` r
 
 citation("animovement")
-#> To cite package 'animovement' in publications use:
+#> To cite the animovement toolbox in publications use:
 #> 
 #>   Roald-Arbøl M (2026). "animovement: An R toolbox for analysing
-#>   movement across space and time."
+#>   movement across space and time." doi:10.5281/zenodo.13235277
+#>   <https://doi.org/10.5281/zenodo.13235277>.
 #>   <https://animovement.dev/animovement/>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
-#>   @Misc{roaldarbol:2025,
-#>     title = {animovement: An R toolbox for analysing movement across space and time.},
+#>   @Misc{animovement,
+#>     title = {animovement: An R toolbox for analysing movement across space and time},
 #>     author = {Mikkel Roald-Arbøl},
 #>     year = {2026},
+#>     doi = {10.5281/zenodo.13235277},
+#>     version = {0.7.4.9000},
 #>     url = {https://animovement.dev/animovement/},
-#>     abstract = {An R toolbox for analysing movement across space and time.},
-#>     version = {0.7.4},
 #>   }
 ```

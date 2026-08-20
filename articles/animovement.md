@@ -46,7 +46,7 @@ The core packages are:
 | [*animetric*](https://animovement.dev/animetric) | Calculating movement-based metrics |
 | [*anivis*](https://animovement.dev/anivis) | Visualising movement data and diagnostics |
 
-[`animovement_packages()`](http://animovement.dev/animovement/reference/animovement_packages.md)
+[`animovement_packages()`](https://animovement.dev/animovement/reference/animovement_packages.md)
 reports the set that is actually in force — the core packages, or
 whatever a project configuration file specifies, plus any session
 extensions:
@@ -62,7 +62,7 @@ animovement_packages()
 
 When two attached packages export a function of the same name, the one
 attached later masks the other.
-[`animovement_conflicts()`](http://animovement.dev/animovement/reference/animovement_conflicts.md)
+[`animovement_conflicts()`](https://animovement.dev/animovement/reference/animovement_conflicts.md)
 lists every such clash involving an animovement package, in search-path
 order:
 
@@ -81,12 +81,12 @@ animovement_conflicts(sub("package:", "", search()[-1]))
 
 ## Extending the animovement
 
-[`animovement_extend()`](http://animovement.dev/animovement/reference/animovement_extend.md)
+[`animovement_extend()`](https://animovement.dev/animovement/reference/animovement_extend.md)
 adds packages for the current session. They are attached alongside the
 core packages, their conflicts are reported, and they are remembered in
 `options("animovement.extend")` so
-[`animovement_packages()`](http://animovement.dev/animovement/reference/animovement_packages.md),
-[`animovement_update()`](http://animovement.dev/animovement/reference/animovement_update.md)
+[`animovement_packages()`](https://animovement.dev/animovement/reference/animovement_packages.md),
+[`animovement_update()`](https://animovement.dev/animovement/reference/animovement_update.md)
 and friends include them:
 
 ``` r
@@ -103,7 +103,7 @@ options(animovement.extend = c("ggplot2", "tidyr"))
 library(animovement)
 ```
 
-[`animovement_detach()`](http://animovement.dev/animovement/reference/animovement_detach.md)
+[`animovement_detach()`](https://animovement.dev/animovement/reference/animovement_detach.md)
 is the inverse. With no arguments it detaches all animovement packages;
 `session = TRUE` also clears them from the session options, and
 `unload = TRUE` unloads the namespaces as well:
@@ -125,7 +125,7 @@ one per line, or separated by commas or spaces:
 
 When this file is present, it *replaces* the standard set of core
 packages — so list everything the project needs.
-[`animovement_packages()`](http://animovement.dev/animovement/reference/animovement_packages.md)
+[`animovement_packages()`](https://animovement.dev/animovement/reference/animovement_packages.md)
 reads it, and [`library(animovement)`](https://animovement.dev) attaches
 exactly that set.
 
@@ -150,7 +150,7 @@ The options the meta-package recognises are:
 The animovement packages are published on
 [R-universe](https://animovement.r-universe.dev) rather than CRAN, so a
 plain `getOption("repos")` will not find them.
-[`animovement_repos()`](http://animovement.dev/animovement/reference/animovement_repos.md)
+[`animovement_repos()`](https://animovement.dev/animovement/reference/animovement_repos.md)
 adds the R-universe to a repository vector, and is the default for the
 functions below:
 
@@ -170,10 +170,10 @@ animovement_repos()
 options(repos = animovement_repos()) # ...or apply it to the whole session
 ```
 
-[`animovement_update()`](http://animovement.dev/animovement/reference/animovement_update.md)
+[`animovement_update()`](https://animovement.dev/animovement/reference/animovement_update.md)
 checks the installed versions against the repositories and installs what
 is behind;
-[`animovement_install()`](http://animovement.dev/animovement/reference/animovement_install.md)
+[`animovement_install()`](https://animovement.dev/animovement/reference/animovement_install.md)
 installs packages that are missing altogether:
 
 ``` r
@@ -182,11 +182,11 @@ animovement_update()
 animovement_install()
 ```
 
-[`animovement_sitrep()`](http://animovement.dev/animovement/reference/animovement_sitrep.md)
+[`animovement_sitrep()`](https://animovement.dev/animovement/reference/animovement_sitrep.md)
 gives the situation report the two are based on — every package in your
 animovement, its installed version, and whether a newer one is available
 — and
-[`animovement_deps()`](http://animovement.dev/animovement/reference/animovement_deps.md)
+[`animovement_deps()`](https://animovement.dev/animovement/reference/animovement_deps.md)
 lists the dependencies underneath them:
 
 ``` r

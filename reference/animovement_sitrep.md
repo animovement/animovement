@@ -15,7 +15,7 @@ animovement_sitrep(...)
 - ...:
 
   arguments other than `pkg` passed to
-  [`animovement_deps`](http://animovement.dev/animovement/reference/animovement_deps.md).
+  [`animovement_deps`](https://animovement.dev/animovement/reference/animovement_deps.md).
 
 ## Value
 
@@ -23,5 +23,5 @@ animovement_sitrep(...)
 
 ## See also
 
-[`animovement_deps`](http://animovement.dev/animovement/reference/animovement_deps.md),
-[`animovement`](http://animovement.dev/animovement/reference/animovement.md)
+[`animovement_deps`](https://animovement.dev/animovement/reference/animovement_deps.md),
+[`animovement`](https://animovement.dev/animovement/reference/animovement.md)

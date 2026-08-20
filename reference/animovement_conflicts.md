@@ -26,7 +26,7 @@ they appear on the [`search`](https://rdrr.io/r/base/search.html) path.
 
 ## See also
 
-[`animovement`](http://animovement.dev/animovement/reference/animovement.md)
+[`animovement`](https://animovement.dev/animovement/reference/animovement.md)
 
 ## Examples
 

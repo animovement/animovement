@@ -5,10 +5,10 @@ The *animovement* packages are published on
 `getOption("repos")` alone will not find them. This adds the R-universe
 to a repository vector unless it is already present, and is the default
 for
-[`animovement_deps`](http://animovement.dev/animovement/reference/animovement_deps.md),
-[`animovement_update`](http://animovement.dev/animovement/reference/animovement_update.md)
+[`animovement_deps`](https://animovement.dev/animovement/reference/animovement_deps.md),
+[`animovement_update`](https://animovement.dev/animovement/reference/animovement_update.md)
 and
-[`animovement_install`](http://animovement.dev/animovement/reference/animovement_install.md).
+[`animovement_install`](https://animovement.dev/animovement/reference/animovement_install.md).
 
 ## Usage
 
@@ -37,8 +37,8 @@ mirror. The CRAN entry is kept rather than dropped because the
 
 ## See also
 
-[`animovement_update`](http://animovement.dev/animovement/reference/animovement_update.md),
-[`animovement`](http://animovement.dev/animovement/reference/animovement.md)
+[`animovement_update`](https://animovement.dev/animovement/reference/animovement_update.md),
+[`animovement`](https://animovement.dev/animovement/reference/animovement.md)
 
 ## Examples
 

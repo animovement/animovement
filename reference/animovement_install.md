@@ -20,7 +20,7 @@ animovement_install(
 
   comma-separated package names, quoted or unquoted, or vectors of
   package names. If left empty, all packages returned by
-  [`animovement_packages`](http://animovement.dev/animovement/reference/animovement_packages.md)
+  [`animovement_packages`](https://animovement.dev/animovement/reference/animovement_packages.md)
   are checked.
 
 - only.missing:
@@ -37,7 +37,7 @@ animovement_install(
 - repos:
 
   the repositories to install from. Defaults to
-  [`animovement_repos()`](http://animovement.dev/animovement/reference/animovement_repos.md),
+  [`animovement_repos()`](https://animovement.dev/animovement/reference/animovement_repos.md),
   which adds the *animovement* R-universe to `getOption("repos")`.
 
 ## Value
@@ -57,5 +57,5 @@ file.
 
 ## See also
 
-[`animovement_update`](http://animovement.dev/animovement/reference/animovement_update.md),
-[`animovement`](http://animovement.dev/animovement/reference/animovement.md)
+[`animovement_update`](https://animovement.dev/animovement/reference/animovement_update.md),
+[`animovement`](https://animovement.dev/animovement/reference/animovement.md)

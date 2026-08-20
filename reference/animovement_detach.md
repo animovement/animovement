@@ -21,7 +21,7 @@ animovement_detach(
 
   comma-separated package names, quoted or unquoted, or vectors of
   package names. If left empty, all packages returned by
-  [`animovement_packages`](http://animovement.dev/animovement/reference/animovement_packages.md)
+  [`animovement_packages`](https://animovement.dev/animovement/reference/animovement_packages.md)
   are detached.
 
 - unload:
@@ -53,5 +53,5 @@ animovement_detach(
 
 ## See also
 
-[`animovement_extend`](http://animovement.dev/animovement/reference/animovement_extend.md),
-[`animovement`](http://animovement.dev/animovement/reference/animovement.md)
+[`animovement_extend`](https://animovement.dev/animovement/reference/animovement_extend.md),
+[`animovement`](https://animovement.dev/animovement/reference/animovement.md)

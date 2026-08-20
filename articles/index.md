@@ -3,4 +3,4 @@
 ### All vignettes
 
 - [Introduction to
-  animovement](http://animovement.dev/animovement/articles/animovement.md):
+  animovement](https://animovement.dev/animovement/articles/animovement.md):

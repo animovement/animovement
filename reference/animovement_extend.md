@@ -39,13 +39,13 @@ the packages that are not attached are attached, but conflicts are
 checked for all specified packages. An `options("animovement.extend")`
 is set which stores these extension packages, regardless of whether they
 were already attached or not. When calling
-[`animovement_packages`](http://animovement.dev/animovement/reference/animovement_packages.md),
-[`animovement_deps`](http://animovement.dev/animovement/reference/animovement_deps.md),
-[`animovement_conflicts`](http://animovement.dev/animovement/reference/animovement_conflicts.md),
-[`animovement_update`](http://animovement.dev/animovement/reference/animovement_update.md),
-[`animovement_sitrep`](http://animovement.dev/animovement/reference/animovement_sitrep.md)
+[`animovement_packages`](https://animovement.dev/animovement/reference/animovement_packages.md),
+[`animovement_deps`](https://animovement.dev/animovement/reference/animovement_deps.md),
+[`animovement_conflicts`](https://animovement.dev/animovement/reference/animovement_conflicts.md),
+[`animovement_update`](https://animovement.dev/animovement/reference/animovement_update.md),
+[`animovement_sitrep`](https://animovement.dev/animovement/reference/animovement_sitrep.md)
 or
-[`animovement_detach`](http://animovement.dev/animovement/reference/animovement_detach.md),
+[`animovement_detach`](https://animovement.dev/animovement/reference/animovement_detach.md),
 these packages are included as part of the *animovement*. To extend the
 *animovement* for the current session when it is not yet loaded, users
 can also set `options(animovement.extend = c(...))`, where `c(...)` is a
@@ -54,5 +54,5 @@ character vector of package names, before calling
 
 ## See also
 
-[`animovement_detach`](http://animovement.dev/animovement/reference/animovement_detach.md),
-[`animovement`](http://animovement.dev/animovement/reference/animovement.md)
+[`animovement_detach`](https://animovement.dev/animovement/reference/animovement_detach.md),
+[`animovement`](https://animovement.dev/animovement/reference/animovement.md)
