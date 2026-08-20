@@ -1,3 +1,6 @@
+# Announces releases on Zulip. The logic lives in animovement/.github so it is
+# maintained in one place; only the triggers have to be declared here, because
+# GitHub fires them against this repository.
 name: Post Release Notes on Zulip
 
 on:
@@ -16,62 +19,7 @@ on:
 
 jobs:
   notify-zulip:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - name: Look up the release
-        id: release
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-          PKG: ${{ github.event.repository.name }}
-          EVENT_NAME: ${{ github.event_name }}
-          EVENT_TAG: ${{ github.event.release.tag_name }}
-          INPUT_TAG: ${{ inputs.tag }}
-        run: |
-          set -euo pipefail
-          if [ "$EVENT_NAME" = "release" ]; then
-            tag="$EVENT_TAG"
-          elif [ -n "$INPUT_TAG" ]; then
-            tag="$INPUT_TAG"
-          else
-            tag=$(gh release view --json tagName --jq '.tagName')
-          fi
-          gh release view "$tag" --json tagName,name,url,body > release.json
-
-          # Release names are written in several styles across the ecosystem:
-          # "v0.4.0", "anicheck 0.2.0", "animovement v0.7.4" and
-          # "v0.4.0 - one source of truth for dimensionality". The heading
-          # already carries the package and tag, so strip any leading package
-          # name, version and separator and keep only the descriptive part.
-          # Names that are nothing but a version leave an empty subtitle.
-          name=$(jq -r '.name // ""' release.json)
-          subtitle=$(printf '%s' "$name" \
-            | sed -E "s/^${PKG}[[:space:]]+//" \
-            | sed -E 's/^v?[0-9]+(\.[0-9]+)*([-.][A-Za-z0-9]+)*[[:space:]]*//' \
-            | sed -E 's/^[[:space:]]*[—–:-][[:space:]]*//')
-
-          {
-            echo "tag=$(jq -r '.tagName' release.json)"
-            echo "url=$(jq -r '.url' release.json)"
-            echo "subtitle=$subtitle"
-            echo "body<<ZULIP_RELEASE_BODY"
-            jq -r '.body' release.json
-            echo "ZULIP_RELEASE_BODY"
-          } >> "$GITHUB_OUTPUT"
-
-      - name: Send release notification to Zulip
-        uses: zulip/github-actions-zulip/send-message@v1
-        with:
-          api-key: ${{ secrets.ZULIP_API_KEY }}
-          email: "releases-bot@animovement.zulipchat.com"
-          organization-url: "https://animovement.zulipchat.com"
-          to: "announcements"
-          type: "stream"
-          topic: "releases"
-          content: |
-            # [${{ github.event.repository.name }} ${{ steps.release.outputs.tag }}](${{ steps.release.outputs.url }})
-            ${{ steps.release.outputs.subtitle != '' && format('**{0}**', steps.release.outputs.subtitle) || '' }}
-
-            ${{ steps.release.outputs.body }}
+    uses: animovement/.github/.github/workflows/release-to-zulip.yml@main
+    with:
+      tag: ${{ inputs.tag }}
+    secrets: inherit
