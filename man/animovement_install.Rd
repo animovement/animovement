@@ -30,6 +30,12 @@ This function (by default) checks if any \emph{animovement} package is missing a
 There is also the possibility to set \code{options(animovement.install = TRUE)} before \code{library(animovement)}, which will call \code{animovement_install()} before loading any packages to make sure all packages are available.
 If you are using a \code{.animovement} configuration file inside a project (see vignette), you can also place \code{_opt_animovement.install = TRUE} before the list of packages in that file.
 }
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+# Install any ecosystem packages that are missing
+animovement_install()
+\dontshow{\}) # examplesIf}
+}
 \seealso{
 \code{\link{animovement_update}}, \code{\link{animovement}}
 }

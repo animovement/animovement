@@ -30,6 +30,16 @@ An \code{options("animovement.extend")} is set which stores these extension pack
 To extend the \emph{animovement} for the current session when it is not yet loaded, users can also set \code{options(animovement.extend = c(...))}, where \code{c(...)}
 is a character vector of package names, before calling \code{library(animovement)}.
 }
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+# Add packages to your animovement for this session. They are attached, and
+# their conflicts reported alongside the core packages.
+animovement_extend(ggplot2, tidyr)
+
+# Set the option before library(animovement) to extend on attach instead
+options(animovement.extend = c("ggplot2", "tidyr"))
+\dontshow{\}) # examplesIf}
+}
 \seealso{
 \code{\link{animovement_detach}}, \code{\link{animovement}}
 }
