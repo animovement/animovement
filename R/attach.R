@@ -123,6 +123,12 @@ animovement_attach <- function(
 #'
 #' @returns \code{animovement_detach} returns \code{NULL} invisibly.
 #' @seealso \code{\link{animovement_extend}}, \code{\link{animovement}}
+#' @examplesIf interactive()
+#' # Detach one package
+#' animovement_detach(aniread)
+#'
+#' # Detach the whole suite, and forget any session extensions
+#' animovement_detach(session = TRUE)
 #' @export
 animovement_detach <- function(
   ...,
@@ -194,6 +200,13 @@ animovement_detach <- function(
 #'
 #' @returns \code{animovement_extend} returns \code{NULL} invisibly.
 #' @seealso \code{\link{animovement_detach}}, \code{\link{animovement}}
+#' @examplesIf interactive()
+#' # Add packages to your animovement for this session. They are attached, and
+#' # their conflicts reported alongside the core packages.
+#' animovement_extend(ggplot2, tidyr)
+#'
+#' # Set the option before library(animovement) to extend on attach instead
+#' options(animovement.extend = c("ggplot2", "tidyr"))
 #' @export
 animovement_extend <- function(
   ...,

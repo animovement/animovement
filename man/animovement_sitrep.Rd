@@ -17,6 +17,10 @@ This function gives a quick overview of the version of R and all
 \emph{animovement} packages (including availability updates for packages) and indicates
 whether any project-level configuration files are used.
 }
+\examples{
+# Versions of every animovement package, and whether any are behind
+animovement_sitrep()
+}
 \seealso{
 \code{\link{animovement_deps}}, \code{\link{animovement}}
 }

@@ -86,6 +86,12 @@ deparse_repos <- function(repos) {
 #'
 #' @returns A data frame giving the package names, the CRAN and local version, and a logical variable stating whether the local version is behind the CRAN version.
 #' @seealso \code{\link{animovement_sitrep}}, \code{\link{animovement}}
+#' @examples
+#' # The packages the suite depends on, and their versions
+#' head(animovement_deps())
+#'
+#' # Including their dependencies in turn
+#' nrow(animovement_deps(recursive = TRUE))
 #' @export
 animovement_deps <- function(
   pkg = animovement_packages(),
@@ -165,6 +171,13 @@ animovement_deps <- function(
 #'
 #' @returns \code{animovement_update} returns \code{NULL} invisibly.
 #' @seealso \code{\link{animovement_deps}}, \code{\link{animovement}}
+#' @examples
+#' # Report which packages are behind, without changing anything
+#' animovement_update()
+#'
+#' # Pass install = TRUE to actually install what is out of date
+#' @examplesIf FALSE
+#' animovement_update(install = TRUE)
 #' @export
 animovement_update <- function(
   ...,
@@ -231,6 +244,9 @@ animovement_update <- function(
 #'
 #' @returns \code{animovement_install} returns \code{NULL} invisibly.
 #' @seealso \code{\link{animovement_update}}, \code{\link{animovement}}
+#' @examplesIf interactive()
+#' # Install any ecosystem packages that are missing
+#' animovement_install()
 #' @export
 animovement_install <- function(
   ...,
@@ -280,6 +296,9 @@ animovement_install <- function(
 #'
 #' @returns \code{animovement_sitrep} returns \code{NULL} invisibly.
 #' @seealso \code{\link{animovement_deps}}, \code{\link{animovement}}
+#' @examples
+#' # Versions of every animovement package, and whether any are behind
+#' animovement_sitrep()
 #' @export
 animovement_sitrep <- function(...) {
   cat(rule(

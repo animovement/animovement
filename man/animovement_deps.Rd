@@ -30,6 +30,13 @@ A data frame giving the package names, the CRAN and local version, and a logical
 \description{
 Lists all \emph{animovement} dependencies and the local and CRAN versions of packages and dependencies.
 }
+\examples{
+# The packages the suite depends on, and their versions
+head(animovement_deps())
+
+# Including their dependencies in turn
+nrow(animovement_deps(recursive = TRUE))
+}
 \seealso{
 \code{\link{animovement_sitrep}}, \code{\link{animovement}}
 }
