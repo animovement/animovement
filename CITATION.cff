@@ -8,15 +8,18 @@ message: 'To cite package "animovement" in publications use:'
 type: software
 license: GPL-3.0-only
 title: 'animovement: An R toolbox for analysing movement across space and time.'
-version: 0.7.4
+version: 0.7.4.9000
 date-released: 2026-08-19
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.13235277
 abstract: An R toolbox for analysing movement across space and time.
 authors:
 - family-names: Roald-Arbøl
   given-names: Mikkel
   email: animovement.84w1m@passmail.com
   orcid: https://orcid.org/0000-0002-9998-0058
-url: http://animovement.dev/animovement/
+url: https://animovement.dev/animovement/
 contact:
 - family-names: Roald-Arbøl
   given-names: Mikkel

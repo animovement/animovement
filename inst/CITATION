@@ -1,12 +1,17 @@
+citHeader(
+  "To cite the animovement toolbox in publications use:"
+)
 
-bibentry(bibtype = "Misc",
-         key = "roaldarbol:2025",
-         title = "animovement: An R toolbox for analysing movement across space and time.",
-         author = person(given = "Mikkel",
-                         family = "Roald-Arbøl",
-                         email = "animovement.84w1m@passmail.com",
-                         comment = c(ORCID = "0000-0002-9998-0058")),
-         year = "2026",
-         url = "https://animovement.dev/animovement/",
-         abstract = "An R toolbox for analysing movement across space and time.",
-         version = "0.7.4")
+bibentry(
+  bibtype  = "Misc",
+  key      = "animovement",
+  title    = "animovement: An R toolbox for analysing movement across space and time",
+  author   = person(
+    given = "Mikkel", family = "Roald-Arbøl",
+    comment = c(ORCID = "0000-0002-9998-0058")
+  ),
+  year     = "2026",
+  doi      = "10.5281/zenodo.13235277",
+  version  = meta$Version,
+  url      = "https://animovement.dev/animovement/"
+)
