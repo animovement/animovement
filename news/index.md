@@ -2,6 +2,14 @@
 
 ## animovement (development version)
 
+- [`print()`](https://rdrr.io/r/base/print.html) on an
+  `animovement_conflicts` object returns the object invisibly, as an S3
+  print method should, instead of `NULL`
+  ([\#159](https://github.com/animovement/animovement/issues/159)).
+- Removed the unused `cyan()`, `lightblue()` and `yellow()` styling
+  helpers, left over from the fastverse adaptation
+  ([\#159](https://github.com/animovement/animovement/issues/159)).
+
 ## animovement 0.7.4
 
 - The licence declaration is corrected from `GPL-3 + file LICENSE` to

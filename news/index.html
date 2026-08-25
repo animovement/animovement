@@ -53,7 +53,10 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="animovement-development-version">animovement (development version)<a class="anchor" aria-label="anchor" href="#animovement-development-version"></a></h2>
-</div>
+<ul><li>
+<code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> on an <code>animovement_conflicts</code> object returns the object invisibly, as an S3 print method should, instead of <code>NULL</code> (<a href="https://github.com/animovement/animovement/issues/159" class="external-link">#159</a>).</li>
+<li>Removed the unused <code>cyan()</code>, <code>lightblue()</code> and <code>yellow()</code> styling helpers, left over from the fastverse adaptation (<a href="https://github.com/animovement/animovement/issues/159" class="external-link">#159</a>).</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.4" id="animovement-074">animovement 0.7.4<a class="anchor" aria-label="anchor" href="#animovement-074"></a></h2>
 <ul><li><p>The licence declaration is corrected from <code>GPL-3 + file LICENSE</code> to <code>GPL-3</code>, with the full text as <code>LICENSE.md</code>. The <code>+ file LICENSE</code> form asserts additional restrictions beyond GPL-3, and the file held nothing but the stock GPL-3 text. The licence that applies is unchanged; only how it is declared. <code>CITATION.cff</code> said <code>MIT</code>, left over from before the metapackage was rebuilt on the fastverse pattern, and now agrees at <code>GPL-3.0-only</code>.</p></li>
