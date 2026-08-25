@@ -106,5 +106,8 @@ cat_line <- function(x) cat(x, "\n", sep = "", file = stdout(), append = TRUE)
 
 #' @export
 print.animovement_conflicts <- function(x, ..., startup = FALSE) {
-  if (length(x)) cat_line(animovement_conflict_message(x))
+  if (length(x)) {
+    cat_line(animovement_conflict_message(x))
+  }
+  invisible(x)
 }

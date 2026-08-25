@@ -159,13 +159,6 @@ blue <- function(x) {
     paste0("\033[34m", x, "\033[39m")
   }
 }
-cyan <- function(x) {
-  if (isFALSE(getOption("animovement.styling"))) {
-    x
-  } else {
-    paste0("\033[36m", x, "\033[39m")
-  }
-}
 magenta2 <- function(x) {
   if (isFALSE(getOption("animovement.styling"))) {
     x
@@ -178,13 +171,6 @@ gold <- function(x) {
     x
   } else {
     paste0("\033[38;5;214m", x, "\033[39m")
-  }
-}
-lightblue <- function(x) {
-  if (isFALSE(getOption("animovement.styling"))) {
-    x
-  } else {
-    paste0("\033[38;5;45m", x, "\033[39m")
   }
 }
 kingsblue <- function(x) {
@@ -206,13 +192,6 @@ red <- function(x) {
     x
   } else {
     paste0("\033[31m", x, "\033[39m")
-  }
-}
-yellow <- function(x) {
-  if (isFALSE(getOption("animovement.styling"))) {
-    x
-  } else {
-    paste0("\033[33m", x, "\033[39m")
   }
 }
 bold <- function(x) {

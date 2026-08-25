@@ -1,5 +1,8 @@
 # animovement (development version)
 
+* `print()` on an `animovement_conflicts` object returns the object invisibly, as an S3 print method should, instead of `NULL` (#159).
+* Removed the unused `cyan()`, `lightblue()` and `yellow()` styling helpers, left over from the fastverse adaptation (#159).
+
 # animovement 0.7.4
 
 * The licence declaration is corrected from `GPL-3 + file LICENSE` to `GPL-3`, with the full text as `LICENSE.md`. The `+ file LICENSE` form asserts additional restrictions beyond GPL-3, and the file held nothing but the stock GPL-3 text. The licence that applies is unchanged; only how it is declared. `CITATION.cff` said `MIT`, left over from before the metapackage was rebuilt on the fastverse pattern, and now agrees at `GPL-3.0-only`.
