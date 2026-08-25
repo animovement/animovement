@@ -56,3 +56,16 @@ character vector of package names, before calling
 
 [`animovement_detach`](https://animovement.dev/animovement/reference/animovement_detach.md),
 [`animovement`](https://animovement.dev/animovement/reference/animovement.md)
+
+## Examples
+
+``` r
+if (FALSE) { # interactive()
+# Add packages to your animovement for this session. They are attached, and
+# their conflicts reported alongside the core packages.
+animovement_extend(ggplot2, tidyr)
+
+# Set the option before library(animovement) to extend on attach instead
+options(animovement.extend = c("ggplot2", "tidyr"))
+}
+```

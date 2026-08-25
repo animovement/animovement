@@ -55,3 +55,15 @@ animovement_detach(
 
 [`animovement_extend`](https://animovement.dev/animovement/reference/animovement_extend.md),
 [`animovement`](https://animovement.dev/animovement/reference/animovement.md)
+
+## Examples
+
+``` r
+if (FALSE) { # interactive()
+# Detach one package
+animovement_detach(aniread)
+
+# Detach the whole suite, and forget any session extensions
+animovement_detach(session = TRUE)
+}
+```

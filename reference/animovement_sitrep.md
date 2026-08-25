@@ -25,3 +25,38 @@ animovement_sitrep(...)
 
 [`animovement_deps`](https://animovement.dev/animovement/reference/animovement_deps.md),
 [`animovement`](https://animovement.dev/animovement/reference/animovement.md)
+
+## Examples
+
+``` r
+# Versions of every animovement package, and whether any are behind
+animovement_sitrep()
+#> -- animovement 0.7.4.9000: Situation Report ------------------------- R 4.6.1 --
+#>  * Project config file: FALSE
+#> -- Core packages --------------------------------------------------------------- 
+#>  * aniframe   (0.7.0.9000)
+#>  * aniread    (0.6.0.9000)
+#>  * anispace   (0.2.0.9000)
+#>  * aniprocess (0.4.0)
+#>  * anicheck   (0.2.0)
+#>  * animetric  (0.4.0)
+#>  * anivis     (0.2.0)
+#> -- Dependencies ---------------------------------------------------------------- 
+#>  * anytime    (0.3.13)
+#>  * cli        (3.6.6)
+#>  * data.table (1.18.6.1)
+#>  * dplyr      (1.2.1)
+#>  * ggplot2    (4.0.3)
+#>  * hms        (1.1.4)
+#>  * janitor    (2.2.1)
+#>  * lifecycle  (1.0.5)
+#>  * marquee    (1.2.1)
+#>  * patchwork  (1.3.2)
+#>  * pillar     (1.11.1)
+#>  * purrr      (1.2.2)
+#>  * rlang      (1.3.0)
+#>  * stringr    (1.6.0)
+#>  * tidyr      (1.3.2)
+#>  * tidyselect (1.2.1)
+#>  * vroom      (1.7.1)
+```

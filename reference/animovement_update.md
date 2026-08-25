@@ -36,3 +36,16 @@ animovement_update(..., install = FALSE, repos = animovement_repos())
 
 [`animovement_deps`](https://animovement.dev/animovement/reference/animovement_deps.md),
 [`animovement`](https://animovement.dev/animovement/reference/animovement.md)
+
+## Examples
+
+``` r
+# Report which packages are behind, without changing anything
+animovement_update()
+#> All animovement packages up-to-date
+
+# Pass install = TRUE to actually install what is out of date
+if (FALSE) {
+animovement_update(install = TRUE)
+}
+```

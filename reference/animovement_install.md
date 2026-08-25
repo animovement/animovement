@@ -59,3 +59,12 @@ file.
 
 [`animovement_update`](https://animovement.dev/animovement/reference/animovement_update.md),
 [`animovement`](https://animovement.dev/animovement/reference/animovement.md)
+
+## Examples
+
+``` r
+if (FALSE) { # interactive()
+# Install any ecosystem packages that are missing
+animovement_install()
+}
+```

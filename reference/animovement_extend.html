@@ -98,6 +98,18 @@ is a character vector of package names, before calling <code><a href="https://an
     <div class="dont-index"><p><code><a href="animovement_detach.html">animovement_detach</a></code>, <code><a href="animovement.html">animovement</a></code></p></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+<span class="r-in"><span><span class="co"># Add packages to your animovement for this session. They are attached, and</span></span></span>
+<span class="r-in"><span><span class="co"># their conflicts reported alongside the core packages.</span></span></span>
+<span class="r-in"><span><span class="fu">animovement_extend</span><span class="op">(</span><span class="va">ggplot2</span>, <span class="va">tidyr</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Set the option before library(animovement) to extend on attach instead</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>animovement.extend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ggplot2"</span>, <span class="st">"tidyr"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
