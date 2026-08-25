@@ -30,6 +30,10 @@ installed package.
   and formatting failures block merging.
 - **Run the tests** — `devtools::test()`. Do not rely on code looking correct.
 - **Do not push to `main`.** It is protected; open a pull request. Checks must pass before merging.
+- **Write the pull request title as a [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/)**
+  — `fix(animovement): keep metadata through filter_kalman()`. Merges squash, so the title becomes the
+  commit on `main`, and a workflow checks it. Types and the breaking-change rule are in
+  [CONTRIBUTING.md](https://github.com/animovement/.github/blob/main/CONTRIBUTING.md#commit-messages).
 - **Fill in the pull request template** rather than replacing it with generated prose.
 - **Do not submit a pull request you have not read and tested yourself.** See the AI policy.
 
