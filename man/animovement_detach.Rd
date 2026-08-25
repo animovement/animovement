@@ -29,6 +29,15 @@ animovement_detach(
 \description{
 Detaches \emph{animovement} packages, removing them from the \code{\link{search}} path.
 }
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+# Detach one package
+animovement_detach(aniread)
+
+# Detach the whole suite, and forget any session extensions
+animovement_detach(session = TRUE)
+\dontshow{\}) # examplesIf}
+}
 \seealso{
 \code{\link{animovement_extend}}, \code{\link{animovement}}
 }

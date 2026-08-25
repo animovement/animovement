@@ -20,6 +20,15 @@ animovement_update(..., install = FALSE, repos = animovement_repos())
 This will check all \emph{animovement} packages (and their
 dependencies) for updates and (optionally) install those updates.
 }
+\examples{
+# Report which packages are behind, without changing anything
+animovement_update()
+
+# Pass install = TRUE to actually install what is out of date
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+animovement_update(install = TRUE)
+\dontshow{\}) # examplesIf}
+}
 \seealso{
 \code{\link{animovement_deps}}, \code{\link{animovement}}
 }
