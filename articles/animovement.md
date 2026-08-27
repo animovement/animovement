@@ -23,9 +23,9 @@ tutorials on actually *analysing* movement data with these packages, see
 
 library(animovement)
 #> -- Attaching packages -------------------------------- animovement 0.7.4.9000 --
-#> v aniframe   0.7.0.9000     v anicheck   0.2.0     
+#> v aniframe   0.7.0.9000     v anicheck   0.2.0.9000
 #> v aniread    0.6.0.9000     v animetric  0.4.0     
-#> v anispace   0.2.0.9000     v anivis     0.2.0     
+#> v anispace   0.2.0.9000     v anivis     0.2.0.9000
 #> v aniprocess 0.4.0
 ```
 

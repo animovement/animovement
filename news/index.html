@@ -53,106 +53,199 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="animovement-development-version">animovement (development version)<a class="anchor" aria-label="anchor" href="#animovement-development-version"></a></h2>
+<div class="section level3">
+<h3 id="changed-development-version">Changed<a class="anchor" aria-label="anchor" href="#changed-development-version"></a></h3>
+<ul><li>Removed the unused <code>cyan()</code>, <code>lightblue()</code> and <code>yellow()</code> styling helpers, left over from the fastverse adaptation (<a href="https://github.com/animovement/animovement/issues/159" class="external-link">#159</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="fixed-development-version">Fixed<a class="anchor" aria-label="anchor" href="#fixed-development-version"></a></h3>
 <ul><li>
 <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> on an <code>animovement_conflicts</code> object returns the object invisibly, as an S3 print method should, instead of <code>NULL</code> (<a href="https://github.com/animovement/animovement/issues/159" class="external-link">#159</a>).</li>
-<li>Removed the unused <code>cyan()</code>, <code>lightblue()</code> and <code>yellow()</code> styling helpers, left over from the fastverse adaptation (<a href="https://github.com/animovement/animovement/issues/159" class="external-link">#159</a>).</li>
 </ul></div>
+</div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.7.4" id="animovement-074">animovement 0.7.4<a class="anchor" aria-label="anchor" href="#animovement-074"></a></h2>
-<ul><li><p>The licence declaration is corrected from <code>GPL-3 + file LICENSE</code> to <code>GPL-3</code>, with the full text as <code>LICENSE.md</code>. The <code>+ file LICENSE</code> form asserts additional restrictions beyond GPL-3, and the file held nothing but the stock GPL-3 text. The licence that applies is unchanged; only how it is declared. <code>CITATION.cff</code> said <code>MIT</code>, left over from before the metapackage was rebuilt on the fastverse pattern, and now agrees at <code>GPL-3.0-only</code>.</p></li>
-<li><p>Sebastian Krantz (fastverse) and Hadley Wickham (tidyverse) are credited as contributors, for the package management code adapted from the fastverse.</p></li>
-<li><p>The DOI badge now uses the static Zenodo badge rather than the repository-ID one, which answered a redirect before serving anything and often failed to render.</p></li>
-<li><p>Documentation is now scoped to the meta-package itself. The ecosystem tutorials have moved to <a href="https://animovement.dev" class="external-link">animovement.dev</a>; the README and the introductory vignette now cover attaching the suite, conflicts, <code>.animovement</code> project configuration, extending, updating, and suggested packages (<a href="https://github.com/animovement/animovement/issues/136" class="external-link">#136</a>, <a href="https://github.com/animovement/animovement/issues/148" class="external-link">#148</a>).</p></li>
-<li><p>Dropped <code>rhdf5</code> and the Bioconductor r-universe from <code>Suggests</code> — it was only needed by the tutorials that have moved. <code><a href="../reference/animovement_install_suggested.html">animovement_install_suggested()</a></code> still resolves it for the ecosystem packages that suggest it.</p></li>
-<li><p>Fixed the R-universe and Zulip badges in the README, which Quarto was rewriting with a spurious <code>.png</code> extension.</p></li>
-<li><p><code><a href="../reference/animovement_update.html">animovement_update()</a></code>, <code><a href="../reference/animovement_install.html">animovement_install()</a></code> and <code><a href="../reference/animovement_deps.html">animovement_deps()</a></code> now look in the animovement r-universe by default, via the new <code><a href="../reference/animovement_repos.html">animovement_repos()</a></code>, instead of failing unless <code>repos</code> was set by hand (<a href="https://github.com/animovement/animovement/issues/144" class="external-link">#144</a>).</p></li>
-<li><p><code><a href="../reference/animovement_install_suggested.html">animovement_install_suggested()</a></code> works again: it no longer passes an unsupported <code>repos</code> argument to <code><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pak::pkg_install()</a></code>, and finds <code>rhdf5</code> on the Bioconductor r-universe (<a href="https://github.com/animovement/animovement/issues/146" class="external-link">#146</a>).</p></li>
-<li><p>Installation under webR goes through <code>webr::install()</code> for every install function, not just <code><a href="../reference/animovement_install_suggested.html">animovement_install_suggested()</a></code> (<a href="https://github.com/animovement/animovement/issues/139" class="external-link">#139</a>).</p></li>
-<li><p>Suggested packages no longer include development tooling, or packages already required by the suite, cutting the set from 21 to 8 (<a href="https://github.com/animovement/animovement/issues/143" class="external-link">#143</a>).</p></li>
+<h2 class="pkg-version" data-toc-text="0.7.4" id="animovement-074-2026-08-19">animovement 0.7.4 (2026-08-19)<a class="anchor" aria-label="anchor" href="#animovement-074-2026-08-19"></a></h2>
+<div class="section level3">
+<h3 id="changed-0-7-4">Changed<a class="anchor" aria-label="anchor" href="#changed-0-7-4"></a></h3>
+<ul><li>The licence declaration is corrected from <code>GPL-3 + file LICENSE</code> to <code>GPL-3</code>, with the full text as <code>LICENSE.md</code>. The <code>+ file LICENSE</code> form asserts additional restrictions beyond GPL-3, and the file held nothing but the stock GPL-3 text. The licence that applies is unchanged; only how it is declared. <code>CITATION.cff</code> said <code>MIT</code>, left over from before the metapackage was rebuilt on the fastverse pattern, and now agrees at <code>GPL-3.0-only</code>.</li>
+<li>Sebastian Krantz (fastverse) and Hadley Wickham (tidyverse) are credited as contributors, for the package management code adapted from the fastverse.</li>
+<li>
+<code><a href="../reference/animovement_update.html">animovement_update()</a></code>, <code><a href="../reference/animovement_install.html">animovement_install()</a></code> and <code><a href="../reference/animovement_deps.html">animovement_deps()</a></code> look in the animovement r-universe by default, via the new <code><a href="../reference/animovement_repos.html">animovement_repos()</a></code>, instead of failing unless <code>repos</code> was set by hand (<a href="https://github.com/animovement/animovement/issues/144" class="external-link">#144</a>).</li>
+<li>Installation under webR goes through <code>webr::install()</code> for every install function, not just <code><a href="../reference/animovement_install_suggested.html">animovement_install_suggested()</a></code> (<a href="https://github.com/animovement/animovement/issues/139" class="external-link">#139</a>).</li>
+<li>Suggested packages no longer include development tooling, or packages already required by the suite, cutting the set from 21 to 8 (<a href="https://github.com/animovement/animovement/issues/143" class="external-link">#143</a>).</li>
+<li>Documentation is scoped to the meta-package itself. The ecosystem tutorials have moved to <a href="https://animovement.dev" class="external-link">animovement.dev</a>; the README and the introductory vignette cover attaching the suite, conflicts, <code>.animovement</code> project configuration, extending, updating and suggested packages (<a href="https://github.com/animovement/animovement/issues/136" class="external-link">#136</a>, <a href="https://github.com/animovement/animovement/issues/148" class="external-link">#148</a>).</li>
 </ul></div>
+<div class="section level3">
+<h3 id="removed-0-7-4">Removed<a class="anchor" aria-label="anchor" href="#removed-0-7-4"></a></h3>
+<ul><li>
+<code>rhdf5</code> and the Bioconductor r-universe from <code>Suggests</code> — needed only by the tutorials that have moved. <code><a href="../reference/animovement_install_suggested.html">animovement_install_suggested()</a></code> still resolves it for the ecosystem packages that suggest it.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="fixed-0-7-4">Fixed<a class="anchor" aria-label="anchor" href="#fixed-0-7-4"></a></h3>
+<ul><li>
+<code><a href="../reference/animovement_install_suggested.html">animovement_install_suggested()</a></code> works again: it no longer passes an unsupported <code>repos</code> argument to <code><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pak::pkg_install()</a></code>, and finds <code>rhdf5</code> on the Bioconductor r-universe (<a href="https://github.com/animovement/animovement/issues/146" class="external-link">#146</a>).</li>
+<li>The DOI badge uses the static Zenodo badge rather than the repository-ID one, which answered a redirect before serving anything and often failed to render.</li>
+<li>The R-universe and Zulip badges in the README, which Quarto was rewriting with a spurious <code>.png</code> extension.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.3" id="animovement-073">animovement 0.7.3<a class="anchor" aria-label="anchor" href="#animovement-073"></a></h2>
-<ul><li>Added <code>here</code> and <code>signal</code> to Suggests, and <code>circular</code> for <code>summarise_aniframe()</code>.</li>
-<li>Suggested packages can now be installed from the r-universe and Bioconductor (<code>rhdf5</code>) r-universe mirrors.</li>
-<li>Documentation overhaul: articles converted to Quarto (<code>.qmd</code>), trackball articles modernised to the current API, and shared pkgdown theming inherited from <code>animovementtemplate</code>.</li>
-<li>Added webR / <code>r-wasm</code> support so the package can run in the browser.</li>
+<div class="section level3">
+<h3 id="added-0-7-3">Added<a class="anchor" aria-label="anchor" href="#added-0-7-3"></a></h3>
+<ul><li>
+<code>here</code> and <code>signal</code> to <code>Suggests</code>, and <code>circular</code> for <code>summarise_aniframe()</code>.</li>
+<li>webR / <code>r-wasm</code> support, so the package can run in the browser.</li>
 </ul></div>
+<div class="section level3">
+<h3 id="changed-0-7-3">Changed<a class="anchor" aria-label="anchor" href="#changed-0-7-3"></a></h3>
+<ul><li>Suggested packages can be installed from the r-universe and Bioconductor r-universe mirrors.</li>
+<li>Articles converted to Quarto, trackball articles modernised to the current API, and shared pkgdown theming inherited from <code>animovementtemplate</code>.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.2" id="animovement-072">animovement 0.7.2<a class="anchor" aria-label="anchor" href="#animovement-072"></a></h2>
-<ul><li>Added <code>anispace</code> to the bundled suite, bringing spatial analysis functionality into animovement.</li>
+<div class="section level3">
+<h3 id="added-0-7-2">Added<a class="anchor" aria-label="anchor" href="#added-0-7-2"></a></h3>
+<ul><li>
+<code>anispace</code> joins the bundled suite, bringing spatial transformations into animovement.</li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.1" id="animovement-071">animovement 0.7.1<a class="anchor" aria-label="anchor" href="#animovement-071"></a></h2>
-<ul><li>Added <code><a href="../reference/animovement_install_suggested.html">animovement_install_suggested()</a></code> to help users install the optional packages used by some functions.</li>
-<li>Updated CI workflows, README and citation metadata.</li>
+<div class="section level3">
+<h3 id="added-0-7-1">Added<a class="anchor" aria-label="anchor" href="#added-0-7-1"></a></h3>
+<ul><li>
+<code><a href="../reference/animovement_install_suggested.html">animovement_install_suggested()</a></code>, to install the optional packages some functions use.</li>
 </ul></div>
+<div class="section level3">
+<h3 id="changed-0-7-1">Changed<a class="anchor" aria-label="anchor" href="#changed-0-7-1"></a></h3>
+<ul><li>CI workflows, README and citation metadata updated.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.0" id="animovement-070">animovement 0.7.0<a class="anchor" aria-label="anchor" href="#animovement-070"></a></h2>
-<p><strong>animovement is now a metapackage.</strong> The codebase has been split into a suite of focused packages that animovement bundles and re-exports:</p>
-<ul><li>
-<code>aniframe</code> — the standardised <code>ani_df</code> data class</li>
-<li>
-<code>aniread</code> — data readers</li>
-<li>
-<code>aniprocess</code> — cleaning, filtering and processing</li>
-<li>
-<code>anicheck</code> — quality-control checks</li>
-<li>
-<code>animetric</code> — movement metrics</li>
-<li>
-<code>anivis</code> — visualisation</li>
-</ul><p>Other changes:</p>
-<ul><li>New <code>ani_df</code> class with accompanying improvements and tests.</li>
-<li>Continued metadata improvements.</li>
-<li>
-<code>frame rate</code> terminology replaced with <code>sampling rate</code> throughout.</li>
-<li>Removed the <code>classify_</code> functions.</li>
-<li>Switched to <a href="https://posit-dev.github.io/air/" class="external-link">Air</a> for code formatting.</li>
+<p><strong>animovement is now a metapackage.</strong> The codebase is split into a suite of focused packages that animovement bundles and re-exports: <code>aniframe</code> (the shared data class), <code>aniread</code> (readers), <code>aniprocess</code> (cleaning and filtering), <code>anicheck</code> (quality control), <code>animetric</code> (metrics) and <code>anivis</code> (visualisation).</p>
+<div class="section level3">
+<h3 id="added-0-7-0">Added<a class="anchor" aria-label="anchor" href="#added-0-7-0"></a></h3>
+<ul><li>The <code>ani_df</code> class, with accompanying improvements and tests.</li>
 </ul></div>
+<div class="section level3">
+<h3 id="changed-0-7-0">Changed<a class="anchor" aria-label="anchor" href="#changed-0-7-0"></a></h3>
+<ul><li>Continued metadata improvements.</li>
+<li>
+<code>frame rate</code> is replaced by <code>sampling rate</code> throughout.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="removed-0-7-0">Removed<a class="anchor" aria-label="anchor" href="#removed-0-7-0"></a></h3>
+<ul><li>The <code>classify_*()</code> functions.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.0" id="animovement-060">animovement 0.6.0<a class="anchor" aria-label="anchor" href="#animovement-060"></a></h2>
-<p>A large feature release focused on filtering, calculations and movement classification:</p>
-<ul><li>Added Kalman filters and improved bandwidth filters for smoothing.</li>
-<li>Added <code>replace_na()</code>/NA-handling functions and <code>classify_low_periods()</code>.</li>
-<li>Added coordinate rotation and egocentric transformation, plus centroid and coordinate transformations.</li>
-<li>Added peak/trough (extrema) detection and timeseries alignment, with improved detection of active periods.</li>
-<li>Added kinematics calculations and a <code>filter_by_speed()</code> fix.</li>
-<li>Added <code>set_individual()</code>/<code>set_framerate()</code> helpers and a <code>return_type</code> parameter to several functions.</li>
-<li>Many new tests and documentation improvements.</li>
+<p>A large feature release, focused on filtering, calculation and movement classification.</p>
+<div class="section level3">
+<h3 id="added-0-6-0">Added<a class="anchor" aria-label="anchor" href="#added-0-6-0"></a></h3>
+<ul><li>Kalman filters, and improved bandwidth filters for smoothing.</li>
+<li>
+<code>replace_na()</code> and the NA-handling family, and <code>classify_low_periods()</code>.</li>
+<li>Coordinate rotation and egocentric transformation, with centroid and coordinate transformations.</li>
+<li>Peak and trough detection, and timeseries alignment, with improved detection of active periods.</li>
+<li>Kinematics calculations.</li>
+<li>
+<code>set_individual()</code> and <code>set_framerate()</code>, and a <code>return_type</code> argument on several functions.</li>
 </ul></div>
+<div class="section level3">
+<h3 id="fixed-0-6-0">Fixed<a class="anchor" aria-label="anchor" href="#fixed-0-6-0"></a></h3>
+<ul><li>
+<code>filter_by_speed()</code>.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.1" id="animovement-051">animovement 0.5.1<a class="anchor" aria-label="anchor" href="#animovement-051"></a></h2>
-<p>Previously, <code>smooth_track</code> was only built to smoothen trackball data. In this fix, we fixed it by doing the following: - Changed the name to <code>smooth_movement</code> - Added parameter <code>use_derivatives</code> (default: <code>FALSE</code>) which is how trackball data should be smoothed - Written the non-derivative code</p>
-<p>So now <code>smooth_movement</code> should be able to smooth all your movement data!</p>
+<div class="section level3">
+<h3 id="changed-0-5-1">Changed<a class="anchor" aria-label="anchor" href="#changed-0-5-1"></a></h3>
+<ul><li>
+<code>smooth_track()</code> is renamed <code>smooth_movement()</code> and now smooths any movement data, not only trackball data. It gains <code>use_derivatives</code> (default <code>FALSE</code>), which is how trackball data should be smoothed; the non-derivative path is new.</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.0" id="animovement-050">animovement 0.5.0<a class="anchor" aria-label="anchor" href="#animovement-050"></a></h2>
-<p>A big update! There are three major updates: - We finally stabilised on a <strong>data format</strong> and <strong>implemented it for all readers</strong>! - We’ve introduced <strong>metadata</strong>. It’s still experimental, but an important step in the right direction. - We added tests to ensure the output data frames from readers always contain the expected columns and column classes. - We also added tests to ensure metadata is present after reading a data frame.</p>
-<p>We are not nearly done with the work on metadata, but are exited to finally get it started.</p>
+<p>Three major changes: a data format stabilised across every reader, the first metadata, and tests to hold both in place.</p>
+<div class="section level3">
+<h3 id="added-0-5-0">Added<a class="anchor" aria-label="anchor" href="#added-0-5-0"></a></h3>
+<ul><li>Metadata on the returned data frames. Experimental, but the start of the contract that became aniframe.</li>
+<li>Tests that reader output always carries the expected columns and column classes, and that metadata survives a read.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="changed-0-5-0">Changed<a class="anchor" aria-label="anchor" href="#changed-0-5-0"></a></h3>
+<ul><li>The data format is settled and implemented for all readers.</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.1" id="animovement-041">animovement 0.4.1<a class="anchor" aria-label="anchor" href="#animovement-041"></a></h2>
-<p>Changed parameter in <code>read_animalta()</code>.</p>
+<div class="section level3">
+<h3 id="changed-0-4-1">Changed<a class="anchor" aria-label="anchor" href="#changed-0-4-1"></a></h3>
+<ul><li>A parameter in <code>read_animalta()</code>.</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.0" id="animovement-040">animovement 0.4.0<a class="anchor" aria-label="anchor" href="#animovement-040"></a></h2>
-<p>Added readers for AnimalTA (<code>read_animalta</code>) and idtracker.ai (<code>read_idtracker</code>).</p>
+<div class="section level3">
+<h3 id="added-0-4-0">Added<a class="anchor" aria-label="anchor" href="#added-0-4-0"></a></h3>
+<ul><li>
+<code>read_animalta()</code> for AnimalTA, and <code>read_idtracker()</code> for idtracker.ai.</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.0" id="animovement-030">animovement 0.3.0<a class="anchor" aria-label="anchor" href="#animovement-030"></a></h2>
-<p>Has added the ability to read centroid tracking from Bonsai files through <code>read_bonsai()</code>.</p>
+<div class="section level3">
+<h3 id="added-0-3-0">Added<a class="anchor" aria-label="anchor" href="#added-0-3-0"></a></h3>
+<ul><li>
+<code>read_bonsai()</code> reads centroid tracking from Bonsai files.</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="animovement-020">animovement 0.2.0<a class="anchor" aria-label="anchor" href="#animovement-020"></a></h2>
-<p><strong>Package name changed to <code>animovement</code>!</strong> To reflect the change in scope of the package to now cover a wide variety of movement data, the package has changed its name. This was a conscious decision as maintaining two packages with similar functionality wouldn’t be feasible long-term. The new update brings with it a wealth of new functionality, but also a lot of breaking changes. With this update, the package aligns much closer to my vision for it, and I expect no more major breaking changes in the near future. So let’s delve in to all the new stuff!</p>
-<ul><li>Much improved documentation</li>
-<li>Added new readers <code>read_deeplabcut()</code>, <code>read_sleap()</code>, <code>read_trex()</code>…</li>
-<li>Standardised data cleaning with <code>smooth_tracks()</code>
-</li>
+<p><strong>The package is renamed from <code>trackballr</code> to <code>animovement</code></strong>, reflecting a scope that now covers movement data generally rather than trackballs alone. The rename brings a great deal of new functionality and a correspondingly large set of breaking changes.</p>
+<p>For the former <code>trackballr</code> functionality, install from source from the <a href="https://github.com/roaldarbol/animovement" class="external-link">repository history</a>.</p>
+<div class="section level3">
+<h3 id="added-0-2-0">Added<a class="anchor" aria-label="anchor" href="#added-0-2-0"></a></h3>
+<ul><li>Readers for pose-estimation output: <code>read_deeplabcut()</code>, <code>read_sleap()</code>, <code>read_trex()</code> and others.</li>
 <li>
-</li><li>More tests</li>
-</ul><p>Although this is annoying to current users, it was a necessity to ensure proper testing of all the various functions which have now been broken into smaller subsets. If you still need the former <code>trackballr</code> package functionality, you can download the source files in Github and <a href="https://stackoverflow.com/a/1474125" class="external-link">install from source</a>.</p>
-<p>If you encounter bugs, please report them in the <a href="https://github.com/roaldarbol/animovement/issues" class="external-link">Github issues</a>.</p>
+<code>smooth_tracks()</code>, for standardised data cleaning.</li>
+<li>Substantially more tests, and much improved documentation.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="changed-0-2-0">Changed<a class="anchor" aria-label="anchor" href="#changed-0-2-0"></a></h3>
+<ul><li>The package name, and with it every function that carried the trackball-specific naming.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1.2" id="animovement-012-as-trackballr">animovement 0.1.2 (as trackballr)<a class="anchor" aria-label="anchor" href="#animovement-012-as-trackballr"></a></h2>
+<div class="section level3">
+<h3 id="added-0-1-2">Added<a class="anchor" aria-label="anchor" href="#added-0-1-2"></a></h3>
+<ul><li>Tests for <code>read_trackball_data()</code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="deprecated-0-1-2">Deprecated<a class="anchor" aria-label="anchor" href="#deprecated-0-1-2"></a></h3>
+<ul><li>The <code>format</code> parameter of <code>read_trackball_data()</code>.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1.1" id="animovement-011-as-trackballr">animovement 0.1.1 (as trackballr)<a class="anchor" aria-label="anchor" href="#animovement-011-as-trackballr"></a></h2>
+<div class="section level3">
+<h3 id="added-0-1-1">Added<a class="anchor" aria-label="anchor" href="#added-0-1-1"></a></h3>
+<ul><li>Sample data, used in the README example.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="changed-0-1-1">Changed<a class="anchor" aria-label="anchor" href="#changed-0-1-1"></a></h3>
+<ul><li>
+<code>configuration</code> in <code>read_trackball_data()</code> becomes <code>fixed</code> / <code>free</code>.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1.0" id="animovement-010-as-trackballr">animovement 0.1.0 (as trackballr)<a class="anchor" aria-label="anchor" href="#animovement-010-as-trackballr"></a></h2>
+<p>First upload to GitHub.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
