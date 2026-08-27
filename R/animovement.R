@@ -39,7 +39,7 @@
 #'
 #' @importFrom utils stack packageVersion install.packages available.packages
 #' @importFrom tools package_dependencies
-#' @import aniframe
+#' @import anicore
 #' @import aniread
 #' @import anispace
 #' @import aniprocess

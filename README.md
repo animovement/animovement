@@ -29,7 +29,7 @@ whole workflow with versions and conflicts sorted out for you.
 
 It includes a core set of packages that are loaded on startup:
 
-- [`aniframe`](https://animovement.dev/aniframe) provides the core data
+- [`aniframe`](https://animovement.dev/anicore) provides the core data
   structures that the rest of the ecosystem is built on — the shared
   representation that lets these packages hand data to one another.
 

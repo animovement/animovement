@@ -46,7 +46,7 @@ The core packages are:
 
 | Package | Role |
 | --- | --- |
-| [*aniframe*](https://animovement.dev/aniframe) | Core data structures for movement data |
+| [*aniframe*](https://animovement.dev/anicore) | Core data structures for movement data |
 | [*aniread*](https://animovement.dev/aniread) | Reading and writing movement data |
 | [*anispace*](https://animovement.dev/anispace) | Spatial transformation methods |
 | [*aniprocess*](https://animovement.dev/aniprocess) | Signal processing and filtering |
