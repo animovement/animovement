@@ -1,123 +1,169 @@
 # animovement (development version)
 
-* `print()` on an `animovement_conflicts` object returns the object invisibly, as an S3 print method should, instead of `NULL` (#159).
+## Changed
+
 * Removed the unused `cyan()`, `lightblue()` and `yellow()` styling helpers, left over from the fastverse adaptation (#159).
 
-# animovement 0.7.4
+## Fixed
+
+* `print()` on an `animovement_conflicts` object returns the object invisibly, as an S3 print method should, instead of `NULL` (#159).
+
+# animovement 0.7.4 (2026-08-19)
+
+## Changed
 
 * The licence declaration is corrected from `GPL-3 + file LICENSE` to `GPL-3`, with the full text as `LICENSE.md`. The `+ file LICENSE` form asserts additional restrictions beyond GPL-3, and the file held nothing but the stock GPL-3 text. The licence that applies is unchanged; only how it is declared. `CITATION.cff` said `MIT`, left over from before the metapackage was rebuilt on the fastverse pattern, and now agrees at `GPL-3.0-only`.
 * Sebastian Krantz (fastverse) and Hadley Wickham (tidyverse) are credited as contributors, for the package management code adapted from the fastverse.
-* The DOI badge now uses the static Zenodo badge rather than the repository-ID one, which answered a redirect before serving anything and often failed to render.
-
-* Documentation is now scoped to the meta-package itself. The ecosystem tutorials have moved to [animovement.dev](https://animovement.dev); the README and the introductory vignette now cover attaching the suite, conflicts, `.animovement` project configuration, extending, updating, and suggested packages (#136, #148).
-* Dropped `rhdf5` and the Bioconductor r-universe from `Suggests` — it was only needed by the tutorials that have moved. `animovement_install_suggested()` still resolves it for the ecosystem packages that suggest it.
-* Fixed the R-universe and Zulip badges in the README, which Quarto was rewriting with a spurious `.png` extension.
-* `animovement_update()`, `animovement_install()` and `animovement_deps()` now look in the animovement r-universe by default, via the new `animovement_repos()`, instead of failing unless `repos` was set by hand (#144).
-* `animovement_install_suggested()` works again: it no longer passes an unsupported `repos` argument to `pak::pkg_install()`, and finds `rhdf5` on the Bioconductor r-universe (#146).
+* `animovement_update()`, `animovement_install()` and `animovement_deps()` look in the animovement r-universe by default, via the new `animovement_repos()`, instead of failing unless `repos` was set by hand (#144).
 * Installation under webR goes through `webr::install()` for every install function, not just `animovement_install_suggested()` (#139).
 * Suggested packages no longer include development tooling, or packages already required by the suite, cutting the set from 21 to 8 (#143).
+* Documentation is scoped to the meta-package itself. The ecosystem tutorials have moved to [animovement.dev](https://animovement.dev); the README and the introductory vignette cover attaching the suite, conflicts, `.animovement` project configuration, extending, updating and suggested packages (#136, #148).
+
+## Removed
+
+* `rhdf5` and the Bioconductor r-universe from `Suggests` — needed only by the tutorials that have moved. `animovement_install_suggested()` still resolves it for the ecosystem packages that suggest it.
+
+## Fixed
+
+* `animovement_install_suggested()` works again: it no longer passes an unsupported `repos` argument to `pak::pkg_install()`, and finds `rhdf5` on the Bioconductor r-universe (#146).
+* The DOI badge uses the static Zenodo badge rather than the repository-ID one, which answered a redirect before serving anything and often failed to render.
+* The R-universe and Zulip badges in the README, which Quarto was rewriting with a spurious `.png` extension.
 
 # animovement 0.7.3
 
-* Added `here` and `signal` to Suggests, and `circular` for `summarise_aniframe()`.
-* Suggested packages can now be installed from the r-universe and Bioconductor (`rhdf5`) r-universe mirrors.
-* Documentation overhaul: articles converted to Quarto (`.qmd`), trackball articles modernised to the current API, and shared pkgdown theming inherited from `animovementtemplate`.
-* Added webR / `r-wasm` support so the package can run in the browser.
+## Added
+
+* `here` and `signal` to `Suggests`, and `circular` for `summarise_aniframe()`.
+* webR / `r-wasm` support, so the package can run in the browser.
+
+## Changed
+
+* Suggested packages can be installed from the r-universe and Bioconductor r-universe mirrors.
+* Articles converted to Quarto, trackball articles modernised to the current API, and shared pkgdown theming inherited from `animovementtemplate`.
 
 # animovement 0.7.2
 
-* Added `anispace` to the bundled suite, bringing spatial analysis functionality into animovement.
+## Added
+
+* `anispace` joins the bundled suite, bringing spatial transformations into animovement.
 
 # animovement 0.7.1
 
-* Added `animovement_install_suggested()` to help users install the optional packages used by some functions.
-* Updated CI workflows, README and citation metadata.
+## Added
+
+* `animovement_install_suggested()`, to install the optional packages some functions use.
+
+## Changed
+
+* CI workflows, README and citation metadata updated.
 
 # animovement 0.7.0
 
-**animovement is now a metapackage.** The codebase has been split into a suite of focused packages that animovement bundles and re-exports:
+**animovement is now a metapackage.** The codebase is split into a suite of focused packages that animovement bundles and re-exports: `aniframe` (the shared data class), `aniread` (readers), `aniprocess` (cleaning and filtering), `anicheck` (quality control), `animetric` (metrics) and `anivis` (visualisation).
 
-* `aniframe` — the standardised `ani_df` data class
-* `aniread` — data readers
-* `aniprocess` — cleaning, filtering and processing
-* `anicheck` — quality-control checks
-* `animetric` — movement metrics
-* `anivis` — visualisation
+## Added
 
-Other changes:
+* The `ani_df` class, with accompanying improvements and tests.
 
-* New `ani_df` class with accompanying improvements and tests.
+## Changed
+
 * Continued metadata improvements.
-* `frame rate` terminology replaced with `sampling rate` throughout.
-* Removed the `classify_` functions.
-* Switched to [Air](https://posit-dev.github.io/air/) for code formatting.
+* `frame rate` is replaced by `sampling rate` throughout.
+
+## Removed
+
+* The `classify_*()` functions.
 
 # animovement 0.6.0
 
-A large feature release focused on filtering, calculations and movement classification:
+A large feature release, focused on filtering, calculation and movement classification.
 
-* Added Kalman filters and improved bandwidth filters for smoothing.
-* Added `replace_na()`/NA-handling functions and `classify_low_periods()`.
-* Added coordinate rotation and egocentric transformation, plus centroid and coordinate transformations.
-* Added peak/trough (extrema) detection and timeseries alignment, with improved detection of active periods.
-* Added kinematics calculations and a `filter_by_speed()` fix.
-* Added `set_individual()`/`set_framerate()` helpers and a `return_type` parameter to several functions.
-* Many new tests and documentation improvements.
+## Added
+
+* Kalman filters, and improved bandwidth filters for smoothing.
+* `replace_na()` and the NA-handling family, and `classify_low_periods()`.
+* Coordinate rotation and egocentric transformation, with centroid and coordinate transformations.
+* Peak and trough detection, and timeseries alignment, with improved detection of active periods.
+* Kinematics calculations.
+* `set_individual()` and `set_framerate()`, and a `return_type` argument on several functions.
+
+## Fixed
+
+* `filter_by_speed()`.
 
 # animovement 0.5.1
-Previously, `smooth_track` was only built to smoothen trackball data. In this fix, we fixed it by doing the following:
-- Changed the name to `smooth_movement`
-- Added parameter `use_derivatives` (default: `FALSE`) which is how trackball data should be smoothed
-- Written the non-derivative code
 
-So now `smooth_movement` should be able to smooth all your movement data!
+## Changed
+
+* `smooth_track()` is renamed `smooth_movement()` and now smooths any movement data, not only trackball data. It gains `use_derivatives` (default `FALSE`), which is how trackball data should be smoothed; the non-derivative path is new.
 
 # animovement 0.5.0
-A big update! There are three major updates:
-- We finally stabilised on a **data format** and **implemented it for all readers**! 
-- We've introduced **metadata**. It's still experimental, but an important step in the right direction.
-- We added tests to ensure the output data frames from readers always contain the expected columns and column classes.
-- We also added tests to ensure metadata is present after reading a data frame.
 
-We are not nearly done with the work on metadata, but are exited to finally get it started.
+Three major changes: a data format stabilised across every reader, the first metadata, and tests to hold both in place.
+
+## Added
+
+* Metadata on the returned data frames. Experimental, but the start of the contract that became aniframe.
+* Tests that reader output always carries the expected columns and column classes, and that metadata survives a read.
+
+## Changed
+
+* The data format is settled and implemented for all readers.
 
 # animovement 0.4.1
 
-Changed parameter in `read_animalta()`.
+## Changed
+
+* A parameter in `read_animalta()`.
 
 # animovement 0.4.0
 
-Added readers for AnimalTA (`read_animalta`) and idtracker.ai (`read_idtracker`).
+## Added
+
+* `read_animalta()` for AnimalTA, and `read_idtracker()` for idtracker.ai.
 
 # animovement 0.3.0
 
-Has added the ability to read centroid tracking from Bonsai files through `read_bonsai()`.
+## Added
+
+* `read_bonsai()` reads centroid tracking from Bonsai files.
 
 # animovement 0.2.0
 
-**Package name changed to `animovement`!** To reflect the change in scope of the package to now cover a wide variety of movement data, the package has changed its name. This was a conscious decision as maintaining two packages with similar functionality wouldn't be feasible long-term. The new update brings with it a wealth of new functionality, but also a lot of breaking changes. With this update, the package aligns much closer to my vision for it, and I expect no more major breaking changes in the near future. So let's delve in to all the new stuff!
+**The package is renamed from `trackballr` to `animovement`**, reflecting a scope that now covers movement data generally rather than trackballs alone. The rename brings a great deal of new functionality and a correspondingly large set of breaking changes.
 
-* Much improved documentation
-* Added new readers `read_deeplabcut()`, `read_sleap()`, `read_trex()`...
-* Standardised data cleaning with `smooth_tracks()`
-* 
-* More tests
+For the former `trackballr` functionality, install from source from the [repository history](https://github.com/roaldarbol/animovement).
 
-Although this is annoying to current users, it was a necessity to ensure proper testing of all the various functions which have now been broken into smaller subsets. If you still need the former `trackballr` package functionality, you can download the source files in Github and [install from source](https://stackoverflow.com/a/1474125).
+## Added
 
-If you encounter bugs, please report them in the [Github issues](https://github.com/roaldarbol/animovement/issues).
+* Readers for pose-estimation output: `read_deeplabcut()`, `read_sleap()`, `read_trex()` and others.
+* `smooth_tracks()`, for standardised data cleaning.
+* Substantially more tests, and much improved documentation.
 
-# trackballr 0.1.2
+## Changed
 
-* Added tests for `read_trackball_data`
-* `format` was deprecated as a parameter in `read_trackball_data`
+* The package name, and with it every function that carried the trackball-specific naming.
 
-# trackballr 0.1.1
+# animovement 0.1.2 (as trackballr)
 
-* Added sample data
-* Using sample data in the `README` EXAMPLE.
-* Changed `configuration` in `read_trackball_data` to `fixed`/`free`.
+## Added
 
-# trackballr 0.1.0
+* Tests for `read_trackball_data()`.
 
-* Initial upload to Github.
+## Deprecated
+
+* The `format` parameter of `read_trackball_data()`.
+
+# animovement 0.1.1 (as trackballr)
+
+## Added
+
+* Sample data, used in the README example.
+
+## Changed
+
+* `configuration` in `read_trackball_data()` becomes `fixed` / `free`.
+
+# animovement 0.1.0 (as trackballr)
+
+First upload to GitHub.
