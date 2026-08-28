@@ -69,7 +69,7 @@ test_that("animovement_deps() aborts when no requested package is in repos", {
 
   expect_error(
     animovement_deps(
-      pkg = c("aniframe", "aniread"),
+      pkg = c("anicore", "aniread"),
       repos = repo,
       check.deps = FALSE
     ),
@@ -81,7 +81,7 @@ test_that("the abort names the repositories searched and points at R-universe", 
   repo <- local_empty_repo()
 
   err <- tryCatch(
-    animovement_deps(pkg = "aniframe", repos = repo, check.deps = FALSE),
+    animovement_deps(pkg = "anicore", repos = repo, check.deps = FALSE),
     error = function(e) conditionMessage(e)
   )
 
@@ -96,7 +96,7 @@ test_that("animovement_update() surfaces that error rather than 'behind' not fou
   # here, so subset(deps, behind) failed with "object 'behind' not found".
   expect_error(
     animovement_update(
-      pkg = "aniframe",
+      pkg = "anicore",
       repos = repo,
       check.deps = FALSE
     ),
@@ -109,7 +109,7 @@ test_that("a partial match warns but still returns a data frame", {
 
   expect_warning(
     deps <- animovement_deps(
-      pkg = c("notanimovement", "aniframe"),
+      pkg = c("notanimovement", "anicore"),
       repos = repo,
       check.deps = FALSE
     ),

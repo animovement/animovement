@@ -355,7 +355,7 @@ test_that(".get_animovement_packages returns expected packages", {
   pkgs <- .get_animovement_packages()
 
   expect_true("animovement" %in% pkgs)
-  expect_true("aniframe" %in% pkgs)
+  expect_true("anicore" %in% pkgs)
   expect_true("aniread" %in% pkgs)
   expect_true("aniprocess" %in% pkgs)
   expect_true("animetric" %in% pkgs)
@@ -370,7 +370,7 @@ test_that(".exclude_dev_packages removes dev and animovement packages", {
     "testthat",
     "rmarkdown",
     "pak",
-    "aniframe",
+    "anicore",
     "ggplot2"
   )
   result <- .exclude_dev_packages(input)
@@ -379,7 +379,7 @@ test_that(".exclude_dev_packages removes dev and animovement packages", {
   expect_false("knitr" %in% result)
   expect_false("testthat" %in% result)
   expect_false("pak" %in% result)
-  expect_false("aniframe" %in% result)
+  expect_false("anicore" %in% result)
 })
 
 test_that(".find_suggested parses Suggests field correctly", {
@@ -403,7 +403,7 @@ test_that(".get_all_suggested excludes animovement ecosystem packages", {
   local_mocked_bindings(
     .find_suggested = function(pkg) {
       if (pkg == "animovement") {
-        c("circular", "aniframe", "stinepack")
+        c("circular", "anicore", "stinepack")
       } else {
         NULL
       }
@@ -413,7 +413,7 @@ test_that(".get_all_suggested excludes animovement ecosystem packages", {
 
   result <- .get_all_suggested("animovement")
 
-  expect_false("aniframe" %in% result)
+  expect_false("anicore" %in% result)
   expect_false("animovement" %in% result)
   expect_true("circular" %in% result)
   expect_true("stinepack" %in% result)
