@@ -2,6 +2,7 @@
 
 ## Changed
 
+* `aniframe` is now `anicore`. The core package was renamed, so the set that `library(animovement)` attaches, `animovement_packages()`, and the `.animovement` project file all name `anicore` instead.
 * Removed the unused `cyan()`, `lightblue()` and `yellow()` styling helpers, left over from the fastverse adaptation (#159).
 
 ## Fixed

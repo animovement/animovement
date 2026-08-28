@@ -196,8 +196,8 @@
       "Authors@R": "person( \"Mikkel\",  \"Roald-Arbøl\",  role = c(\"aut\", \"cre\"),  email = \"animovement.84w1m@passmail.com\", comment = c(ORCID = \"0000-0002-9998-0058\") )",
       "Description": "An R package providing core data structures for movement data.",
       "License": "MIT + file LICENSE",
-      "URL": "http://animovement.dev/aniframe/, https://github.com/animovement/aniframe/",
-      "BugReports": "https://github.com/animovement/aniframe/issues",
+      "URL": "http://animovement.dev/anicore/, https://github.com/animovement/anicore/",
+      "BugReports": "https://github.com/animovement/anicore/issues",
       "Encoding": "UTF-8",
       "Depends": [
         "R (>= 4.1.0)"
@@ -227,7 +227,7 @@
       "Author": "Mikkel Roald-Arbøl [aut, cre] (ORCID: <https://orcid.org/0000-0002-9998-0058>)",
       "Maintainer": "Mikkel Roald-Arbøl <animovement.84w1m@passmail.com>",
       "RemoteType": "repository",
-      "RemoteUrl": "https://github.com/animovement/aniframe",
+      "RemoteUrl": "https://github.com/animovement/anicore",
       "RemoteRef": "HEAD",
       "RemoteSha": "dac8ecbf63a73294ac6006e1c3603451cc797a6b"
     },

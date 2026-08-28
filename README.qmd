@@ -42,7 +42,7 @@ Zulip](https://img.shields.io/badge/chat-Zulip-6492FE?logo=zulip&logoColor=white
 
 It includes a core set of packages that are loaded on startup:
 
-* [`aniframe`](https://animovement.dev/aniframe) provides the core data structures that the rest of the ecosystem is built on — the shared representation that lets these packages hand data to one another.
+* [`anicore`](https://animovement.dev/anicore) provides the core data structures that the rest of the ecosystem is built on — the shared representation that lets these packages hand data to one another.
 
 * [`aniread`](https://animovement.dev/aniread) reads and writes movement data, turning the output of tracking tools and recording hardware into that common structure.
 
@@ -98,7 +98,7 @@ animovement_extend(ggplot2, tidyr, install = TRUE)
 For a set that belongs to a project rather than a session, put a file named `.animovement` in the project root and list the packages you want — one per line, or separated by commas or spaces:
 
 ```
-aniframe, aniread, aniprocess
+anicore, aniread, aniprocess
 ggplot2
 ```
 

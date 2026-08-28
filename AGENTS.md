@@ -14,7 +14,7 @@
   function, grouped, with a one-line description. Full help for one function, including its exact
   signature, is at `https://animovement.dev/animovement/reference/<function>.md`.
 - **Which package owns what** — <https://github.com/animovement/animovement-agents> maps the suite:
-  the aniframe data model, and the verb prefixes each package owns.
+  the anicore data model, and the verb prefixes each package owns.
 - **How we work** — [CONTRIBUTING.md](https://github.com/animovement/.github/blob/main/CONTRIBUTING.md).
 - **Working with AI tools** — [AI.md](https://github.com/animovement/.github/blob/main/AI.md).
 

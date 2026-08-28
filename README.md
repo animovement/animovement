@@ -29,7 +29,7 @@ whole workflow with versions and conflicts sorted out for you.
 
 It includes a core set of packages that are loaded on startup:
 
-- [`aniframe`](https://animovement.dev/aniframe) provides the core data
+- [`anicore`](https://animovement.dev/anicore) provides the core data
   structures that the rest of the ecosystem is built on — the shared
   representation that lets these packages hand data to one another.
 
@@ -86,10 +86,10 @@ When loading the package, the versions and any conflicts are listed:
 ``` r
 library(animovement)
 #> -- Attaching packages -------------------------------- animovement 0.7.4.9000 --
-#> v aniframe   0.7.0.9000     v anicheck   0.2.0     
-#> v aniread    0.6.0.9000     v animetric  0.4.0     
-#> v anispace   0.2.0          v anivis     0.2.0     
-#> v aniprocess 0.4.0
+#> v anicore    0.7.0.9000     v anicheck   0.2.0.9000
+#> v aniread    0.6.0.9000     v animetric  0.4.0.9000
+#> v anispace   0.2.0.9000     v anivis     0.2.0.9000
+#> v aniprocess 0.4.0.9000
 ```
 
 If a function name is exported by two attached packages, the one
@@ -120,7 +120,7 @@ For a set that belongs to a project rather than a session, put a file
 named `.animovement` in the project root and list the packages you want
 — one per line, or separated by commas or spaces:
 
-    aniframe, aniread, aniprocess
+    anicore, aniread, aniprocess
     ggplot2
 
 When this file is present it *replaces* the standard core set, so list

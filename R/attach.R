@@ -1,5 +1,5 @@
 .core_pkg <- c(
-  'aniframe',
+  'anicore',
   'aniread',
   'anispace',
   'aniprocess',
