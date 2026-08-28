@@ -8,8 +8,8 @@ message: 'To cite package "animovement" in publications use:'
 type: software
 license: GPL-3.0-only
 title: 'animovement: An R toolbox for analysing movement across space and time.'
-version: 0.7.4.9000
-date-released: 2026-08-19
+version: 0.8.0
+date-released: 2026-08-28
 identifiers:
   - type: doi
     value: 10.5281/zenodo.13235277
