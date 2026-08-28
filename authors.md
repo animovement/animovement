@@ -15,7 +15,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/animovement/animovement/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/animovement/animovement/blob/v0.8.0/inst/CITATION)
 
 Roald-Arbøl M (2026). “animovement: An R toolbox for analysing movement
 across space and time.”

@@ -39,7 +39,7 @@ animovement_sitrep()
 #>  * anispace   (0.3.0)
 #>  * aniprocess (0.5.0)
 #>  * anicheck   (0.3.0)
-#>  * animetric  (0.4.0.9000)
+#>  * animetric  (0.5.0)
 #>  * anivis     (0.2.1)
 #> -- Dependencies ---------------------------------------------------------------- 
 #>  * anytime    (0.3.13)
