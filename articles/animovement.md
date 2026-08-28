@@ -22,7 +22,7 @@ tutorials on actually *analysing* movement data with these packages, see
 ``` r
 
 library(animovement)
-#> -- Attaching packages ------------------------------------- animovement 0.8.0 --
+#> -- Attaching packages -------------------------------- animovement 0.8.0.9000 --
 #> v anicore    0.8.0.9000     v anicheck   0.3.0     
 #> v aniread    0.7.0          v animetric  0.5.0     
 #> v anispace   0.3.0          v anivis     0.2.1     
