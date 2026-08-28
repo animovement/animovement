@@ -31,7 +31,7 @@ animovement_sitrep(...)
 ``` r
 # Versions of every animovement package, and whether any are behind
 animovement_sitrep()
-#> -- animovement 0.7.4.9000: Situation Report ------------------------- R 4.6.1 --
+#> -- animovement 0.8.0: Situation Report ------------------------------ R 4.6.1 --
 #>  * Project config file: FALSE
 #> -- Core packages --------------------------------------------------------------- 
 #>  * anicore    (0.8.0.9000)

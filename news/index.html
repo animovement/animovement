@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">animovement</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.4.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,17 +52,17 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="animovement-development-version">animovement (development version)<a class="anchor" aria-label="anchor" href="#animovement-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.8.0" id="animovement-080-2026-08-28">animovement 0.8.0 (2026-08-28)<a class="anchor" aria-label="anchor" href="#animovement-080-2026-08-28"></a></h2>
 <div class="section level3">
-<h3 id="changed-development-version">Changed<a class="anchor" aria-label="anchor" href="#changed-development-version"></a></h3>
-<ul><li>
-<code>aniframe</code> is now <code>anicore</code>. The core package was renamed, so the set that <code><a href="https://animovement.dev" class="external-link">library(animovement)</a></code> attaches, <code><a href="../reference/animovement_packages.html">animovement_packages()</a></code>, and the <code>.animovement</code> project file all name <code>anicore</code> instead.</li>
-<li>Removed the unused <code>cyan()</code>, <code>lightblue()</code> and <code>yellow()</code> styling helpers, left over from the fastverse adaptation (<a href="https://github.com/animovement/animovement/issues/159" class="external-link">#159</a>).</li>
+<h3 id="changed-0-8-0">Changed<a class="anchor" aria-label="anchor" href="#changed-0-8-0"></a></h3>
+<ul><li><p>The minimum <code>anicore</code> is 0.8.0, the first version published under that name — the metapackage depended on <code>anicore</code> with no version constraint, so nothing recorded that a pre-rename <code>aniframe</code> will not do.</p></li>
+<li><p><code>aniframe</code> is now <code>anicore</code>. The core package was renamed, so the set that <code><a href="https://animovement.dev" class="external-link">library(animovement)</a></code> attaches, <code><a href="../reference/animovement_packages.html">animovement_packages()</a></code>, and the <code>.animovement</code> project file all name <code>anicore</code> instead.</p></li>
+<li><p>Removed the unused <code>cyan()</code>, <code>lightblue()</code> and <code>yellow()</code> styling helpers, left over from the fastverse adaptation (<a href="https://github.com/animovement/animovement/issues/159" class="external-link">#159</a>).</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="fixed-development-version">Fixed<a class="anchor" aria-label="anchor" href="#fixed-development-version"></a></h3>
-<ul><li>
-<code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> on an <code>animovement_conflicts</code> object returns the object invisibly, as an S3 print method should, instead of <code>NULL</code> (<a href="https://github.com/animovement/animovement/issues/159" class="external-link">#159</a>).</li>
+<h3 id="fixed-0-8-0">Fixed<a class="anchor" aria-label="anchor" href="#fixed-0-8-0"></a></h3>
+<ul><li><p>The stray <code>LICENSE</code> file is removed and <code>AGENTS.md</code> is kept out of the built package, clearing the two notes <code>R CMD check</code> reported. <code>LICENSE</code> held a <code>YEAR:</code>/<code>COPYRIGHT HOLDER:</code> template, the form R uses for <code>MIT + file LICENSE</code>; it was left behind when 0.7.4 corrected the declaration to <code>GPL-3</code>, whose full text is <code>LICENSE.md</code>.</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> on an <code>animovement_conflicts</code> object returns the object invisibly, as an S3 print method should, instead of <code>NULL</code> (<a href="https://github.com/animovement/animovement/issues/159" class="external-link">#159</a>).</p></li>
 </ul></div>
 </div>
     <div class="section level2">

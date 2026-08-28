@@ -1,18 +1,30 @@
 # Changelog
 
-## animovement (development version)
+## animovement 0.8.0 (2026-08-28)
 
 ### Changed
+
+- The minimum `anicore` is 0.8.0, the first version published under that
+  name — the metapackage depended on `anicore` with no version
+  constraint, so nothing recorded that a pre-rename `aniframe` will not
+  do.
 
 - `aniframe` is now `anicore`. The core package was renamed, so the set
   that [`library(animovement)`](https://animovement.dev) attaches,
   [`animovement_packages()`](https://animovement.dev/animovement/reference/animovement_packages.md),
   and the `.animovement` project file all name `anicore` instead.
+
 - Removed the unused `cyan()`, `lightblue()` and `yellow()` styling
   helpers, left over from the fastverse adaptation
   ([\#159](https://github.com/animovement/animovement/issues/159)).
 
 ### Fixed
+
+- The stray `LICENSE` file is removed and `AGENTS.md` is kept out of the
+  built package, clearing the two notes `R CMD check` reported.
+  `LICENSE` held a `YEAR:`/`COPYRIGHT HOLDER:` template, the form R uses
+  for `MIT + file LICENSE`; it was left behind when 0.7.4 corrected the
+  declaration to `GPL-3`, whose full text is `LICENSE.md`.
 
 - [`print()`](https://rdrr.io/r/base/print.html) on an
   `animovement_conflicts` object returns the object invisibly, as an S3
