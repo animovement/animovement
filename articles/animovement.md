@@ -23,10 +23,10 @@ tutorials on actually *analysing* movement data with these packages, see
 
 library(animovement)
 #> -- Attaching packages -------------------------------- animovement 0.7.4.9000 --
-#> v aniframe   0.7.0.9000     v anicheck   0.2.0.9000
-#> v aniread    0.6.0.9000     v animetric  0.4.0     
+#> v anicore    0.8.0.9000     v anicheck   0.2.0.9000
+#> v aniread    0.6.0.9000     v animetric  0.4.0.9000
 #> v anispace   0.2.0.9000     v anivis     0.2.0.9000
-#> v aniprocess 0.4.0
+#> v aniprocess 0.4.0.9000
 ```
 
 Attaching prints a startup message listing the core packages and their
@@ -38,7 +38,7 @@ The core packages are:
 
 | Package | Role |
 |----|----|
-| [*aniframe*](https://animovement.dev/aniframe) | Core data structures for movement data |
+| [*anicore*](https://animovement.dev/anicore) | Core data structures for movement data |
 | [*aniread*](https://animovement.dev/aniread) | Reading and writing movement data |
 | [*anispace*](https://animovement.dev/anispace) | Spatial transformation methods |
 | [*aniprocess*](https://animovement.dev/aniprocess) | Signal processing and filtering |
@@ -54,7 +54,7 @@ extensions:
 ``` r
 
 animovement_packages()
-#> [1] "aniframe"    "aniread"     "anispace"    "aniprocess"  "anicheck"   
+#> [1] "anicore"     "aniread"     "anispace"    "aniprocess"  "anicheck"   
 #> [6] "animetric"   "anivis"      "animovement"
 ```
 
@@ -120,7 +120,7 @@ For a set of packages that belongs to a project rather than a session,
 put a file named `.animovement` in the project root. List the packages
 one per line, or separated by commas or spaces:
 
-    aniframe, aniread, aniprocess
+    anicore, aniread, aniprocess
     ggplot2
 
 When this file is present, it *replaces* the standard set of core
@@ -135,7 +135,7 @@ variables). Entries placed before the package names are applied before
 the packages are attached, those after them afterwards:
 
     _opt_animovement.install = TRUE
-    aniframe, aniread, aniprocess
+    anicore, aniread, aniprocess
 
 The options the meta-package recognises are:
 

@@ -34,12 +34,12 @@ animovement_sitrep()
 #> -- animovement 0.7.4.9000: Situation Report ------------------------- R 4.6.1 --
 #>  * Project config file: FALSE
 #> -- Core packages --------------------------------------------------------------- 
-#>  * aniframe   (0.7.0.9000)
+#>  * anicore    (0.8.0.9000)
 #>  * aniread    (0.6.0.9000)
 #>  * anispace   (0.2.0.9000)
-#>  * aniprocess (0.4.0)
+#>  * aniprocess (0.4.0.9000)
 #>  * anicheck   (0.2.0.9000)
-#>  * animetric  (0.4.0)
+#>  * animetric  (0.4.0.9000)
 #>  * anivis     (0.2.0.9000)
 #> -- Dependencies ---------------------------------------------------------------- 
 #>  * anytime    (0.3.13)

@@ -50,7 +50,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-animovement" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="animovement"><span class="fa fab fa-r-project"></span> animovement</button>
   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-animovement">
 <li><a class="external-link dropdown-item" href="https://animovement.dev/anicheck/">anicheck</a></li>
-    <li><a class="external-link dropdown-item" href="https://animovement.dev/aniframe/">aniframe</a></li>
+    <li><a class="external-link dropdown-item" href="https://animovement.dev/anicore/">aniframe</a></li>
     <li><a class="external-link dropdown-item" href="https://animovement.dev/animetric/">animetric</a></li>
     <li><a class="dropdown-item" href="https://animovement.dev/animovement/">animovement</a></li>
     <li><a class="external-link dropdown-item" href="https://animovement.dev/aniprocess/">aniprocess</a></li>
@@ -90,7 +90,7 @@
 <p><a href="https://animovement.dev" class="external-link">animovement</a> is a “meta-package” for analysing movement across space and time. Whether your data comes from pose estimation, centroid tracking, a trackball or a treadmill, the analysis follows much the same arc: read the data, check what you got, clean it, put it in a sensible frame of reference, derive the metrics you care about, and look at the result. The animovement ecosystem splits that arc into focused packages, each doing one part well — and the <em>animovement</em> package bundles them, so a single <code><a href="https://animovement.dev" class="external-link">library(animovement)</a></code> gives you the whole workflow with versions and conflicts sorted out for you.</p>
 <p>It includes a core set of packages that are loaded on startup:</p>
 <ul>
-<li><p><a href="https://animovement.dev/aniframe" class="external-link"><code>aniframe</code></a> provides the core data structures that the rest of the ecosystem is built on — the shared representation that lets these packages hand data to one another.</p></li>
+<li><p><a href="https://animovement.dev/anicore" class="external-link"><code>anicore</code></a> provides the core data structures that the rest of the ecosystem is built on — the shared representation that lets these packages hand data to one another.</p></li>
 <li><p><a href="https://animovement.dev/aniread" class="external-link"><code>aniread</code></a> reads and writes movement data, turning the output of tracking tools and recording hardware into that common structure.</p></li>
 <li><p><a href="https://animovement.dev/anicheck" class="external-link"><code>anicheck</code></a> diagnoses data quality, so you find the gaps, outliers and low-confidence stretches before they reach your results.</p></li>
 <li><p><a href="https://animovement.dev/aniprocess" class="external-link"><code>aniprocess</code></a> does signal processing and filtering — smoothing, interpolating and otherwise cleaning up trajectories.</p></li>
@@ -116,10 +116,10 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://animovement.dev" class="external-link">animovement</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; -- Attaching packages -------------------------------- animovement 0.7.4.9000 --</span></span>
-<span><span class="co">#&gt; v aniframe   0.7.0.9000     v anicheck   0.2.0     </span></span>
-<span><span class="co">#&gt; v aniread    0.6.0.9000     v animetric  0.4.0     </span></span>
-<span><span class="co">#&gt; v anispace   0.2.0          v anivis     0.2.0     </span></span>
-<span><span class="co">#&gt; v aniprocess 0.4.0</span></span></code></pre></div>
+<span><span class="co">#&gt; v anicore    0.7.0.9000     v anicheck   0.2.0.9000</span></span>
+<span><span class="co">#&gt; v aniread    0.6.0.9000     v animetric  0.4.0.9000</span></span>
+<span><span class="co">#&gt; v anispace   0.2.0.9000     v anivis     0.2.0.9000</span></span>
+<span><span class="co">#&gt; v aniprocess 0.4.0.9000</span></span></code></pre></div>
 <p>If a function name is exported by two attached packages, the one attached later masks the other, and the startup message says so. <code><a href="reference/animovement_conflicts.html">animovement_conflicts()</a></code> lists them again at any point, and works for any attached packages — not just ours. To see what is currently in your animovement, and how it is doing:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/animovement_packages.html">animovement_packages</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># Which packages are attached as part of animovement</span></span>
@@ -134,7 +134,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/animovement_extend.html">animovement_extend</a></span><span class="op">(</span><span class="va">ggplot2</span>, <span class="va">tidyr</span>, install <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>For a set that belongs to a project rather than a session, put a file named <code>.animovement</code> in the project root and list the packages you want — one per line, or separated by commas or spaces:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>aniframe, aniread, aniprocess</span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>anicore, aniread, aniprocess</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>ggplot2</span></code></pre></div>
 <p>When this file is present it <em>replaces</em> the standard core set, so list everything the project needs. That makes the project’s dependencies explicit to anyone who opens it, and keeps <code><a href="https://animovement.dev" class="external-link">library(animovement)</a></code> meaning the same thing for all of them.</p>
 <p>Options can be set in the same file by prefixing them with <code>_opt_</code> and placing them before the package names (for example <code>_opt_animovement.install = TRUE</code>), or set directly in R:</p>

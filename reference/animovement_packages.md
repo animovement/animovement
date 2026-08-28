@@ -36,6 +36,6 @@ A character vector of package names.
 
 ``` r
 animovement_packages()
-#> [1] "aniframe"    "aniread"     "anispace"    "aniprocess"  "anicheck"   
+#> [1] "anicore"     "aniread"     "anispace"    "aniprocess"  "anicheck"   
 #> [6] "animetric"   "anivis"      "animovement"
 ```

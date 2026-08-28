@@ -47,7 +47,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-animovement" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="animovement"><span class="fa fab fa-r-project"></span> animovement</button>
   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-animovement">
 <li><a class="external-link dropdown-item" href="https://animovement.dev/anicheck/">anicheck</a></li>
-    <li><a class="external-link dropdown-item" href="https://animovement.dev/aniframe/">aniframe</a></li>
+    <li><a class="external-link dropdown-item" href="https://animovement.dev/anicore/">aniframe</a></li>
     <li><a class="external-link dropdown-item" href="https://animovement.dev/animetric/">animetric</a></li>
     <li><a class="dropdown-item" href="https://animovement.dev/animovement/">animovement</a></li>
     <li><a class="external-link dropdown-item" href="https://animovement.dev/aniprocess/">aniprocess</a></li>
@@ -106,10 +106,10 @@ packages, see <a href="https://animovement.dev" class="external-link">animovemen
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://animovement.dev" class="external-link">animovement</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; -- Attaching packages -------------------------------- animovement 0.7.4.9000 --</span></span>
-<span><span class="co">#&gt; v aniframe   0.7.0.9000     v anicheck   0.2.0.9000</span></span>
-<span><span class="co">#&gt; v aniread    0.6.0.9000     v animetric  0.4.0     </span></span>
+<span><span class="co">#&gt; v anicore    0.8.0.9000     v anicheck   0.2.0.9000</span></span>
+<span><span class="co">#&gt; v aniread    0.6.0.9000     v animetric  0.4.0.9000</span></span>
 <span><span class="co">#&gt; v anispace   0.2.0.9000     v anivis     0.2.0.9000</span></span>
-<span><span class="co">#&gt; v aniprocess 0.4.0</span></span></code></pre></div>
+<span><span class="co">#&gt; v aniprocess 0.4.0.9000</span></span></code></pre></div>
 <p>Attaching prints a startup message listing the core packages and
 their versions, followed by any conflicts between them and packages you
 already have loaded. Both can be silenced with
@@ -126,7 +126,7 @@ already have loaded. Both can be silenced with
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://animovement.dev/aniframe" class="external-link"><em>aniframe</em></a></td>
+<td><a href="https://animovement.dev/anicore" class="external-link"><em>anicore</em></a></td>
 <td>Core data structures for movement data</td>
 </tr>
 <tr class="even">
@@ -160,7 +160,7 @@ in force — the core packages, or whatever a project configuration file
 specifies, plus any session extensions:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/animovement_packages.html">animovement_packages</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "aniframe"    "aniread"     "anispace"    "aniprocess"  "anicheck"   </span></span>
+<span><span class="co">#&gt; [1] "anicore"     "aniread"     "anispace"    "aniprocess"  "anicheck"   </span></span>
 <span><span class="co">#&gt; [6] "animetric"   "anivis"      "animovement"</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -207,7 +207,7 @@ unloads the namespaces as well:</p>
 <p>For a set of packages that belongs to a project rather than a
 session, put a file named <code>.animovement</code> in the project root.
 List the packages one per line, or separated by commas or spaces:</p>
-<pre><code>aniframe, aniread, aniprocess
+<pre><code>anicore, aniread, aniprocess
 ggplot2</code></pre>
 <p>When this file is present, it <em>replaces</em> the standard set of
 core packages — so list everything the project needs.
@@ -219,7 +219,7 @@ prefixing them with <code>_opt_</code> (options) or giving them bare
 applied before the packages are attached, those after them
 afterwards:</p>
 <pre><code>_opt_animovement.install = TRUE
-aniframe, aniread, aniprocess</code></pre>
+anicore, aniread, aniprocess</code></pre>
 <p>The options the meta-package recognises are:</p>
 <ul>
 <li>
