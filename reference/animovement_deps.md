@@ -63,11 +63,11 @@ version.
 head(animovement_deps())
 #>      package       cran      local behind
 #> 1    anicore 0.8.0.9000 0.8.0.9000  FALSE
-#> 2    aniread      0.7.0      0.7.0  FALSE
-#> 3   anispace      0.3.0      0.3.0  FALSE
-#> 4 aniprocess      0.5.0      0.5.0  FALSE
-#> 5   anicheck      0.3.0      0.3.0  FALSE
-#> 6  animetric      0.5.0      0.5.0  FALSE
+#> 2    aniread 0.7.0.9000 0.7.0.9000  FALSE
+#> 3   anispace 0.3.0.9000 0.3.0.9000  FALSE
+#> 4 aniprocess 0.5.0.9000 0.5.0.9000  FALSE
+#> 5   anicheck 0.3.0.9000 0.3.0.9000  FALSE
+#> 6  animetric 0.5.0.9000 0.5.0.9000  FALSE
 
 # Including their dependencies in turn
 nrow(animovement_deps(recursive = TRUE))
