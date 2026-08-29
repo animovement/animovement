@@ -10,6 +10,8 @@ home:
 template:
   bootstrap: 5
   package: animovementtemplate
+  bslib:
+    primary: "#3E7A91"
 
 reference:
 - title: "animovement"
