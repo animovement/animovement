@@ -6,7 +6,7 @@ home:
 # Theme, author details, and the shared navbar components (the animovement
 # ecosystem dropdown + Zulip link) are inherited from animovementtemplate.
 # This site documents the meta-package only; tutorials for analysing movement
-# data live on the hub, which the Learn link below points at.
+# data live on the hub at animovement.dev.
 template:
   bootstrap: 5
   package: animovementtemplate
@@ -29,11 +29,5 @@ reference:
 
 
 navbar:
-  components:
-    learn:
-      icon: fa fa-graduation-cap
-      text: Learn
-      href: https://animovement.dev
-      aria-label: Tutorials on animovement.dev
   structure:
-    left:  [intro, articles, reference, news, learn]
+    left:  [intro, articles, reference, news]
