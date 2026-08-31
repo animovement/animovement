@@ -61,9 +61,7 @@ if (FALSE) {
 
 # listing all soft/weak dependencies
 animovement_show_suggested()
-#> 
-#> ── Suggested packages for animovement ecosystem ──
-#> 
+#> -- Suggested packages for animovement ecosystem --------------------------------
 #> animovement: circular, signal
 #> aniread: arrow, rhdf5, xml2, c3dr
 #> aniprocess: signal, stinepack

@@ -2,6 +2,29 @@
 
 ## animovement (development version)
 
+### Fixed
+
+- Messages are only styled when whatever receives them can render
+  colour. The attach banner and the other styled output used to emit
+  ANSI escape sequences unconditionally, so redirecting R output to a
+  file, or rendering it in a knitr chunk, produced text like
+  `[1mAttaching packages[22m`. `NO_COLOR` and
+  `options(cli.num_colors = 1)` are now honoured, and
+  `options(animovement.styling = TRUE)` forces colour on where it is
+  wanted anyway
+  ([\#178](https://github.com/animovement/animovement/issues/178)).
+
+- The attach banner and
+  [`animovement_show_suggested()`](https://animovement.dev/animovement/reference/animovement_install_suggested.md)
+  are each emitted as a single message rather than one per line.
+  Anything that captures messages singly — a knitr chunk, a log,
+  `testthat` — used to receive them in pieces, which rendered as a stack
+  of separate blocks with a scrollbar per line.
+  [`animovement_show_suggested()`](https://animovement.dev/animovement/reference/animovement_install_suggested.md)
+  also honours `animovement.quiet` now, which it bypassed by printing
+  through cli directly
+  ([\#178](https://github.com/animovement/animovement/issues/178)).
+
 ## animovement 0.8.0 (2026-08-28)
 
 ### Changed
