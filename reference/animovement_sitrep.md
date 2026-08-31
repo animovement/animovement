@@ -35,12 +35,12 @@ animovement_sitrep()
 #>  * Project config file: FALSE
 #> -- Core packages --------------------------------------------------------------- 
 #>  * anicore    (0.8.0.9002)
-#>  * aniread    (0.7.0.9001)
-#>  * anispace   (0.3.0.9001)
-#>  * aniprocess (0.5.0.9001)
-#>  * anicheck   (0.3.0.9001)
-#>  * animetric  (0.5.0.9001)
-#>  * anivis     (0.2.1.9000)
+#>  * aniread    (0.7.0.9003)
+#>  * anispace   (0.3.0.9002)
+#>  * aniprocess (0.5.0.9002)
+#>  * anicheck   (0.3.0.9002)
+#>  * animetric  (0.5.0.9002)
+#>  * anivis     (0.2.1.9001)
 #> -- Dependencies ---------------------------------------------------------------- 
 #>  * anytime    (0.3.13)
 #>  * cli        (3.6.6)
