@@ -1,5 +1,9 @@
 # animovement (development version)
 
+## Removed
+
+* `circular` and `signal` are no longer suggested by the metapackage. Nothing in it uses either — the only mentions were string literals in test fixtures — but because `animovement_show_suggested()` reads each package's `Suggests`, they were reported under `animovement:`, as though the metapackage needed them. `signal` belongs to aniprocess, which suggests it for the Savitzky-Golay and Butterworth filters. `circular` is no longer used anywhere in the ecosystem, since animetric took its circular statistics from anicore (animovement/anicore#147); this removes the last reference to it.
+
 ## Fixed
 
 * Messages are only styled when whatever receives them can render colour. The attach banner and the other styled output used to emit ANSI escape sequences unconditionally, so redirecting R output to a file, or rendering it in a knitr chunk, produced text like `[1mAttaching packages[22m`. `NO_COLOR` and `options(cli.num_colors = 1)` are now honoured, and `options(animovement.styling = TRUE)` forces colour on where it is wanted anyway (#178).
