@@ -75,15 +75,26 @@ animovement_install_suggested <- function(package = "animovement") {
 animovement_show_suggested <- function(package = "animovement") {
   all_packages <- .get_animovement_packages()
 
-  cli::cli_h2("Suggested packages for animovement ecosystem")
-
+  lines <- character()
   for (pkg in all_packages) {
     suggested <- .filter_suggested(.find_suggested(pkg))
 
     if (!is.null(suggested) && length(suggested) > 0) {
-      cli::cli_text("{.field {pkg}}: {paste(suggested, collapse = ', ')}")
+      lines <- c(
+        lines,
+        cli::format_inline(
+          "{.field {pkg}}: {paste(suggested, collapse = ', ')}"
+        )
+      )
     }
   }
+
+  header <- rule(
+    left = "Suggested packages for animovement ecosystem",
+    style.left = function(x) bold(text_col(x))
+  )
+
+  msg(paste(c(header, lines), collapse = "\n"))
 
   all_suggested <- .get_all_suggested(package)
   invisible(all_suggested)

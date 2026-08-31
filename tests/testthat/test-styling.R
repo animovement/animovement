@@ -53,3 +53,33 @@ test_that("the attach banner carries no escapes when colour is off", {
 
   expect_identical(banner, cli::ansi_strip(banner))
 })
+
+test_that("the attach banner is emitted as a single message", {
+  withr::local_options(animovement.styling = FALSE)
+
+  n <- 0L
+  withCallingHandlers(
+    animovement_attach(.core_pkg, onattach = FALSE),
+    message = function(c) {
+      n <<- n + 1L
+      invokeRestart("muffleMessage")
+    }
+  )
+
+  expect_identical(n, 1L)
+})
+
+test_that("animovement_show_suggested() is emitted as a single message", {
+  withr::local_options(animovement.styling = FALSE)
+
+  n <- 0L
+  withCallingHandlers(
+    animovement_show_suggested(),
+    message = function(c) {
+      n <<- n + 1L
+      invokeRestart("muffleMessage")
+    }
+  )
+
+  expect_identical(n, 1L)
+})
