@@ -6,8 +6,12 @@ name: pkgdown
 on:
   push:
     branches: [main]
+  # Every pull request, whatever it targets. A stacked pull request has a base
+  # of another branch, so `branches: [main]` skipped it -- and since pkgdown is
+  # a required check, one that never runs blocks the merge for good. The
+  # reusable workflow only deploys when the event is not a pull request, so
+  # running here builds the site without publishing it.
   pull_request:
-    branches: [main]
   release:
     types: [published]
   workflow_dispatch:
