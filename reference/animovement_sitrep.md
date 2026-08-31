@@ -31,15 +31,15 @@ animovement_sitrep(...)
 ``` r
 # Versions of every animovement package, and whether any are behind
 animovement_sitrep()
-#> -- animovement 0.8.0.9001: Situation Report ------------------------- R 4.6.1 --
+#> -- animovement 0.8.0.9002: Situation Report ------------------------- R 4.6.1 --
 #>  * Project config file: FALSE
 #> -- Core packages --------------------------------------------------------------- 
-#>  * anicore    (0.8.0.9001)
-#>  * aniread    (0.7.0.9000)
-#>  * anispace   (0.3.0.9000)
-#>  * aniprocess (0.5.0.9000)
+#>  * anicore    (0.8.0.9002)
+#>  * aniread    (0.7.0.9001)
+#>  * anispace   (0.3.0.9001)
+#>  * aniprocess (0.5.0.9001)
 #>  * anicheck   (0.3.0.9001)
-#>  * animetric  (0.5.0.9000)
+#>  * animetric  (0.5.0.9001)
 #>  * anivis     (0.2.1.9000)
 #> -- Dependencies ---------------------------------------------------------------- 
 #>  * anytime    (0.3.13)

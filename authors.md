@@ -27,6 +27,6 @@ across space and time.”
       author = {Mikkel Roald-Arbøl},
       year = {2026},
       doi = {10.5281/zenodo.13235277},
-      version = {0.8.0.9001},
+      version = {0.8.0.9002},
       url = {https://animovement.dev/animovement/},
     }
