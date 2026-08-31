@@ -36,22 +36,19 @@ animovement_attach <- function(
   }
 
   pv <- package_version("animovement")
-  msg(
-    rule(
-      left = txt,
-      style.left = function(x) bold(text_col(x)),
-      right = paste("animovement", pv),
-      style.right = function(x) {
-        sub(
-          pv,
-          text_col(pv),
-          sub("animovement", kingsblue("animovement"), x, fixed = TRUE),
-          fixed = TRUE
-        )
-      },
-      style.rule = TRUE
-    ),
-    startup = onattach
+  header <- rule(
+    left = txt,
+    style.left = function(x) bold(text_col(x)),
+    right = paste("animovement", pv),
+    style.right = function(x) {
+      sub(
+        pv,
+        text_col(pv),
+        sub("animovement", kingsblue("animovement"), x, fixed = TRUE),
+        fixed = TRUE
+      )
+    },
+    style.rule = TRUE
   )
 
   versions <- vapply(to_load, package_version, character(1L))
@@ -74,7 +71,9 @@ animovement_attach <- function(
     lapply(to_load, same_library)
   })
 
-  msg(paste(info, collapse = "\n"), startup = onattach)
+  # One message, not one per part: anything that captures messages singly --
+  # knitr, a log, testthat -- otherwise receives the banner in pieces.
+  msg(paste(c(header, info), collapse = "\n"), startup = onattach)
 
   invisible()
 }

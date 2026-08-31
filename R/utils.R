@@ -145,62 +145,37 @@ package_version <- function(x) {
   paste(unclass(packageVersion(x))[[1L]], collapse = ".")
 }
 
-green <- function(x) {
-  if (isFALSE(getOption("animovement.styling"))) {
-    x
-  } else {
-    paste0("\033[32m", x, "\033[39m")
+# Colour is only safe when whatever receives the message can render it. A file,
+# a pipe, a knitr chunk or a terminal without ANSI support all get escape codes
+# otherwise. cli::num_ansi_colors() settles that in one call -- it honours
+# NO_COLOR, TERM, RStudio, knitr and non-interactive sessions -- while
+# animovement.styling stays the manual override in both directions.
+styled <- function() {
+  styling <- getOption("animovement.styling")
+  if (isFALSE(styling)) {
+    return(FALSE)
   }
-}
-blue <- function(x) {
-  if (isFALSE(getOption("animovement.styling"))) {
-    x
-  } else {
-    paste0("\033[34m", x, "\033[39m")
+  if (isTRUE(styling)) {
+    return(TRUE)
   }
+  cli::num_ansi_colors() > 1
 }
-magenta2 <- function(x) {
-  if (isFALSE(getOption("animovement.styling"))) {
-    x
-  } else {
-    paste0("\033[38;5;198m", x, "\033[39m")
+
+ansi <- function(x, open, close = "39") {
+  if (!styled()) {
+    return(x)
   }
+  paste0("\033[", open, "m", x, "\033[", close, "m")
 }
-gold <- function(x) {
-  if (isFALSE(getOption("animovement.styling"))) {
-    x
-  } else {
-    paste0("\033[38;5;214m", x, "\033[39m")
-  }
-}
-kingsblue <- function(x) {
-  if (isFALSE(getOption("animovement.styling"))) {
-    x
-  } else {
-    paste0("\033[38;5;33m", x, "\033[39m")
-  }
-}
-grey70 <- function(x) {
-  if (isFALSE(getOption("animovement.styling"))) {
-    x
-  } else {
-    paste0("\033[0;38;5;249m", x, "\033[39m")
-  }
-}
-red <- function(x) {
-  if (isFALSE(getOption("animovement.styling"))) {
-    x
-  } else {
-    paste0("\033[31m", x, "\033[39m")
-  }
-}
-bold <- function(x) {
-  if (isFALSE(getOption("animovement.styling"))) {
-    x
-  } else {
-    paste0("\033[1m", x, "\033[22m")
-  }
-}
+
+green <- function(x) ansi(x, "32")
+blue <- function(x) ansi(x, "34")
+magenta2 <- function(x) ansi(x, "38;5;198")
+gold <- function(x) ansi(x, "38;5;214")
+kingsblue <- function(x) ansi(x, "38;5;33")
+grey70 <- function(x) ansi(x, "0;38;5;249")
+red <- function(x) ansi(x, "31")
+bold <- function(x) ansi(x, "1", "22")
 # Crayons white is more gray-isch
 # white <- function(x) if(isFALSE(getOption("animovement.styling"))) x else paste0("\033[37m", x, "\033[39m")
 # Using bright white: https://i.stack.imgur.com/9UVnC.png
