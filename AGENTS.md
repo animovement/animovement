@@ -31,9 +31,18 @@ installed package.
 - **Run the tests** — `devtools::test()`. Do not rely on code looking correct.
 - **Do not push to `main`.** It is protected; open a pull request. Checks must pass before merging.
 - **Write the pull request title as a [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/)**
-  — `fix(animovement): keep metadata through filter_kalman()`. Merges squash, so the title becomes the
-  commit on `main`, and a workflow checks it. Types and the breaking-change rule are in
+  — `fix(animovement): keep metadata through filter_kalman()`. Pull requests are squash-merged, and one
+  with a single commit lands with that commit's message rather than the title, so make the two match.
+  No workflow checks the title here; a reviewer does. Types and the breaking-change rule are in
   [CONTRIBUTING.md](https://github.com/animovement/.github/blob/main/CONTRIBUTING.md#commit-messages).
+- **Read and write aniframe metadata only through anicore's accessors** (`get_metadata()`,
+  `set_metadata()`, `get_variables()`, …), never `attr(x, "metadata")` or `$variables_*`. Outside
+  anicore, CI's `anicore-metadata-contract` job fails on raw access.
+- **Bump the development version** (`.9003` → `.9004`) in the same pull request only when another
+  package will require the change; otherwise leave it alone. See
+  [CONTRIBUTING.md](https://github.com/animovement/.github/blob/main/CONTRIBUTING.md#development-versions).
+- **renv activates when R starts here**, but CI ignores it and resolves dependencies from
+  `DESCRIPTION`. Set `RENV_CONFIG_AUTOLOADER_ENABLED=false` before starting R to do the same.
 - **Fill in the pull request template** rather than replacing it with generated prose.
 - **Do not submit a pull request you have not read and tested yourself.** See the AI policy.
 
