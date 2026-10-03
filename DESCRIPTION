@@ -38,7 +38,8 @@ Imports:
     anicheck, 
     animetric, 
     anivis,
-    cli
+    cli,
+    lifecycle
 Suggests:
     pak,
     here,

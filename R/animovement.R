@@ -39,6 +39,7 @@
 #'
 #' @importFrom utils stack packageVersion install.packages available.packages
 #' @importFrom tools package_dependencies
+#' @importFrom lifecycle deprecated
 #' @import anicore
 #' @import aniread
 #' @import anispace

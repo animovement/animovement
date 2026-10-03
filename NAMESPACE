@@ -20,6 +20,7 @@ import(aniprocess)
 import(aniread)
 import(anispace)
 import(anivis)
+importFrom(lifecycle,deprecated)
 importFrom(tools,package_dependencies)
 importFrom(utils,
   available.packages,
