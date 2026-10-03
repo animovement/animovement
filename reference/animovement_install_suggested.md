@@ -35,11 +35,12 @@ packages that animovement and its ecosystem packages might need.
 current list of suggested packages.
 
 This function will check the `Suggests` field of animovement and all its
-imported packages (aniframe, aniread, aniprocess, animetric, anicheck,
-anivis), excluding packages only needed for development or documentation
-workflows (knitr, rmarkdown, testthat, pak, here, covr, pkgdown, withr,
-ragg, curl, readxl, tibble, tinytable), and packages already required by
-an ecosystem package, which are installed regardless.
+imported packages (anicore, anispace, aniread, aniprocess, animetric,
+anicheck, anivis), excluding packages only needed for development or
+documentation workflows (knitr, rmarkdown, testthat, pak, here, covr,
+pkgdown, withr, ragg, curl, readxl, tibble, tinytable), and packages
+already required by an ecosystem package, which are installed
+regardless.
 
 Under WebR, packages are installed with `webr::install()`, since
 [`utils::install.packages()`](https://rdrr.io/r/utils/install.packages.html)
