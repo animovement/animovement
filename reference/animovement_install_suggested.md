@@ -62,7 +62,7 @@ if (FALSE) {
 # listing all soft/weak dependencies
 animovement_show_suggested()
 #> -- Suggested packages for animovement ecosystem --------------------------------
-#> aniread: arrow, rhdf5, xml2, c3dr
+#> aniread: arrow, rhdf5, jsonlite, yaml, xml2, c3dr
 #> aniprocess: signal, stinepack
 #> animetric: sf
 ```

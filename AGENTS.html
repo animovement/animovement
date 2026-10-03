@@ -81,7 +81,13 @@
 <li>
 <strong>Do not push to <code>main</code>.</strong> It is protected; open a pull request. Checks must pass before merging.</li>
 <li>
-<strong>Write the pull request title as a <a href="https://www.conventionalcommits.org/en/v1.0.0/" class="external-link">Conventional Commit</a></strong> — <code>fix(animovement): keep metadata through filter_kalman()</code>. Merges squash, so the title becomes the commit on <code>main</code>, and a workflow checks it. Types and the breaking-change rule are in <a href="https://github.com/animovement/.github/blob/main/CONTRIBUTING.md#commit-messages" class="external-link">CONTRIBUTING.md</a>.</li>
+<strong>Write the pull request title as a <a href="https://www.conventionalcommits.org/en/v1.0.0/" class="external-link">Conventional Commit</a></strong> — <code>fix(animovement): keep metadata through filter_kalman()</code>. Pull requests are squash-merged, and one with a single commit lands with that commit’s message rather than the title, so make the two match. No workflow checks the title here; a reviewer does. Types and the breaking-change rule are in <a href="https://github.com/animovement/.github/blob/main/CONTRIBUTING.md#commit-messages" class="external-link">CONTRIBUTING.md</a>.</li>
+<li>
+<strong>Read and write aniframe metadata only through anicore’s accessors</strong> (<code>get_metadata()</code>, <code>set_metadata()</code>, <code>get_variables()</code>, …), never <code>attr(x, "metadata")</code> or <code>$variables_*</code>. Outside anicore, CI’s <code>anicore-metadata-contract</code> job fails on raw access.</li>
+<li>
+<strong>Bump the development version</strong> (<code>.9003</code> → <code>.9004</code>) in the same pull request only when another package will require the change; otherwise leave it alone. See <a href="https://github.com/animovement/.github/blob/main/CONTRIBUTING.md#development-versions" class="external-link">CONTRIBUTING.md</a>.</li>
+<li>
+<strong>renv activates when R starts here</strong>, but CI ignores it and resolves dependencies from <code>DESCRIPTION</code>. Set <code>RENV_CONFIG_AUTOLOADER_ENABLED=false</code> before starting R to do the same.</li>
 <li>
 <strong>Fill in the pull request template</strong> rather than replacing it with generated prose.</li>
 <li>
