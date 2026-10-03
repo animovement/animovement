@@ -66,8 +66,8 @@ head(animovement_deps())
 #> 2    aniread 0.7.0.9004 0.7.0.9004  FALSE
 #> 3   anispace 0.3.0.9006 0.3.0.9006  FALSE
 #> 4 aniprocess 0.5.0.9003 0.5.0.9003  FALSE
-#> 5   anicheck 0.3.0.9003 0.3.0.9003  FALSE
-#> 6  animetric 0.5.0.9004 0.5.0.9004  FALSE
+#> 5   anicheck 0.3.0.9004 0.3.0.9004  FALSE
+#> 6  animetric 0.5.0.9005 0.5.0.9005  FALSE
 
 # Including their dependencies in turn
 nrow(animovement_deps(recursive = TRUE))
