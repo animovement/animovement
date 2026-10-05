@@ -187,9 +187,8 @@ would love to get a sample of your data to support it!**
   [reprex](https://reprex.tidyverse.org/articles/learn-reprex.html) (a
   minimal, reproducible example) is the fastest route to an answer.
 
-- See
-  [CONTRIBUTING.md](https://animovement.dev/animovement/CONTRIBUTING.md)
-  for the pull request process.
+- See the [contributing guide](https://animovement.dev/contribute/) for
+  the pull request process.
 
 ## Citation
 
