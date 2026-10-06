@@ -73,11 +73,11 @@ When loading the package, the versions and any conflicts are listed:
 ``` r
 
 library(animovement)
-#> -- Attaching packages -------------------------------- animovement 0.8.0.9000 --
-#> v anicore    0.8.0     v anicheck   0.3.0
-#> v aniread    0.7.0     v animetric  0.5.0
-#> v anispace   0.3.0     v anivis     0.2.1
-#> v aniprocess 0.5.0
+#> -- Attaching packages -------------------------------- animovement 0.8.0.9002 --
+#> v anicore    0.8.0.9008     v anicheck   0.3.0.9004
+#> v aniread    0.7.0.9006     v animetric  0.5.0.9006
+#> v anispace   0.3.0.9006     v anivis     0.2.1.9003
+#> v aniprocess 0.5.0.9003
 ```
 
 If a function name is exported by two attached packages, the one
@@ -212,7 +212,7 @@ citation("animovement")
 #>     author = {Mikkel Roald-Arbøl},
 #>     year = {2026},
 #>     doi = {10.5281/zenodo.13235277},
-#>     version = {0.8.0.9000},
+#>     version = {0.8.0.9002},
 #>     url = {https://animovement.dev/animovement/},
 #>   }
 ```

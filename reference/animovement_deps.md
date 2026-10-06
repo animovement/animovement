@@ -62,8 +62,8 @@ version.
 # The packages the suite depends on, and their versions
 head(animovement_deps())
 #>      package       cran      local behind
-#> 1    anicore 0.8.0.9007 0.8.0.9007  FALSE
-#> 2    aniread 0.7.0.9004 0.7.0.9004  FALSE
+#> 1    anicore 0.8.0.9008 0.8.0.9008  FALSE
+#> 2    aniread 0.7.0.9006 0.7.0.9006  FALSE
 #> 3   anispace 0.3.0.9006 0.3.0.9006  FALSE
 #> 4 aniprocess 0.5.0.9003 0.5.0.9003  FALSE
 #> 5   anicheck 0.3.0.9004 0.3.0.9004  FALSE
