@@ -8,7 +8,7 @@
   'anivis'
 )
 
-ckeck_attached <- function(needed = TRUE) {
+check_attached <- function(needed = TRUE) {
   pkg <- animovement_packages(include.self = FALSE)
   attached <- is_attached(pkg)
   return(pkg[if (needed) !attached else attached])
@@ -91,7 +91,7 @@ animovement_attach <- function(
     animovement_install()
   }
 
-  needed <- ckeck_attached()
+  needed <- check_attached()
 
   if (length(needed) > 0L) {
     animovement_attach(needed, onattach = TRUE)
@@ -137,7 +137,7 @@ animovement_detach <- function(
   session = FALSE
 ) {
   if (missing(...)) {
-    loaded <- ckeck_attached(needed = FALSE)
+    loaded <- check_attached(needed = FALSE)
     if (include.self) {
       loaded <- c(loaded, "animovement")
     } # Could already be part of loaded ??

@@ -38,7 +38,9 @@ test_that("animovement_install_suggested returns invisible NULL", {
 test_that("shows success message when all packages installed", {
   local_mocked_bindings(
     .get_all_suggested = function(pkg) c("dplyr", "ggplot2"),
-    .installed_packages = function() c("dplyr", "ggplot2", "base"),
+    .is_package_installed = function(packages) {
+      packages %in% c("dplyr", "ggplot2", "base")
+    },
     .package = "animovement"
   )
 
@@ -66,7 +68,7 @@ test_that("uses pak::pkg_install when pak is available", {
 
   local_mocked_bindings(
     .get_all_suggested = function(pkg) c("dplyr", "ggplot2"),
-    .installed_packages = function() "base",
+    .is_package_installed = function(packages) packages %in% "base",
     .check_if_installed = function(pkg) pkg == "pak",
     .package = "animovement"
   )
@@ -107,7 +109,7 @@ test_that("the repos option is restored after the pak install", {
 
   local_mocked_bindings(
     .get_all_suggested = function(pkg) c("dplyr"),
-    .installed_packages = function() "base",
+    .is_package_installed = function(packages) packages %in% "base",
     .check_if_installed = function(pkg) pkg == "pak",
     .package = "animovement"
   )
@@ -134,7 +136,7 @@ test_that("Bioconductor is included so rhdf5 can be installed", {
 
   local_mocked_bindings(
     .get_all_suggested = function(pkg) c("rhdf5"),
-    .installed_packages = function() "base",
+    .is_package_installed = function(packages) packages %in% "base",
     .check_if_installed = function(pkg) FALSE,
     .package = "animovement"
   )
@@ -157,7 +159,7 @@ test_that("falls back to install.packages when pak unavailable", {
 
   local_mocked_bindings(
     .get_all_suggested = function(pkg) c("dplyr", "ggplot2"),
-    .installed_packages = function() "base",
+    .is_package_installed = function(packages) packages %in% "base",
     .check_if_installed = function(pkg) FALSE,
     .package = "animovement"
   )
@@ -182,7 +184,7 @@ test_that("WebR installs go through webr::install(), not install.packages()", {
 
   local_mocked_bindings(
     .get_all_suggested = function(pkg) c("dplyr"),
-    .installed_packages = function() "base",
+    .is_package_installed = function(packages) packages %in% "base",
     .is_webr = function() TRUE,
     .install_webr = function(packages, repos) {
       webr_packages <<- packages
@@ -225,7 +227,7 @@ test_that("the r-wasm repo is not used outside WebR", {
 
   local_mocked_bindings(
     .get_all_suggested = function(pkg) c("dplyr"),
-    .installed_packages = function() "base",
+    .is_package_installed = function(packages) packages %in% "base",
     .is_webr = function() FALSE,
     .check_if_installed = function(pkg) FALSE,
     .package = "animovement"
@@ -321,7 +323,7 @@ test_that("only installs packages that are not yet installed", {
 
   local_mocked_bindings(
     .get_all_suggested = function(pkg) c("dplyr", "ggplot2", "tidyr"),
-    .installed_packages = function() c("dplyr", "base"),
+    .is_package_installed = function(packages) packages %in% c("dplyr", "base"),
     .check_if_installed = function(pkg) FALSE,
     .package = "animovement"
   )

@@ -50,7 +50,7 @@ animovement_install_suggested <- function(package = "animovement") {
   }
 
   # install only the packages not yet installed
-  installed_packages <- suggested_packages %in% .installed_packages()
+  installed_packages <- .is_package_installed(suggested_packages)
 
   if (all(installed_packages)) {
     cli::cli_alert_success("All suggested packages are already installed.")
@@ -118,18 +118,10 @@ bioc_universe <- "https://bioc.r-universe.dev"
 }
 
 
+# The core list itself lives in `.core_pkg` (R/attach.R).
 #' @keywords internal
 .get_animovement_packages <- function() {
-  c(
-    "animovement",
-    "anicore",
-    "anispace",
-    "aniread",
-    "aniprocess",
-    "animetric",
-    "anicheck",
-    "anivis"
-  )
+  c("animovement", .core_pkg)
 }
 
 
@@ -246,9 +238,17 @@ bioc_universe <- "https://bioc.r-universe.dev"
 }
 
 
+# Whether each package is installed in the library path, without loading it.
+# system.file() avoids utils::installed.packages(), which reads every
+# DESCRIPTION in every library and is slow on large libraries.
 #' @keywords internal
-.installed_packages <- function() {
-  rownames(utils::installed.packages())
+.is_package_installed <- function(packages) {
+  vapply(
+    packages,
+    function(pkg) nzchar(system.file(package = pkg)),
+    logical(1),
+    USE.NAMES = FALSE
+  )
 }
 
 
