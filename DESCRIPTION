@@ -6,14 +6,14 @@ Authors@R: c(
     person(
       "Mikkel", 
       "Roald-Arbøl", 
-      role = c("aut", "cre"), 
+      role = c("aut", "cre", "cph"), 
       email = "animovement.84w1m@passmail.com",
       comment = c(ORCID = "0000-0002-9998-0058")
       ),
     person(
       "Sebastian",
       "Krantz",
-      role = "ctb",
+      role = c("ctb", "cph"),
       comment = "Author of the fastverse, from which the package management code is adapted"
       ),
     person(
@@ -21,13 +21,15 @@ Authors@R: c(
       "Wickham",
       role = "ctb",
       comment = "Author of the tidyverse, from which that code originally derives"
-      )
+      ),
+    person("Posit Software, PBC", role = "cph")
     )
 Description: An R toolbox for analysing movement across space and time.
 License: GPL-3
-URL: https://animovement.dev, https://animovement.dev/animovement, https://github.com/animovement/animovement
+URL: https://animovement.dev, https://animovement.dev/animovement/, https://github.com/animovement/animovement
 BugReports: https://github.com/animovement/animovement/issues
 Encoding: UTF-8
+Language: en-GB
 Depends: 
     R (>= 4.1)
 Imports: 
@@ -39,20 +41,15 @@ Imports:
     animetric, 
     anivis,
     cli,
-    lifecycle
+    lifecycle,
+    tools,
+    utils
 Suggests:
     pak,
-    here,
     knitr (>= 1.41),
     rmarkdown (>= 2.20),
     testthat (>= 3.0.0),
-    withr,
-    ggplot2,
-    patchwork,
-    readxl,
-    tibble,
-    tidyr,
-    tinytable
+    withr
 Additional_repositories: https://animovement.r-universe.dev
 Roxygen: list(markdown = TRUE)
 NeedsCompilation: no

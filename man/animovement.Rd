@@ -47,24 +47,25 @@ Utilities to retrieve the names of \emph{animovement} packages (and dependencies
 Useful links:
 \itemize{
   \item \url{https://animovement.dev}
-  \item \url{https://animovement.dev/animovement}
+  \item \url{https://animovement.dev/animovement/}
   \item \url{https://github.com/animovement/animovement}
   \item Report bugs at \url{https://github.com/animovement/animovement/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Mikkel Roald-Arbøl \email{animovement.84w1m@passmail.com} (\href{https://orcid.org/0000-0002-9998-0058}{ORCID})
+\strong{Maintainer}: Mikkel Roald-Arbøl \email{animovement.84w1m@passmail.com} (\href{https://orcid.org/0000-0002-9998-0058}{ORCID}) [copyright holder]
 
 Authors:
 \itemize{
-  \item Mikkel Roald-Arbøl \email{animovement.84w1m@passmail.com} (\href{https://orcid.org/0000-0002-9998-0058}{ORCID})
+  \item Mikkel Roald-Arbøl \email{animovement.84w1m@passmail.com} (\href{https://orcid.org/0000-0002-9998-0058}{ORCID}) [copyright holder]
 }
 
 Other contributors:
 \itemize{
-  \item Sebastian Krantz (Author of the fastverse, from which the package management code is adapted) [contributor]
+  \item Sebastian Krantz (Author of the fastverse, from which the package management code is adapted) [contributor, copyright holder]
   \item Hadley Wickham (Author of the tidyverse, from which that code originally derives) [contributor]
+  \item Posit Software, PBC [copyright holder]
 }
 
 }
