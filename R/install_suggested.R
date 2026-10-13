@@ -33,13 +33,12 @@
 #' @return Invisible `NULL`. Used for side-effect of installing packages.
 #'
 #' @examples
-#' # download all suggested packages
-#' if (FALSE) {
-#'   animovement_install_suggested("animovement")
-#' }
-#'
 #' # listing all soft/weak dependencies
 #' animovement_show_suggested()
+#'
+#' @examplesIf interactive()
+#' # download all suggested packages
+#' animovement_install_suggested("animovement")
 #'
 #' @export
 animovement_install_suggested <- function(package = "animovement") {

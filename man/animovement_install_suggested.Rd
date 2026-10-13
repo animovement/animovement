@@ -46,12 +46,11 @@ animovement R-universe and the Bioconductor R-universe -- the last of which
 is where \code{rhdf5} comes from.
 }
 \examples{
-# download all suggested packages
-if (FALSE) {
-  animovement_install_suggested("animovement")
-}
-
 # listing all soft/weak dependencies
 animovement_show_suggested()
 
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+# download all suggested packages
+animovement_install_suggested("animovement")
+\dontshow{\}) # examplesIf}
 }
