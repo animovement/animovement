@@ -51,8 +51,10 @@ animovement_repos()
 #>                                                               
 #>                          "https://animovement.r-universe.dev" 
 
+if (FALSE) { # interactive()
 # Make it apply to install.packages() and friends for the whole session
-if (FALSE) { # \dontrun{
-options(repos = animovement_repos())
-} # }
+old <- options(repos = animovement_repos())
+getOption("repos")
+options(old)
+}
 ```

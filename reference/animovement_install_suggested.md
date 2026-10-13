@@ -55,15 +55,15 @@ Bioconductor R-universe – the last of which is where `rhdf5` comes from.
 ## Examples
 
 ``` r
-# download all suggested packages
-if (FALSE) {
-  animovement_install_suggested("animovement")
-}
-
 # listing all soft/weak dependencies
 animovement_show_suggested()
 #> -- Suggested packages for animovement ecosystem --------------------------------
 #> aniread: arrow, rhdf5, jsonlite, yaml, xml2, c3dr
 #> aniprocess: signal, stinepack
 #> animetric: sf
+
+if (FALSE) { # interactive()
+# download all suggested packages
+animovement_install_suggested("animovement")
+}
 ```

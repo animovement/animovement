@@ -255,7 +255,7 @@ trackballs alone. The rename brings a great deal of new functionality
 and a correspondingly large set of breaking changes.
 
 For the former `trackballr` functionality, install from source from the
-[repository history](https://github.com/roaldarbol/animovement).
+[repository history](https://github.com/animovement/animovement).
 
 ### Added
 

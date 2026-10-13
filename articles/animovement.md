@@ -6,7 +6,7 @@ that do, so that a single
 [`library(animovement)`](https://animovement.dev) gives you a complete
 and coherent workflow instead of seven packages to track separately. In
 that respect it is a descendant of the
-[*fastverse*](https://fastverse.github.io/fastverse/), whose approach to
+[*fastverse*](https://fastverse.org/fastverse/), whose approach to
 package management it borrows.
 
 Splitting the ecosystem into focused packages keeps each one small,
@@ -38,13 +38,13 @@ The core packages are:
 
 | Package | Role |
 |----|----|
-| [*anicore*](https://animovement.dev/anicore) | Core data structures for movement data |
-| [*aniread*](https://animovement.dev/aniread) | Reading and writing movement data |
-| [*anispace*](https://animovement.dev/anispace) | Spatial transformation methods |
-| [*aniprocess*](https://animovement.dev/aniprocess) | Signal processing and filtering |
-| [*anicheck*](https://animovement.dev/anicheck) | Diagnosing movement data quality |
-| [*animetric*](https://animovement.dev/animetric) | Calculating movement-based metrics |
-| [*anivis*](https://animovement.dev/anivis) | Visualising movement data and diagnostics |
+| [*anicore*](https://animovement.dev/anicore/) | Core data structures for movement data |
+| [*aniread*](https://animovement.dev/aniread/) | Reading and writing movement data |
+| [*anispace*](https://animovement.dev/anispace/) | Spatial transformation methods |
+| [*aniprocess*](https://animovement.dev/aniprocess/) | Signal processing and filtering |
+| [*anicheck*](https://animovement.dev/anicheck/) | Diagnosing movement data quality |
+| [*animetric*](https://animovement.dev/animetric/) | Calculating movement-based metrics |
+| [*anivis*](https://animovement.dev/anivis/) | Visualising movement data and diagnostics |
 
 [`animovement_packages()`](https://animovement.dev/animovement/reference/animovement_packages.md)
 reports the set that is actually in force — the core packages, or

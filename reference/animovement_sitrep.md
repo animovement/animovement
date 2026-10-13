@@ -29,33 +29,8 @@ animovement_sitrep(...)
 ## Examples
 
 ``` r
+if (FALSE) { # interactive()
 # Versions of every animovement package, and whether any are behind
 animovement_sitrep()
-#> -- animovement 0.8.0.9002: Situation Report ------------------------- R 4.6.1 --
-#>  * Project config file: FALSE
-#> -- Core packages --------------------------------------------------------------- 
-#>  * anicore    (0.8.0.9008)
-#>  * aniread    (0.7.0.9006)
-#>  * anispace   (0.3.0.9006)
-#>  * aniprocess (0.5.0.9003)
-#>  * anicheck   (0.3.0.9004)
-#>  * animetric  (0.5.0.9006)
-#>  * anivis     (0.2.1.9003)
-#> -- Dependencies ---------------------------------------------------------------- 
-#>  * anytime    (0.3.13)
-#>  * cli        (3.6.6)
-#>  * data.table (1.18.6.1)
-#>  * dplyr      (1.2.1)
-#>  * ggplot2    (4.0.3)
-#>  * hms        (1.1.4)
-#>  * janitor    (2.2.1)
-#>  * lifecycle  (1.0.5)
-#>  * marquee    (1.2.1)
-#>  * patchwork  (1.3.2)
-#>  * pillar     (1.11.1)
-#>  * purrr      (1.2.2)
-#>  * rlang      (1.3.0)
-#>  * tidyr      (1.3.2)
-#>  * tidyselect (1.2.1)
-#>  * vroom      (1.7.1)
+}
 ```

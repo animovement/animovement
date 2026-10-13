@@ -40,12 +40,11 @@ animovement_update(..., install = FALSE, repos = animovement_repos())
 ## Examples
 
 ``` r
+if (FALSE) { # interactive()
 # Report which packages are behind, without changing anything
 animovement_update()
-#> All animovement packages up-to-date
 
 # Pass install = TRUE to actually install what is out of date
-if (FALSE) {
 animovement_update(install = TRUE)
 }
 ```

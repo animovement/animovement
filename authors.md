@@ -3,14 +3,17 @@
 ## Authors
 
 - **[Mikkel Roald-Arbøl](https://roald-arboel.com)**. Author,
-  maintainer. [](https://orcid.org/0000-0002-9998-0058)
+  maintainer, copyright holder.
+  [](https://orcid.org/0000-0002-9998-0058)
 
-- **Sebastian Krantz**. Contributor.  
+- **Sebastian Krantz**. Contributor, copyright holder.  
   Author of the fastverse, from which the package management code is
   adapted
 
 - **Hadley Wickham**. Contributor.  
   Author of the tidyverse, from which that code originally derives
+
+- **Posit Software, PBC**. Copyright holder.
 
 ## Citation
 

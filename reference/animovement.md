@@ -1,7 +1,7 @@
 # The animovement
 
 The *animovement* is an extensible suite of R packages. It is a
-descendant of the [fastverse](https://fastverse.github.io/fastverse/).
+descendant of the [fastverse](https://fastverse.org/fastverse/).
 
 ## Functions in the *animovement* Package
 
@@ -61,7 +61,7 @@ Useful links:
 
 - <https://animovement.dev>
 
-- <https://animovement.dev/animovement>
+- <https://animovement.dev/animovement/>
 
 - <https://github.com/animovement/animovement>
 
@@ -70,17 +70,19 @@ Useful links:
 ## Author
 
 **Maintainer**: Mikkel Roald-Arbøl <animovement.84w1m@passmail.com>
-([ORCID](https://orcid.org/0000-0002-9998-0058))
+([ORCID](https://orcid.org/0000-0002-9998-0058)) \[copyright holder\]
 
 Authors:
 
 - Mikkel Roald-Arbøl <animovement.84w1m@passmail.com>
-  ([ORCID](https://orcid.org/0000-0002-9998-0058))
+  ([ORCID](https://orcid.org/0000-0002-9998-0058)) \[copyright holder\]
 
 Other contributors:
 
 - Sebastian Krantz (Author of the fastverse, from which the package
-  management code is adapted) \[contributor\]
+  management code is adapted) \[contributor, copyright holder\]
 
 - Hadley Wickham (Author of the tidyverse, from which that code
   originally derives) \[contributor\]
+
+- Posit Software, PBC \[copyright holder\]
