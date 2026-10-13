@@ -23,6 +23,7 @@
 # 15. .exclude_dev_packages removes dev and animovement packages
 # 16. .find_suggested parses Suggests field correctly
 # 17. .get_all_suggested excludes animovement packages from results
+# 18. .is_package_installed reports each package without loading it
 
 test_that("animovement_install_suggested returns invisible NULL", {
   local_mocked_bindings(
@@ -419,4 +420,12 @@ test_that(".get_all_suggested excludes animovement ecosystem packages", {
   expect_false("animovement" %in% result)
   expect_true("circular" %in% result)
   expect_true("stinepack" %in% result)
+})
+
+test_that(".is_package_installed() reports each package without loading it", {
+  expect_identical(
+    .is_package_installed(c("base", "notapackage.animovement")),
+    c(TRUE, FALSE)
+  )
+  expect_identical(.is_package_installed(character()), logical())
 })
