@@ -1,7 +1,7 @@
 #' The animovement
 #'
 #' @description
-#' The \emph{animovement} is an extensible suite of R packages. It is a descendant of the \href{https://fastverse.github.io/fastverse/}{fastverse}.
+#' The \emph{animovement} is an extensible suite of R packages. It is a descendant of the \href{https://fastverse.org/fastverse/}{fastverse}.
 #'
 #' @details NULL
 #' @section Functions in the \emph{animovement} Package:
