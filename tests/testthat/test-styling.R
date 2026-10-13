@@ -4,6 +4,8 @@
 # 2. animovement.styling overrides the detection in both directions
 # 3. Every helper goes through the same gate
 
+skip_if_not_installed("withr")
+
 test_that("no colour when the destination cannot render it", {
   withr::local_options(animovement.styling = NULL, cli.num_colors = 1)
 
