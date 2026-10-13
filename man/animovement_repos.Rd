@@ -29,10 +29,12 @@ than dropped because the \emph{animovement} dependencies live there.
 \examples{
 animovement_repos()
 
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # Make it apply to install.packages() and friends for the whole session
-\dontrun{
-options(repos = animovement_repos())
-}
+old <- options(repos = animovement_repos())
+getOption("repos")
+options(old)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{animovement_update}}, \code{\link{animovement}}

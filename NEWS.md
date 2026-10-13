@@ -149,7 +149,7 @@ Three major changes: a data format stabilised across every reader, the first met
 
 **The package is renamed from `trackballr` to `animovement`**, reflecting a scope that now covers movement data generally rather than trackballs alone. The rename brings a great deal of new functionality and a correspondingly large set of breaking changes.
 
-For the former `trackballr` functionality, install from source from the [repository history](https://github.com/roaldarbol/animovement).
+For the former `trackballr` functionality, install from source from the [repository history](https://github.com/animovement/animovement).
 
 ## Added
 

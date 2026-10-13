@@ -18,8 +18,10 @@ This function gives a quick overview of the version of R and all
 whether any project-level configuration files are used.
 }
 \examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # Versions of every animovement package, and whether any are behind
 animovement_sitrep()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{animovement_deps}}, \code{\link{animovement}}

@@ -33,10 +33,11 @@ animovement_universe <- "https://animovement.r-universe.dev"
 #' @examples
 #' animovement_repos()
 #'
+#' @examplesIf interactive()
 #' # Make it apply to install.packages() and friends for the whole session
-#' \dontrun{
-#' options(repos = animovement_repos())
-#' }
+#' old <- options(repos = animovement_repos())
+#' getOption("repos")
+#' options(old)
 #' @export
 animovement_repos <- function(repos = getOption("repos")) {
   repos[repos == "@CRAN@"] <- "https://cloud.r-project.org"
@@ -86,7 +87,7 @@ deparse_repos <- function(repos) {
 #'
 #' @returns A data frame giving the package names, the CRAN and local version, and a logical variable stating whether the local version is behind the CRAN version.
 #' @seealso \code{\link{animovement_sitrep}}, \code{\link{animovement}}
-#' @examples
+#' @examplesIf interactive()
 #' # The packages the suite depends on, and their versions
 #' head(animovement_deps())
 #'
@@ -171,12 +172,11 @@ animovement_deps <- function(
 #'
 #' @returns \code{animovement_update} returns \code{NULL} invisibly.
 #' @seealso \code{\link{animovement_deps}}, \code{\link{animovement}}
-#' @examples
+#' @examplesIf interactive()
 #' # Report which packages are behind, without changing anything
 #' animovement_update()
 #'
 #' # Pass install = TRUE to actually install what is out of date
-#' @examplesIf FALSE
 #' animovement_update(install = TRUE)
 #' @export
 animovement_update <- function(
@@ -296,7 +296,7 @@ animovement_install <- function(
 #'
 #' @returns \code{animovement_sitrep} returns \code{NULL} invisibly.
 #' @seealso \code{\link{animovement_deps}}, \code{\link{animovement}}
-#' @examples
+#' @examplesIf interactive()
 #' # Versions of every animovement package, and whether any are behind
 #' animovement_sitrep()
 #' @export

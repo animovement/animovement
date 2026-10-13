@@ -16,6 +16,8 @@ local_empty_repo <- function(envir = parent.frame()) {
 }
 
 test_that("animovement_repos() adds the R-universe by default", {
+  skip_if_not_installed("withr")
+
   withr::local_options(repos = c(CRAN = "https://cloud.r-project.org"))
 
   expect_equal(
@@ -28,6 +30,8 @@ test_that("animovement_repos() adds the R-universe by default", {
 })
 
 test_that("animovement_repos() does not duplicate an R-universe already present", {
+  skip_if_not_installed("withr")
+
   repos <- c(
     CRAN = "https://cloud.r-project.org",
     myuniverse = "https://animovement.r-universe.dev"
@@ -38,6 +42,8 @@ test_that("animovement_repos() does not duplicate an R-universe already present"
 })
 
 test_that("animovement_repos() resolves the @CRAN@ placeholder", {
+  skip_if_not_installed("withr")
+
   # A fresh R install leaves this in place, and available.packages() aborts on
   # it with "trying to use CRAN without setting a mirror".
   withr::local_options(repos = c(CRAN = "@CRAN@"))
@@ -50,12 +56,16 @@ test_that("animovement_repos() resolves the @CRAN@ placeholder", {
 })
 
 test_that("animovement_repos() keeps CRAN, since dependencies live there", {
+  skip_if_not_installed("withr")
+
   withr::local_options(repos = c(CRAN = "https://cloud.r-project.org"))
 
   expect_true("https://cloud.r-project.org" %in% animovement_repos())
 })
 
 test_that("the update entry points default to a repos containing R-universe", {
+  skip_if_not_installed("withr")
+
   withr::local_options(repos = c(CRAN = "https://cloud.r-project.org"))
 
   for (fn in list(animovement_deps, animovement_update, animovement_install)) {
@@ -65,6 +75,8 @@ test_that("the update entry points default to a repos containing R-universe", {
 })
 
 test_that("animovement_deps() aborts when no requested package is in repos", {
+  skip_if_not_installed("withr")
+
   repo <- local_empty_repo()
 
   expect_error(
@@ -78,6 +90,8 @@ test_that("animovement_deps() aborts when no requested package is in repos", {
 })
 
 test_that("the abort names the repositories searched and points at R-universe", {
+  skip_if_not_installed("withr")
+
   repo <- local_empty_repo()
 
   err <- tryCatch(
@@ -90,6 +104,8 @@ test_that("the abort names the repositories searched and points at R-universe", 
 })
 
 test_that("animovement_update() surfaces that error rather than 'behind' not found", {
+  skip_if_not_installed("withr")
+
   repo <- local_empty_repo()
 
   # Regression test for animovement#144: animovement_deps() used to return NULL
@@ -105,6 +121,8 @@ test_that("animovement_update() surfaces that error rather than 'behind' not fou
 })
 
 test_that("a partial match warns but still returns a data frame", {
+  skip_if_not_installed("withr")
+
   repo <- local_empty_repo()
 
   expect_warning(
@@ -122,6 +140,8 @@ test_that("a partial match warns but still returns a data frame", {
 })
 
 test_that("non-animovement packages get no R-universe hint", {
+  skip_if_not_installed("withr")
+
   repo <- local_empty_repo()
 
   err <- tryCatch(

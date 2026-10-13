@@ -10,7 +10,7 @@
 [![R-CMD-check](https://github.com/animovement/animovement/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/animovement/animovement/actions/workflows/R-CMD-check.yaml)
 [![animovement status
 badge](https://animovement.r-universe.dev/badges/animovement)](https://animovement.r-universe.dev)
-[![codecov](https://codecov.io/gh/animovement/animovement/graph/badge.svg)](https://codecov.io/gh/animovement/animovement)
+[![codecov](https://codecov.io/gh/animovement/animovement/graph/badge.svg)](https://app.codecov.io/gh/animovement/animovement)
 [![Chat on
 Zulip](https://img.shields.io/badge/chat-Zulip-6492FE?logo=zulip&logoColor=white)](https://animovement.zulipchat.com)
 <!-- badges: end -->
@@ -29,30 +29,30 @@ whole workflow with versions and conflicts sorted out for you.
 
 It includes a core set of packages that are loaded on startup:
 
-- [`anicore`](https://animovement.dev/anicore) provides the core data
+- [`anicore`](https://animovement.dev/anicore/) provides the core data
   structures that the rest of the ecosystem is built on — the shared
   representation that lets these packages hand data to one another.
 
-- [`aniread`](https://animovement.dev/aniread) reads and writes movement
+- [`aniread`](https://animovement.dev/aniread/) reads and writes movement
   data, turning the output of tracking tools and recording hardware into
   that common structure.
 
-- [`anicheck`](https://animovement.dev/anicheck) diagnoses data quality,
+- [`anicheck`](https://animovement.dev/anicheck/) diagnoses data quality,
   so you find the gaps, outliers and low-confidence stretches before
   they reach your results.
 
-- [`aniprocess`](https://animovement.dev/aniprocess) does signal
+- [`aniprocess`](https://animovement.dev/aniprocess/) does signal
   processing and filtering — smoothing, interpolating and otherwise
   cleaning up trajectories.
 
-- [`anispace`](https://animovement.dev/anispace) handles spatial
+- [`anispace`](https://animovement.dev/anispace/) handles spatial
   transformations, such as changing the origin, rotating, or converting
   between coordinate systems.
 
-- [`animetric`](https://animovement.dev/animetric) calculates
+- [`animetric`](https://animovement.dev/animetric/) calculates
   movement-based metrics, from kinematics through to summary statistics.
 
-- [`anivis`](https://animovement.dev/anivis) visualises movement data
+- [`anivis`](https://animovement.dev/anivis/) visualises movement data
   and diagnostics.
 
 Tutorials showing these packages working together live at

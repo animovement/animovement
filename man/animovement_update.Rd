@@ -21,11 +21,11 @@ This will check all \emph{animovement} packages (and their
 dependencies) for updates and (optionally) install those updates.
 }
 \examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # Report which packages are behind, without changing anything
 animovement_update()
 
 # Pass install = TRUE to actually install what is out of date
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 animovement_update(install = TRUE)
 \dontshow{\}) # examplesIf}
 }
