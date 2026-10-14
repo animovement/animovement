@@ -297,3 +297,88 @@ test_that("printing an animovement_sitrep gives the situation report", {
   expect_false(vis$visible)
   expect_identical(vis$value, report)
 })
+
+test_that("animovement_sitrep() groups extension packages apart", {
+  skip_if_not_installed("withr")
+
+  withr::local_options(
+    animovement.extend = "withr",
+    animovement.styling = FALSE
+  )
+  pkg <- animovement_packages(include.self = FALSE)
+  repo <- local_repo(stats::setNames(rep("0.0.1", length(pkg)), pkg))
+
+  report <- animovement_sitrep(repos = repo, check.deps = FALSE)
+
+  expect_identical(
+    report$packages$group[report$packages$package == "withr"],
+    "extension"
+  )
+  expect_true(all(
+    report$packages$group[report$packages$package != "withr"] == "core"
+  ))
+  expect_output(print(report), "Extension packages", fixed = TRUE)
+  expect_no_match(
+    paste(capture.output(print(report)), collapse = "\n"),
+    "Dependencies",
+    fixed = TRUE
+  )
+})
+
+test_that("printing an animovement_sitrep lists dependencies when it has any", {
+  report <- structure(
+    list(
+      animovement_version = "1.0.0",
+      r_version = getRversion(),
+      project_config = FALSE,
+      packages = data.frame(
+        package = c("anicore", "cli"),
+        cran = c("1.0.0", "3.6.0"),
+        local = c("1.0.0", "3.6.0"),
+        behind = c(FALSE, FALSE),
+        group = c("core", "dependency")
+      )
+    ),
+    class = "animovement_sitrep"
+  )
+
+  out <- paste(capture.output(print(report)), collapse = "\n")
+
+  expect_match(out, "Dependencies", fixed = TRUE)
+  expect_match(out, "cli", fixed = TRUE)
+})
+
+test_that("animovement_install() says when everything is installed", {
+  expect_message(
+    animovement_install("stats", repos = "file:///nonexistent"),
+    "All animovement packages installed",
+    fixed = TRUE
+  )
+})
+
+test_that("install = TRUE hands the packages to the installer", {
+  skip_if_not_installed("withr")
+
+  installed <- NULL
+  local_mocked_bindings(
+    .install_packages = function(packages, repos, ...) {
+      installed <<- packages
+      invisible()
+    }
+  )
+  repo <- local_repo(c(anicore = "0.0.1", aniread = "999.0.0"))
+
+  suppressMessages(
+    animovement_update(
+      pkg = c("anicore", "aniread"),
+      install = TRUE,
+      repos = repo,
+      check.deps = FALSE
+    )
+  )
+  expect_identical(installed, "aniread")
+
+  installed <- NULL
+  animovement_install("definitelynotarealpackage", repos = repo)
+  expect_identical(installed, "definitelynotarealpackage")
+})
