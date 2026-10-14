@@ -2,6 +2,8 @@
 
 ## Changed
 
+* `animovement_sitrep()` returns an `animovement_sitrep` object, a list holding the versions of animovement and R, whether a `.animovement` project file is used, and the package table from `animovement_deps()` with a `group` column (core, extension or dependency). Its print method gives the same report as before, so calling it at the console looks unchanged, but `report <- animovement_sitrep()` now keeps the report instead of printing it and returning `NULL`.
+
 * `animovement_update()` and `animovement_install()` report through messages rather than printing to the console, and `options(animovement.quiet = TRUE)` now silences all of their output. That includes the "Start a clean R session then run: install.packages(...)" command printed with `install = FALSE`, and the list of out-of-date packages, which previously went to standard output and could not be suppressed with `suppressMessages()`.
 
 ## Removed

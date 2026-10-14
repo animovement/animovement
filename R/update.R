@@ -285,20 +285,62 @@ animovement_install <- function(
 #'
 #' @param \dots arguments other than \code{pkg} passed to \code{\link{animovement_deps}}.
 #'
-#' @returns \code{animovement_sitrep} returns \code{NULL} invisibly.
+#' @returns An object of class \code{animovement_sitrep}, printed as the
+#'   situation report. It is a list with elements:
+#'   \describe{
+#'     \item{\code{animovement_version}}{the installed version of \emph{animovement}, as a string.}
+#'     \item{\code{r_version}}{the running version of R.}
+#'     \item{\code{project_config}}{logical, whether a \code{.animovement} configuration file is used.}
+#'     \item{\code{packages}}{the data frame from \code{\link{animovement_deps}}, with an
+#'       added column \code{group}, one of \code{"core"}, \code{"extension"} or \code{"dependency"}.}
+#'   }
 #' @seealso \code{\link{animovement_deps}}, \code{\link{animovement}}
 #' @examplesIf interactive()
 #' # Versions of every animovement package, and whether any are behind
 #' animovement_sitrep()
+#'
+#' # The report is also an object you can inspect
+#' report <- animovement_sitrep()
+#' subset(report$packages, behind)
 #' @export
 animovement_sitrep <- function(...) {
+  pkg <- animovement_packages(include.self = FALSE)
+  deps <- animovement_deps(pkg, ...)
+
+  ex <- getOption("animovement.extend")
+  if (length(ex)) {
+    pkg <- setdiff(pkg, ex)
+  }
+  if (any(deps$package == "animovement")) {
+    pkg <- c(pkg, "animovement")
+  } # include.self = FALSE above makes sure we don't add it twice here
+
+  deps$group <- ifelse(
+    deps$package %in% pkg,
+    "core",
+    ifelse(deps$package %in% ex, "extension", "dependency")
+  )
+
+  structure(
+    list(
+      animovement_version = package_version("animovement"),
+      r_version = getRversion(),
+      project_config = file.exists(".animovement"),
+      packages = deps
+    ),
+    class = "animovement_sitrep"
+  )
+}
+
+#' @export
+print.animovement_sitrep <- function(x, ...) {
   cat(rule(
     paste0(
       "animovement ",
-      package_version("animovement"),
+      x$animovement_version,
       ": Situation Report"
     ),
-    paste("R", getRversion()),
+    paste("R", x$r_version),
     style.left = function(x) {
       sub(
         "Situation Report",
@@ -309,9 +351,7 @@ animovement_sitrep <- function(...) {
     }
   ))
 
-  pkg <- animovement_packages(include.self = FALSE)
-  deps <- animovement_deps(pkg, ...)
-
+  deps <- x$packages
   package_pad <- format(deps$package)
   packages <- ifelse(
     deps$behind,
@@ -319,30 +359,18 @@ animovement_sitrep <- function(...) {
     paste0("* ", magenta2(package_pad), " (", deps$cran, ")\n")
   )
 
-  deps <- deps$package
-
-  ex <- getOption("animovement.extend")
-  if (length(ex)) {
-    pkg <- setdiff(pkg, ex)
+  cat("\n", paste0("* Project config file: ", x$project_config, "\n"))
+  cat(rule("Core packages"), "\n", packages[deps$group == "core"])
+  if (any(deps$group == "extension")) {
+    cat(
+      rule("Extension packages"),
+      "\n",
+      packages[deps$group == "extension"]
+    )
   }
-  if (any(deps == "animovement")) {
-    pkg <- c(pkg, "animovement")
-  } # include.self = FALSE above makes sure we don't add it twice here
-
-  pcol <- file.exists(".animovement")
-  cat("\n", paste0("* Project config file: ", pcol, "\n"))
-  cat(rule("Core packages"), "\n", packages[deps %in% pkg])
-  if (length(ex)) {
-    cat(rule("Extension packages"), "\n", packages[deps %in% ex])
-    pkg <- c(pkg, ex)
-  }
-  if (
-    missing(...) ||
-      !any(cdl <- ...names() == "check.deps") ||
-      ...elt(which(cdl))
-  ) {
-    cat(rule("Dependencies"), "\n", packages[!deps %in% pkg])
+  if (any(deps$group == "dependency")) {
+    cat(rule("Dependencies"), "\n", packages[deps$group == "dependency"])
   }
 
-  invisible()
+  invisible(x)
 }

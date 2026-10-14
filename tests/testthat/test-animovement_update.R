@@ -243,3 +243,52 @@ test_that("animovement_update() says when everything is up to date", {
     "All animovement packages up-to-date"
   )
 })
+
+test_that("animovement_sitrep() returns an animovement_sitrep object", {
+  skip_if_not_installed("withr")
+
+  withr::local_options(animovement.extend = NULL)
+  pkg <- animovement_packages(include.self = FALSE)
+  versions <- stats::setNames(rep("0.0.1", length(pkg)), pkg)
+  versions[[1]] <- "999.0.0"
+  repo <- local_repo(versions)
+
+  report <- animovement_sitrep(repos = repo, check.deps = FALSE)
+
+  expect_s3_class(report, "animovement_sitrep")
+  expect_named(
+    report,
+    c("animovement_version", "r_version", "project_config", "packages")
+  )
+  expect_identical(
+    report$animovement_version,
+    as.character(packageVersion("animovement"))
+  )
+  expect_identical(report$r_version, getRversion())
+  expect_type(report$project_config, "logical")
+  expect_named(
+    report$packages,
+    c("package", "cran", "local", "behind", "group")
+  )
+  expect_setequal(report$packages$package, pkg)
+  expect_true(all(report$packages$group == "core"))
+  expect_true(report$packages$behind[report$packages$package == pkg[[1]]])
+})
+
+test_that("printing an animovement_sitrep gives the situation report", {
+  skip_if_not_installed("withr")
+
+  withr::local_options(animovement.extend = NULL, animovement.styling = FALSE)
+  pkg <- animovement_packages(include.self = FALSE)
+  repo <- local_repo(stats::setNames(rep("0.0.1", length(pkg)), pkg))
+
+  report <- animovement_sitrep(repos = repo, check.deps = FALSE)
+
+  expect_output(print(report), "Situation Report", fixed = TRUE)
+  expect_output(print(report), "Core packages", fixed = TRUE)
+  expect_output(print(report), "Project config file", fixed = TRUE)
+  expect_output(print(report), pkg[[1]], fixed = TRUE)
+  capture.output(vis <- withVisible(print(report)))
+  expect_false(vis$visible)
+  expect_identical(vis$value, report)
+})

@@ -10,7 +10,15 @@ animovement_sitrep(...)
 \item{\dots}{arguments other than \code{pkg} passed to \code{\link{animovement_deps}}.}
 }
 \value{
-\code{animovement_sitrep} returns \code{NULL} invisibly.
+An object of class \code{animovement_sitrep}, printed as the
+situation report. It is a list with elements:
+\describe{
+\item{\code{animovement_version}}{the installed version of \emph{animovement}, as a string.}
+\item{\code{r_version}}{the running version of R.}
+\item{\code{project_config}}{logical, whether a \code{.animovement} configuration file is used.}
+\item{\code{packages}}{the data frame from \code{\link{animovement_deps}}, with an
+added column \code{group}, one of \code{"core"}, \code{"extension"} or \code{"dependency"}.}
+}
 }
 \description{
 This function gives a quick overview of the version of R and all
@@ -21,6 +29,10 @@ whether any project-level configuration files are used.
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # Versions of every animovement package, and whether any are behind
 animovement_sitrep()
+
+# The report is also an object you can inspect
+report <- animovement_sitrep()
+subset(report$packages, behind)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
