@@ -176,17 +176,19 @@ test_that("the printed install command carries repos so it can be pasted", {
   )
 })
 
-test_that("the install command respects animovement.quiet", {
+test_that("animovement.quiet does not hide the install command", {
   skip_if_not_installed("withr")
 
   withr::local_options(animovement.quiet = TRUE)
 
-  expect_silent(
+  expect_message(
     animovement_install(
       "definitelynotarealpackage",
       install = FALSE,
       repos = c(animovement = "https://animovement.r-universe.dev")
-    )
+    ),
+    "Start a clean R session then run:",
+    fixed = TRUE
   )
 })
 
@@ -224,13 +226,16 @@ test_that("animovement_update() reports through messages, not stdout", {
   expect_match(msgs, "Start a clean R session then run:", fixed = TRUE)
 
   withr::local_options(animovement.quiet = TRUE)
-  expect_silent(
+  quiet <- capture_messages(
     animovement_update(
       pkg = c("anicore", "aniread"),
       repos = repo,
       check.deps = FALSE
     )
   )
+  quiet <- paste(quiet, collapse = "")
+  expect_no_match(quiet, "out of date", fixed = TRUE)
+  expect_match(quiet, "Start a clean R session then run:", fixed = TRUE)
 })
 
 test_that("animovement_update() says when everything is up to date", {

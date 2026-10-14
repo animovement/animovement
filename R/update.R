@@ -75,7 +75,8 @@ deparse_repos <- function(repos) {
 }
 
 # The install command printed when install = FALSE, as one message so it reaches
-# the message stream in one piece and respects animovement.quiet.
+# the message stream in one piece. It is what the caller asked for, so it is
+# sent with message() rather than msg() and is not hidden by animovement.quiet.
 install_command_msg <- function(packages, repos) {
   paste0(
     "\nStart a clean R session then run:\n",
@@ -222,7 +223,7 @@ animovement_update <- function(
   if (install) {
     .install_packages(behind$package, repos = repos)
   } else {
-    msg(install_command_msg(behind$package, repos))
+    message(install_command_msg(behind$package, repos))
   }
 
   invisible()
@@ -267,7 +268,7 @@ animovement_install <- function(
     if (install) {
       .install_packages(needed, repos = repos)
     } else {
-      msg(install_command_msg(needed, repos))
+      message(install_command_msg(needed, repos))
     }
   } else {
     msg("All animovement packages installed")
