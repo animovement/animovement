@@ -6,7 +6,13 @@
 
 * `animovement_update()` and `animovement_install()` report through messages rather than printing to the console, and `options(animovement.quiet = TRUE)` now silences all of their output. That includes the "Start a clean R session then run: install.packages(...)" command printed with `install = FALSE`, and the list of out-of-date packages, which previously went to standard output and could not be suppressed with `suppressMessages()`.
 
+* Sebastian Krantz and Posit Software, PBC are listed as copyright holders, alongside the maintainer, for the package management code adapted from the fastverse and the tidyverse; `inst/COPYRIGHTS` records which files are adapted and keeps the tidyverse MIT notice (#191).
+
+* The examples for `animovement_deps()`, `animovement_update()`, `animovement_sitrep()` and the other functions that need the network or install packages run only in interactive sessions, and examples that change options restore them (#191).
+
 ## Removed
+
+* `here`, `ggplot2`, `patchwork`, `readxl`, `tibble`, `tidyr` and `tinytable` are no longer suggested by the metapackage, which uses none of them, so `animovement_show_suggested()` and `animovement_install_suggested()` no longer list or install them on its behalf (#191).
 
 * `circular` and `signal` are no longer suggested by the metapackage. Nothing in it uses either — the only mentions were string literals in test fixtures — but because `animovement_show_suggested()` reads each package's `Suggests`, they were reported under `animovement:`, as though the metapackage needed them. `signal` belongs to aniprocess, which suggests it for the Savitzky-Golay and Butterworth filters. `circular` is no longer used anywhere in the ecosystem, since animetric took its circular statistics from anicore (animovement/anicore#147); this removes the last reference to it.
 

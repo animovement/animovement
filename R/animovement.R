@@ -1,4 +1,4 @@
-#' The animovement
+#' animovement: attach and manage the animovement suite of packages
 #'
 #' @description
 #' The \emph{animovement} is an extensible suite of R packages. It is a descendant of the \href{https://fastverse.org/fastverse/}{fastverse}.
