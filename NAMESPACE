@@ -2,6 +2,7 @@
 
 S3method(print,animovement_conflicts)
 S3method(print,animovement_rule)
+S3method(print,animovement_sitrep)
 export(animovement_conflicts)
 export(animovement_deps)
 export(animovement_detach)

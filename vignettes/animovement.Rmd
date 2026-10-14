@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 
 # The startup banner is styled with ANSI escapes, which do not survive the
 # trip into a rendered vignette.
-options(animovement.styling = FALSE)
+old <- options(animovement.styling = FALSE)
 ```
 
 *animovement* is a meta-package. It does not analyse movement data itself — it
@@ -186,3 +186,7 @@ animovement_install_suggested() # install them
 
 Packages needed only for development or documentation (knitr, testthat, and the
 like) are excluded, as are packages an ecosystem package already requires.
+
+```{r, include = FALSE}
+options(old)
+```

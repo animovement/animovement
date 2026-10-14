@@ -156,7 +156,7 @@ test_that("non-animovement packages get no R-universe hint", {
 test_that("the printed install command carries repos so it can be pasted", {
   repos <- c(animovement = "https://animovement.r-universe.dev")
 
-  out <- capture.output(
+  out <- capture_messages(
     animovement_install(
       "definitelynotarealpackage",
       install = FALSE,
@@ -174,4 +174,211 @@ test_that("the printed install command carries repos so it can be pasted", {
     "animovement.r-universe.dev",
     fixed = TRUE
   )
+})
+
+test_that("animovement.quiet does not hide the install command", {
+  skip_if_not_installed("withr")
+
+  withr::local_options(animovement.quiet = TRUE)
+
+  expect_message(
+    animovement_install(
+      "definitelynotarealpackage",
+      install = FALSE,
+      repos = c(animovement = "https://animovement.r-universe.dev")
+    ),
+    "Start a clean R session then run:",
+    fixed = TRUE
+  )
+})
+
+# A local repository listing the given packages at the given versions, so
+# animovement_deps() and its callers run without network access.
+local_repo <- function(versions, envir = parent.frame()) {
+  dir <- withr::local_tempdir(.local_envir = envir)
+  contrib <- file.path(dir, "src", "contrib")
+  dir.create(contrib, recursive = TRUE)
+  writeLines(
+    paste0("Package: ", names(versions), "\nVersion: ", versions, "\n"),
+    file.path(contrib, "PACKAGES")
+  )
+  paste0("file:///", gsub("^/", "", normalizePath(dir, winslash = "/")))
+}
+
+test_that("animovement_update() reports through messages, not stdout", {
+  skip_if_not_installed("withr")
+
+  repo <- local_repo(c(anicore = "0.0.1", aniread = "999.0.0"))
+
+  expect_output(
+    msgs <- capture_messages(
+      animovement_update(
+        pkg = c("anicore", "aniread"),
+        repos = repo,
+        check.deps = FALSE
+      )
+    ),
+    NA
+  )
+  msgs <- paste(msgs, collapse = "")
+  expect_match(msgs, "The following packages are out of date", fixed = TRUE)
+  expect_match(msgs, "aniread", fixed = TRUE)
+  expect_match(msgs, "Start a clean R session then run:", fixed = TRUE)
+
+  withr::local_options(animovement.quiet = TRUE)
+  quiet <- capture_messages(
+    animovement_update(
+      pkg = c("anicore", "aniread"),
+      repos = repo,
+      check.deps = FALSE
+    )
+  )
+  quiet <- paste(quiet, collapse = "")
+  expect_no_match(quiet, "out of date", fixed = TRUE)
+  expect_match(quiet, "Start a clean R session then run:", fixed = TRUE)
+})
+
+test_that("animovement_update() says when everything is up to date", {
+  skip_if_not_installed("withr")
+
+  repo <- local_repo(c(anicore = "0.0.1"))
+
+  expect_message(
+    animovement_update(pkg = "anicore", repos = repo, check.deps = FALSE),
+    "All animovement packages up-to-date"
+  )
+})
+
+test_that("animovement_sitrep() returns an animovement_sitrep object", {
+  skip_if_not_installed("withr")
+
+  withr::local_options(animovement.extend = NULL)
+  pkg <- animovement_packages(include.self = FALSE)
+  versions <- stats::setNames(rep("0.0.1", length(pkg)), pkg)
+  versions[[1]] <- "999.0.0"
+  repo <- local_repo(versions)
+
+  report <- animovement_sitrep(repos = repo, check.deps = FALSE)
+
+  expect_s3_class(report, "animovement_sitrep")
+  expect_named(
+    report,
+    c("animovement_version", "r_version", "project_config", "packages")
+  )
+  expect_identical(
+    report$animovement_version,
+    as.character(packageVersion("animovement"))
+  )
+  expect_identical(report$r_version, getRversion())
+  expect_type(report$project_config, "logical")
+  expect_named(
+    report$packages,
+    c("package", "cran", "local", "behind", "group")
+  )
+  expect_setequal(report$packages$package, pkg)
+  expect_true(all(report$packages$group == "core"))
+  expect_true(report$packages$behind[report$packages$package == pkg[[1]]])
+})
+
+test_that("printing an animovement_sitrep gives the situation report", {
+  skip_if_not_installed("withr")
+
+  withr::local_options(animovement.extend = NULL, animovement.styling = FALSE)
+  pkg <- animovement_packages(include.self = FALSE)
+  repo <- local_repo(stats::setNames(rep("0.0.1", length(pkg)), pkg))
+
+  report <- animovement_sitrep(repos = repo, check.deps = FALSE)
+
+  expect_output(print(report), "Situation Report", fixed = TRUE)
+  expect_output(print(report), "Core packages", fixed = TRUE)
+  expect_output(print(report), "Project config file", fixed = TRUE)
+  expect_output(print(report), pkg[[1]], fixed = TRUE)
+  capture.output(vis <- withVisible(print(report)))
+  expect_false(vis$visible)
+  expect_identical(vis$value, report)
+})
+
+test_that("animovement_sitrep() groups extension packages apart", {
+  skip_if_not_installed("withr")
+
+  withr::local_options(
+    animovement.extend = "withr",
+    animovement.styling = FALSE
+  )
+  pkg <- animovement_packages(include.self = FALSE)
+  repo <- local_repo(stats::setNames(rep("0.0.1", length(pkg)), pkg))
+
+  report <- animovement_sitrep(repos = repo, check.deps = FALSE)
+
+  expect_identical(
+    report$packages$group[report$packages$package == "withr"],
+    "extension"
+  )
+  expect_true(all(
+    report$packages$group[report$packages$package != "withr"] == "core"
+  ))
+  expect_output(print(report), "Extension packages", fixed = TRUE)
+  expect_no_match(
+    paste(capture.output(print(report)), collapse = "\n"),
+    "Dependencies",
+    fixed = TRUE
+  )
+})
+
+test_that("printing an animovement_sitrep lists dependencies when it has any", {
+  report <- structure(
+    list(
+      animovement_version = "1.0.0",
+      r_version = getRversion(),
+      project_config = FALSE,
+      packages = data.frame(
+        package = c("anicore", "cli"),
+        cran = c("1.0.0", "3.6.0"),
+        local = c("1.0.0", "3.6.0"),
+        behind = c(FALSE, FALSE),
+        group = c("core", "dependency")
+      )
+    ),
+    class = "animovement_sitrep"
+  )
+
+  out <- paste(capture.output(print(report)), collapse = "\n")
+
+  expect_match(out, "Dependencies", fixed = TRUE)
+  expect_match(out, "cli", fixed = TRUE)
+})
+
+test_that("animovement_install() says when everything is installed", {
+  expect_message(
+    animovement_install("stats", repos = "file:///nonexistent"),
+    "All animovement packages installed",
+    fixed = TRUE
+  )
+})
+
+test_that("install = TRUE hands the packages to the installer", {
+  skip_if_not_installed("withr")
+
+  installed <- NULL
+  local_mocked_bindings(
+    .install_packages = function(packages, repos, ...) {
+      installed <<- packages
+      invisible()
+    }
+  )
+  repo <- local_repo(c(anicore = "0.0.1", aniread = "999.0.0"))
+
+  suppressMessages(
+    animovement_update(
+      pkg = c("anicore", "aniread"),
+      install = TRUE,
+      repos = repo,
+      check.deps = FALSE
+    )
+  )
+  expect_identical(installed, "aniread")
+
+  installed <- NULL
+  animovement_install("definitelynotarealpackage", repos = repo)
+  expect_identical(installed, "definitelynotarealpackage")
 })

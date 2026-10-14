@@ -205,7 +205,8 @@ animovement_detach <- function(
 #' animovement_extend(ggplot2, tidyr)
 #'
 #' # Set the option before library(animovement) to extend on attach instead
-#' options(animovement.extend = c("ggplot2", "tidyr"))
+#' old <- options(animovement.extend = c("ggplot2", "tidyr"))
+#' options(old)
 #' @export
 animovement_extend <- function(
   ...,
@@ -238,7 +239,7 @@ animovement_extend <- function(
     inst <- needed[!is_installed(needed)]
     if (length(inst)) {
       install.packages(inst)
-      cat("\n")
+      msg("")
     }
   }
 
