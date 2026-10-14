@@ -74,6 +74,19 @@ deparse_repos <- function(repos) {
   paste0(deparse(repos), collapse = "")
 }
 
+# The install command printed when install = FALSE, as one message so it reaches
+# the message stream in one piece and respects animovement.quiet.
+install_command_msg <- function(packages, repos) {
+  paste0(
+    "\nStart a clean R session then run:\n",
+    "install.packages(",
+    paste0(deparse(packages), collapse = "\n"),
+    ", repos = ",
+    deparse_repos(repos),
+    ")"
+  )
+}
+
 #' List all animovement dependencies
 #'
 #' Lists all \emph{animovement} dependencies and the local and CRAN versions of packages and dependencies.
@@ -188,41 +201,28 @@ animovement_update <- function(
   behind <- subset(deps, behind)
 
   if (nrow(behind) == 0L) {
-    if (!isTRUE(getOption("animovement.quiet"))) {
-      cat("All animovement packages up-to-date\n")
-    }
+    msg("All animovement packages up-to-date")
     return(invisible())
   }
 
-  if (!isTRUE(getOption("animovement.quiet"))) {
-    cat("The following packages are out of date:\n")
-    cat(
-      "\n",
-      paste0(
-        "* ",
-        gold(format(behind$package)),
-        " (",
-        behind$local,
-        " -> ",
-        behind$cran,
-        ")\n"
-      )
+  msg(paste0(
+    "The following packages are out of date:\n\n",
+    paste0(
+      "* ",
+      gold(format(behind$package)),
+      " (",
+      behind$local,
+      " -> ",
+      behind$cran,
+      ")",
+      collapse = "\n"
     )
-  }
+  ))
 
   if (install) {
     .install_packages(behind$package, repos = repos)
   } else {
-    cat("\nStart a clean R session then run:\n")
-    pkg_str <- paste0(deparse(behind$package), collapse = "\n")
-    cat(
-      "install.packages(",
-      pkg_str,
-      ", repos = ",
-      deparse_repos(repos),
-      ")\n",
-      sep = ""
-    )
+    msg(install_command_msg(behind$package, repos))
   }
 
   invisible()
@@ -267,19 +267,10 @@ animovement_install <- function(
     if (install) {
       .install_packages(needed, repos = repos)
     } else {
-      cat("\nStart a clean R session then run:\n")
-      pkg_str <- paste0(deparse(needed), collapse = "\n")
-      cat(
-        "install.packages(",
-        pkg_str,
-        ", repos = ",
-        deparse_repos(repos),
-        ")\n",
-        sep = ""
-      )
+      msg(install_command_msg(needed, repos))
     }
-  } else if (!isTRUE(getOption("animovement.quiet"))) {
-    cat("All animovement packages installed\n")
+  } else {
+    msg("All animovement packages installed")
   }
 
   return(invisible())

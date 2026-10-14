@@ -28,7 +28,7 @@
 #'
 #' @section \emph{animovement} Options:
 #' \itemize{
-#' \item \code{options(animovement.quiet = TRUE)} will disable all automatic messages (including conflict reporting) when calling \code{library(animovement)}, \code{\link{animovement_extend}}, \code{\link[=animovement_update]{animovement_update(install = TRUE)}} and \code{\link{animovement_install}}.
+#' \item \code{options(animovement.quiet = TRUE)} will disable all automatic messages (including conflict reporting) when calling \code{library(animovement)}, \code{\link{animovement_extend}}, \code{\link{animovement_update}} and \code{\link{animovement_install}}.
 #' \item \code{options(animovement.styling = FALSE)} will disable all styling applied to text printed to the console.
 #' \item \code{options(animovement.extend = c(...))} can be set before calling \code{library(animovement)} to extend the animovement with some packages for the session. The same can be done with the
 #' \code{\link{animovement_extend}} function after \code{library(animovement)}, which will also populate \code{options("animovement.extend")}.

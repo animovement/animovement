@@ -156,7 +156,7 @@ test_that("non-animovement packages get no R-universe hint", {
 test_that("the printed install command carries repos so it can be pasted", {
   repos <- c(animovement = "https://animovement.r-universe.dev")
 
-  out <- capture.output(
+  out <- capture_messages(
     animovement_install(
       "definitelynotarealpackage",
       install = FALSE,
@@ -173,5 +173,73 @@ test_that("the printed install command carries repos so it can be pasted", {
     paste(out, collapse = ""),
     "animovement.r-universe.dev",
     fixed = TRUE
+  )
+})
+
+test_that("the install command respects animovement.quiet", {
+  skip_if_not_installed("withr")
+
+  withr::local_options(animovement.quiet = TRUE)
+
+  expect_silent(
+    animovement_install(
+      "definitelynotarealpackage",
+      install = FALSE,
+      repos = c(animovement = "https://animovement.r-universe.dev")
+    )
+  )
+})
+
+# A local repository listing the given packages at the given versions, so
+# animovement_deps() and its callers run without network access.
+local_repo <- function(versions, envir = parent.frame()) {
+  dir <- withr::local_tempdir(.local_envir = envir)
+  contrib <- file.path(dir, "src", "contrib")
+  dir.create(contrib, recursive = TRUE)
+  writeLines(
+    paste0("Package: ", names(versions), "\nVersion: ", versions, "\n"),
+    file.path(contrib, "PACKAGES")
+  )
+  paste0("file:///", gsub("^/", "", normalizePath(dir, winslash = "/")))
+}
+
+test_that("animovement_update() reports through messages, not stdout", {
+  skip_if_not_installed("withr")
+
+  repo <- local_repo(c(anicore = "0.0.1", aniread = "999.0.0"))
+
+  expect_output(
+    msgs <- capture_messages(
+      animovement_update(
+        pkg = c("anicore", "aniread"),
+        repos = repo,
+        check.deps = FALSE
+      )
+    ),
+    NA
+  )
+  msgs <- paste(msgs, collapse = "")
+  expect_match(msgs, "The following packages are out of date", fixed = TRUE)
+  expect_match(msgs, "aniread", fixed = TRUE)
+  expect_match(msgs, "Start a clean R session then run:", fixed = TRUE)
+
+  withr::local_options(animovement.quiet = TRUE)
+  expect_silent(
+    animovement_update(
+      pkg = c("anicore", "aniread"),
+      repos = repo,
+      check.deps = FALSE
+    )
+  )
+})
+
+test_that("animovement_update() says when everything is up to date", {
+  skip_if_not_installed("withr")
+
+  repo <- local_repo(c(anicore = "0.0.1"))
+
+  expect_message(
+    animovement_update(pkg = "anicore", repos = repo, check.deps = FALSE),
+    "All animovement packages up-to-date"
   )
 })

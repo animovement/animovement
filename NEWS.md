@@ -1,5 +1,9 @@
 # animovement (development version)
 
+## Changed
+
+* `animovement_update()` and `animovement_install()` report through messages rather than printing to the console, and `options(animovement.quiet = TRUE)` now silences all of their output. That includes the "Start a clean R session then run: install.packages(...)" command printed with `install = FALSE`, and the list of out-of-date packages, which previously went to standard output and could not be suppressed with `suppressMessages()`.
+
 ## Removed
 
 * `circular` and `signal` are no longer suggested by the metapackage. Nothing in it uses either — the only mentions were string literals in test fixtures — but because `animovement_show_suggested()` reads each package's `Suggests`, they were reported under `animovement:`, as though the metapackage needed them. `signal` belongs to aniprocess, which suggests it for the Savitzky-Golay and Butterworth filters. `circular` is no longer used anywhere in the ecosystem, since animetric took its circular statistics from anicore (animovement/anicore#147); this removes the last reference to it.

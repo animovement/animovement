@@ -238,7 +238,7 @@ animovement_extend <- function(
     inst <- needed[!is_installed(needed)]
     if (length(inst)) {
       install.packages(inst)
-      cat("\n")
+      msg("")
     }
   }
 
